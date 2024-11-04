@@ -3,6 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Layout } from "antd";
+import { Content } from "antd/es/layout/layout";
+import AppHeader from "@/components/ui/AppHeader";
+import AppFooter from "@/components/ui/AppFooter";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,6 +18,18 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+
+const contentStyle: React.CSSProperties = {
+  display: 'flex',
+  textAlign: 'center',
+  justifyContent: 'center',
+  minHeight: 120,
+  lineHeight: '120px',
+};
+
+const layoutStyle = {
+  overflow: 'hidden',
+};
 
 export const metadata: Metadata = {
   title: "Solara",
@@ -27,11 +43,17 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="vn">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <AntdRegistry>{children}</AntdRegistry>
+          <AntdRegistry>
+            <Layout style={layoutStyle}>
+              <AppHeader></AppHeader>
+              <Content style={contentStyle}>{children}</Content>
+              <AppFooter></AppFooter>
+            </Layout>
+          </AntdRegistry>
         </body>
       </html>
     </ClerkProvider>
