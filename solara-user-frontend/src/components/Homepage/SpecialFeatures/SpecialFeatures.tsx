@@ -64,7 +64,7 @@ const FeatureGrid = () => {
         <VectorSpecialFeaturesBg/>
         <div className="max-wx mx-features absolute top-0 left-0 right-0 z-10">
           <div className="text-center mb-12">
-            <h1 className="tinh-nang-dac-biet text-5xl font-bold mb-4">Tính Năng Đặc Biệt <Vector2Title className="vector2-margin inline-block" /></h1>
+            <h1 className="tinh-nang-dac-biet text-5xl font-bold mb-4">Tính Năng Đặc Biệt <Vector2Title className="vector2-margin2 inline-block" /></h1>
             
             <p className="hoc-ky-nang-sinh-ton text-lg text-gray-600">Học kỹ năng sinh tồn cho mọi tình huống</p>
           </div>
