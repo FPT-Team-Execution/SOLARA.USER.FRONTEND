@@ -1,0 +1,21 @@
+import LearningSpace from '@/components/layout/LearningSpace';
+import { Metadata } from 'next';
+import React from 'react'
+
+export const metadata: Metadata = {
+    title: "Learning - Solara",
+    description: "Learning survival course application",
+    icons: {
+        icon: '../../',
+    },
+};
+
+const LearningLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
+    return (
+        <LearningSpace>
+            {children}
+        </LearningSpace>
+    )
+}
+
+export default LearningLayout

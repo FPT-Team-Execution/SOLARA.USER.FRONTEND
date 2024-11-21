@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, FC } from 'react';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/cn/cn';
 
 interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;

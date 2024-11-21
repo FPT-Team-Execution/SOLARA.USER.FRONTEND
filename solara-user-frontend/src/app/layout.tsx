@@ -6,7 +6,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
 import AppHeader from "@/components/layout/AppHeader";
-import AppFooter from "@/components/layout/AppFooter";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,15 +31,15 @@ const layoutStyle = {
 };
 
 export const metadata: Metadata = {
-  title: "Solara",
+  title: "Home - Solara",
   description: "Learning survival course application",
+  icons: {
+    icon: './',
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
+
   return (
     <ClerkProvider dynamic>
       <head>
@@ -54,7 +53,6 @@ export default function RootLayout({
             <Layout style={layoutStyle}>
               <AppHeader></AppHeader>
               <Content style={contentStyle}>{children}</Content>
-              <AppFooter></AppFooter>
             </Layout>
           </AntdRegistry>
         </body>
