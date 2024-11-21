@@ -2,6 +2,7 @@
 
 import Spinner from '@/components/ui/Spinner';
 import { HOME_ROUTE, SIGNIN_ROUTE } from '@/constants/routes';
+import axiosClient from '@/utils/axios/axiosClient';
 import { useAuth } from '@clerk/nextjs'
 import { useRequest } from 'ahooks';
 import { useRouter } from 'next/navigation';
@@ -16,11 +17,12 @@ const Page = () => {
         if (isSignedIn) {
             const token: string | null = await getToken({ template: 'Solara' });
             console.log(token);
+            axiosClient.defaults.headers.common.Authorization = `Bearer ${token}`;
             router.push(HOME_ROUTE)
-        } else{
+        } else {
             router.push(SIGNIN_ROUTE)
         }
-        
+
     }, {
         refreshDeps: [isSignedIn]
     })
@@ -29,7 +31,7 @@ const Page = () => {
     return (
         <div className='flex items-center justify-center'>
             {
-                loading ? <Spinner/> : <></>
+                loading ? <Spinner /> : <></>
             }
         </div>
     )
