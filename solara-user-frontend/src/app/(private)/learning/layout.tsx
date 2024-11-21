@@ -1,3 +1,4 @@
+import LearningSpace from '@/components/layout/LearningSpace';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -11,9 +12,9 @@ export const metadata: Metadata = {
 
 const LearningLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
     return (
-        <div>
+        <LearningSpace>
             {children}
-        </div>
+        </LearningSpace>
     )
 }
 
