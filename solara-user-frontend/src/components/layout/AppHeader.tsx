@@ -104,7 +104,7 @@ const AppHeader = () => {
             </PopoverPanel>
           </Popover> */}
 
-          <NavLink href="/learning" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <NavLink href="/learning/topics" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Học Tập
           </NavLink>
 
@@ -190,7 +190,7 @@ const AppHeader = () => {
                 </Disclosure> */}
 
                 <NavLink
-                  href="learning"
+                  href="/learning/topics"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
                   Học Tập
