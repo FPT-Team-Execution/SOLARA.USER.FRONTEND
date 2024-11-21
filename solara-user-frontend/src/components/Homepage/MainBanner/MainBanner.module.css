@@ -1,0 +1,40 @@
+.container {
+    @apply relative text-center;
+}
+
+.bannerImage {
+    @apply w-full h-auto;
+}
+
+.subtitle {
+    @apply absolute top-[45%] w-full text-white px-4 font-light;
+}
+
+.title {
+    @apply absolute top-[55%] w-full text-white px-4 font-bold;
+}
+
+.buttonContainer {
+    @apply absolute top-[70%] w-full flex justify-center gap-4 md:gap-8 flex-wrap px-4;
+}
+
+.learnButton {
+    @apply min-w-[120px] md:min-w-[150px] lg:min-w-[180px] text-sm md:text-base lg:text-lg;
+}
+
+.simulationButton {
+    @apply min-w-[180px] md:min-w-[200px] lg:min-w-[250px] bg-white text-green-900 text-sm md:text-base lg:text-lg;
+}
+
+.simulationButton:hover {
+    @apply bg-gray-200;
+}
+
+/* Responsive Styles */
+.responsiveText {
+    @apply text-sm md:text-lg lg:text-xl;
+}
+
+.responsiveTitle {
+    @apply text-xl md:text-3xl lg:text-5xl;
+}

@@ -25,3 +25,8 @@ body {
 .cl-userButtonPopoverFooter, .cl-internal-lk7758, .cl-internal-1dauvpw {
   display: none;
 }
+
+.section-spacing {
+  margin-top: 4rem;
+  margin-bottom: 4rem; 
+}
