@@ -1,10 +1,21 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import { SIGNIN_ROUTE } from "./constants/routes";
 
 const isPublicRoute = createRouteMatcher(['/', '/signin(.*)', '/signup(.*)'])
 
 export default clerkMiddleware(async (auth, req) => {
     if (!isPublicRoute(req)) {
-        await auth.protect()
+        const { userId } = await auth();
+        if (!userId) {
+            const host = req.headers.get('host');
+            const proto = req.headers.get('x-forwarded-proto');
+            const redirectUrl = `${proto}://${host}${SIGNIN_ROUTE}`
+            return new Response('', {
+                status: 302,
+                headers: { Location: redirectUrl },
+            });
+        }
     }
 });
 

@@ -1,6 +1,5 @@
 /// This file for constants of routes path ///
 
-
 // Auth routes
 export const SIGNIN_ROUTE = "/signin";
 export const SIGNUP_ROUTE = "/signup";
