@@ -14,6 +14,7 @@ import NavLink from '../ui/NavLink'
 import Link from 'next/link'
 import { useAuth, UserButton } from '@clerk/nextjs'
 import { HOME_ROUTE, LEARNING_TOPICS_ROUTE, MARKET_ROUTE, SIGNIN_ROUTE } from '@/constants/routes'
+import Image from 'next/image'
 
 // const learnings = [
 //   { name: 'Flashcard', description: 'Get a better understanding of your traffic', href: '/learning/flashcard', icon: ChartPieIcon },
@@ -31,14 +32,15 @@ const AppHeader = () => {
 
   return (
     <header className="bg-white">
-      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img
+            <Image
               alt=""
-              src="logo.png"
-              className="h-8 w-auto"
+              src="/logo.png"
+              width={84}
+              height={0}
             />
           </Link>
         </div>
@@ -141,10 +143,11 @@ const AppHeader = () => {
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              <Image
                 alt=""
-                src="logo.png"
-                className="h-8 w-auto"
+                src="/logo.png"
+                width={84}
+                height={0}
               />
             </Link>
             <button
