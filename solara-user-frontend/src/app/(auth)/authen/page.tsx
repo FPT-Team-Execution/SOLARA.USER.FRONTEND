@@ -16,8 +16,8 @@ const Page = () => {
     const { loading } = useRequest(async () => {
         if (isSignedIn) {
             const token: string | null = await getToken({ template: 'Solara' });
-            console.log(token);
             axiosClient.defaults.headers.common.Authorization = `Bearer ${token}`;
+            console.log(token);
             router.push(HOME_ROUTE)
         } else {
             router.push(SIGNIN_ROUTE)

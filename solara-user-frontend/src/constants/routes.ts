@@ -10,3 +10,7 @@ export const AUTHEN_ROUTE = "/authen";
 export const HOME_ROUTE = "/";
 
 // Private routes
+export const LEARNING_ROUTE = "/learning";
+export const LEARNING_TOPICS_ROUTE = "/learning/topics";
+
+export const MARKET_ROUTE = "/market";
