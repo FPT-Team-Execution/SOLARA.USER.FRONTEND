@@ -1,18 +1,36 @@
 "use client"
 
+import Spinner from '@/components/ui/Spinner';
+import { HOME_ROUTE, SIGNIN_ROUTE } from '@/constants/routes';
 import { useAuth } from '@clerk/nextjs'
+import { useRequest } from 'ahooks';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 const Page = () => {
 
-    const { getToken } = useAuth();
+    const { isSignedIn, getToken } = useAuth();
+    const router = useRouter();
 
-    getToken({ template: 'Solara' }).then(token => console.log(token))
+    const { loading } = useRequest(async () => {
+        if (isSignedIn) {
+            const token: string | null = await getToken({ template: 'Solara' });
+            console.log(token);
+            router.push(HOME_ROUTE)
+        } else{
+            router.push(SIGNIN_ROUTE)
+        }
+        
+    }, {
+        refreshDeps: [isSignedIn]
+    })
 
 
     return (
-        <div>
-
+        <div className='flex items-center justify-center'>
+            {
+                loading ? <Spinner/> : <></>
+            }
         </div>
     )
 }

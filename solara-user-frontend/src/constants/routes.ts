@@ -2,11 +2,11 @@
 
 
 // Auth routes
-export const SIGNIN_ROUTES = "/signin";
-export const SIGNUP_ROUTES = "/signup";
-export const AUTHEN_ROUTES = "/authen";
+export const SIGNIN_ROUTE = "/signin";
+export const SIGNUP_ROUTE = "/signup";
+export const AUTHEN_ROUTE = "/authen";
 
 // Public routes
-
+export const HOME_ROUTE = "/";
 
 // Private routes
