@@ -10,7 +10,7 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import NavLink from '../ui/NavLink'
+import HeaderButton from '../ui/HeaderButton'
 import Link from 'next/link'
 import { useAuth, UserButton } from '@clerk/nextjs'
 import { HOME_ROUTE, LEARNING_TOPICS_ROUTE, MARKET_ROUTE, SIGNIN_ROUTE } from '@/constants/routes'
@@ -57,15 +57,15 @@ const AppHeader = () => {
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
 
 
-          <NavLink href={HOME_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <HeaderButton href={HOME_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Trang Chủ
-          </NavLink>
+          </HeaderButton>
 
           {/* <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
-              <NavLink href="/learning" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+              <HeaderButton href="/learning" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
                 Học Tập
-              </NavLink>
+              </HeaderButton>
               <ChevronDownIcon aria-hidden="true" className="h-5 w-5 flex-none text-gray-400" />
             </PopoverButton>
 
@@ -107,13 +107,13 @@ const AppHeader = () => {
             </PopoverPanel>
           </Popover> */}
 
-          <NavLink href={LEARNING_TOPICS_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <HeaderButton href={LEARNING_TOPICS_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Học Tập
-          </NavLink>
+          </HeaderButton>
 
-          <NavLink href={MARKET_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <HeaderButton href={MARKET_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Nhãn Hàng
-          </NavLink>
+          </HeaderButton>
 
         </PopoverGroup>
 
@@ -127,9 +127,9 @@ const AppHeader = () => {
               :
               (
 
-                <NavLink href={SIGNIN_ROUTE} className="text-sm/6 font-semibold py-1 px-2 rounded text-gray-900">
+                <HeaderButton href={SIGNIN_ROUTE} className="text-sm/6 font-semibold py-1 px-2 rounded text-gray-900">
                   Sign in <span aria-hidden="true">&rarr;</span>
-                </NavLink>
+                </HeaderButton>
               )
           }
 
@@ -163,19 +163,19 @@ const AppHeader = () => {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
 
-                <NavLink
+                <HeaderButton
                   href={HOME_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
                   Trang Chủ
-                </NavLink>
+                </HeaderButton>
 
                 {/* <Disclosure as="div" className="-mx-3">
                   <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base/6 font-semibold text-gray-900 hover:bg-gray-50">
 
-                    <NavLink href="/learning" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+                    <HeaderButton href="/learning" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
                       Học Tập
-                    </NavLink>
+                    </HeaderButton>
 
                     <ChevronDownIcon aria-hidden="true" className="h-5 w-5 flex-none group-data-[open]:rotate-180" />
                   </DisclosureButton>
@@ -193,19 +193,19 @@ const AppHeader = () => {
                   </DisclosurePanel>
                 </Disclosure> */}
 
-                <NavLink
+                <HeaderButton
                   href={LEARNING_TOPICS_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
                   Học Tập
-                </NavLink>
+                </HeaderButton>
 
-                <NavLink
+                <HeaderButton
                   href={MARKET_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
                   Nhãn Hàng
-                </NavLink>
+                </HeaderButton>
 
               </div>
 
@@ -218,12 +218,12 @@ const AppHeader = () => {
                     :
                     (
 
-                      <NavLink
+                      <HeaderButton
                         href={SIGNIN_ROUTE}
                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                       >
                         Sign in
-                      </NavLink>
+                      </HeaderButton>
                     )
                 }
               </div>
