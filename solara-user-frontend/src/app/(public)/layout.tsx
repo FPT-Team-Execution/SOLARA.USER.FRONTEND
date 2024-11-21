@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 import React from 'react'
 
 export const metadata: Metadata = {
-    title: "Learning - Solara",
+    title: "Market - Solara",
     description: "Learning survival course application",
     icons: {
         icon: '../../',
     },
 };
 
-const LearningLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
+const MarketLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
     return (
         <div>
             {children}
@@ -17,4 +17,4 @@ const LearningLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) 
     )
 }
 
-export default LearningLayout
+export default MarketLayout

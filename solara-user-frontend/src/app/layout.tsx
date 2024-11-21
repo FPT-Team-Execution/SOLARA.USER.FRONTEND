@@ -32,8 +32,11 @@ const layoutStyle = {
 };
 
 export const metadata: Metadata = {
-  title: "Solara",
+  title: "Home - Solara",
   description: "Learning survival course application",
+  icons: {
+    icon: './',
+  },
 };
 
 export default function RootLayout({
