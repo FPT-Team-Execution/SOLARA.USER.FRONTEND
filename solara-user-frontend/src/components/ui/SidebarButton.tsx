@@ -8,11 +8,16 @@ import React, { ComponentProps } from 'react';
 interface SidebarButtonProps extends ComponentProps<typeof Link> {
     children: React.ReactNode; // Văn bản hoặc phần tử con
     icon?: React.ReactNode; // Icon tùy chọn
+    isMultiPath?: boolean; // Kiểm tra nhiều đường dẫn
+
 }
 
-const SidebarButton = ({ className, children, icon, ...props }: SidebarButtonProps) => {
+const SidebarButton = ({ className, isMultiPath = false, children, icon, ...props }: SidebarButtonProps) => {
     const path = usePathname();
-    const isActive = path === props.href;
+    const segments = props.href.toString().split('/');
+    const isActive = isMultiPath
+        ? path.includes(segments[1])
+        : path === props.href;
 
     return (
         <Link

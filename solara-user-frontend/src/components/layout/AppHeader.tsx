@@ -107,7 +107,7 @@ const AppHeader = () => {
             </PopoverPanel>
           </Popover> */}
 
-          <HeaderButton href={LEARNING_TOPICS_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <HeaderButton isMultiPath={true} href={LEARNING_TOPICS_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Học Tập
           </HeaderButton>
 
@@ -194,6 +194,7 @@ const AppHeader = () => {
                 </Disclosure> */}
 
                 <HeaderButton
+                  isMultiPath
                   href={LEARNING_TOPICS_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
