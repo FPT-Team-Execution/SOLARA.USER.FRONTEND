@@ -1,12 +1,34 @@
+/* Typography and Responsive Styles */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
 .tinh-nang-dac-biet {
     color: rgb(28, 59, 31);
-    font-size: 48px; /* Cần đơn vị px */
-    font-family: 'Open Sans', sans-serif; /* Font dự phòng nên được thêm vào */
-    font-weight: 700; /* Không cần dấu nháy */
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 700;
     word-wrap: break-word;
-    margin-bottom: 6px;
-    margin-left: 4rem;
+    margin-bottom: 0.375rem;
+}
 
+/* Responsive Typography for Title */
+@media (max-width: 640px) {
+    .tinh-nang-dac-biet {
+        font-size: 28px;
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .tinh-nang-dac-biet {
+        font-size: 40px;
+        margin-left: 2rem;
+    }
+}
+
+@media (min-width: 1025px) {
+    .tinh-nang-dac-biet {
+        font-size: 48px;
+        margin-left: 4rem;
+    }
 }
 
 .text-center-tt {
@@ -14,56 +36,133 @@
 }
 
 .text-center {
-    line-height: 2.; 
+    line-height: 2; 
 }
 
-.mx-features{
-    margin-left: 12rem;
-    margin-right: 10rem;
+.mx-features {
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
-.max-wx{
+@media (min-width: 1024px) {
+    .mx-features {
+        margin-left: 12rem;
+        margin-right: 10rem;
+    }
+}
+
+.max-wx {
     max-width: 100rem;
 }
 
-.stage-2{
-    margin-top: 100px;
-    margin-bottom: 38px;
+.stage-2 {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
 }
 
-.custom-py{
+@media (min-width: 1024px) {
+    .stage-2 {
+        margin-top: 100px;
+        margin-bottom: 38px;
+    }
+}
+
+.pad{
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+.custom-py {
     padding-top: 2rem;
-    padding-bottom: 0rem;
-    /* min-height: 92vh; */
+    padding-bottom: 0;
 }
 
-.vector2-margin2{
-    margin-left: -3.5rem;
-    margin-top: -3rem;
+.vector2-margin2 {
+    margin-left: -2rem;
+    margin-top: -2rem;
 }
 
+@media (min-width: 1024px) {
+    .vector2-margin2 {
+        margin-left: -2rem;
+        margin-top: -3rem;
+    }
+}
 
-.hoc-ky-nang-sinh-ton{
+.hoc-ky-nang-sinh-ton {
     color: rgb(28, 59, 31);
-    font-size: 20px;
-    font-family: 'Open Sans';
-    font-weight: '400';
-    word-wrap: 'break-word';
-    top: 0px;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+/* Responsive Typography for Description */
+@media (max-width: 640px) {
+    .hoc-ky-nang-sinh-ton {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .hoc-ky-nang-sinh-ton {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .hoc-ky-nang-sinh-ton {
+        font-size: 20px;
+    }
 }
 
 .title {
-  color: rgb(255, 255, 255);
-  font-size: 16px;
-  font-family: 'Open Sans';
-  font-weight: 700;
-  word-wrap: break-word;
+    color: rgb(255, 255, 255);
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 700;
+    word-wrap: break-word;
 }
 
-.description{
+/* Responsive Typography for Card Title */
+@media (max-width: 640px) {
+    .title {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .title {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .title {
+        font-size: 16px;
+    }
+}
+
+.description {
     color: white;
-    font-size: 13;
-    font-family: 'Open Sans';
-    font-weight: '400';
-    word-wrap: 'break-word'
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+/* Responsive Typography for Card Description */
+@media (max-width: 640px) {
+    .description {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .description {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .description {
+        font-size: 13px;
+    }
 }
