@@ -20,7 +20,6 @@ const NavLink = ({ className, ...props }: ComponentProps<typeof Link>) => {
                     className
                 )}
         >
-
         </Link>
 
     )
