@@ -57,7 +57,6 @@ export default function RootLayout({
             <Layout style={layoutStyle}>
               <AppHeader></AppHeader>
               <Content style={contentStyle}>{children}</Content>
-              <AppFooter></AppFooter>
             </Layout>
           </AntdRegistry>
         </body>
