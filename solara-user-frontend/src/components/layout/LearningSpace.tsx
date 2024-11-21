@@ -28,28 +28,6 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
           onClick={() => setCollapsed(!collapsed)}
         />
 
-        {/* <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          items={[
-            {
-              key: '1',
-              icon: <FiLayers />,
-              label: 'Chủ Đề',
-            },
-            {
-              key: '2',
-              icon: <IoExtensionPuzzleOutline />,
-              label: 'Giả Lập',
-            },
-            {
-              key: '3',
-              icon: <LuBadgeInfo />,
-              label: 'Rủi Ro',
-            },
-          ]}
-        /> */}
-
         <div>
           <SidebarButton className='h-12' icon={<FiLayers />} href={LEARNING_TOPICS_ROUTE}>{collapsed ? '' : 'Chủ Đề'}</SidebarButton>
           <SidebarButton className='h-12' icon={<IoExtensionPuzzleOutline />} href={LEARNING_SIMULATIONS_ROUTE}>{collapsed ? '' : 'Giả Lập'}</SidebarButton>
