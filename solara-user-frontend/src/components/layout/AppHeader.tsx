@@ -13,6 +13,8 @@ import {
 import NavLink from '../ui/NavLink'
 import Link from 'next/link'
 import { useAuth, UserButton } from '@clerk/nextjs'
+import { HOME_ROUTE, LEARNING_TOPICS_ROUTE, MARKET_ROUTE, SIGNIN_ROUTE } from '@/constants/routes'
+import Image from 'next/image'
 
 // const learnings = [
 //   { name: 'Flashcard', description: 'Get a better understanding of your traffic', href: '/learning/flashcard', icon: ChartPieIcon },
@@ -30,14 +32,15 @@ const AppHeader = () => {
 
   return (
     <header className="bg-white">
-      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img
+            <Image
               alt=""
-              src="logo.png"
-              className="h-8 w-auto"
+              src="/logo.png"
+              width={84}
+              height={0}
             />
           </Link>
         </div>
@@ -54,7 +57,7 @@ const AppHeader = () => {
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
 
 
-          <NavLink href="/" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <NavLink href={HOME_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Trang Chủ
           </NavLink>
 
@@ -104,11 +107,11 @@ const AppHeader = () => {
             </PopoverPanel>
           </Popover> */}
 
-          <NavLink href="/learning/topics" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <NavLink href={LEARNING_TOPICS_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Học Tập
           </NavLink>
 
-          <NavLink href="/market" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <NavLink href={MARKET_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Nhãn Hàng
           </NavLink>
 
@@ -119,12 +122,12 @@ const AppHeader = () => {
           {
             isSignedIn ?
               (
-                <UserButton/>
+                <UserButton />
               )
               :
               (
 
-                <NavLink href="/signin" className="text-sm/6 font-semibold py-1 px-2 rounded text-gray-900">
+                <NavLink href={SIGNIN_ROUTE} className="text-sm/6 font-semibold py-1 px-2 rounded text-gray-900">
                   Sign in <span aria-hidden="true">&rarr;</span>
                 </NavLink>
               )
@@ -140,10 +143,11 @@ const AppHeader = () => {
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              <Image
                 alt=""
-                src="logo.png"
-                className="h-8 w-auto"
+                src="/logo.png"
+                width={84}
+                height={0}
               />
             </Link>
             <button
@@ -160,7 +164,7 @@ const AppHeader = () => {
               <div className="space-y-2 py-6">
 
                 <NavLink
-                  href="/"
+                  href={HOME_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
                   Trang Chủ
@@ -190,14 +194,14 @@ const AppHeader = () => {
                 </Disclosure> */}
 
                 <NavLink
-                  href="/learning/topics"
+                  href={LEARNING_TOPICS_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
                   Học Tập
                 </NavLink>
 
                 <NavLink
-                  href="/market"
+                  href={MARKET_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
                   Nhãn Hàng
@@ -215,7 +219,7 @@ const AppHeader = () => {
                     (
 
                       <NavLink
-                        href="/signin"
+                        href={SIGNIN_ROUTE}
                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                       >
                         Sign in

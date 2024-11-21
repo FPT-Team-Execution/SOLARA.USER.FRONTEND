@@ -1,4 +1,3 @@
-
 import MainBanner from '@/components/Homepage/MainBanner'
 import SpecialFeatures from '../components/Homepage/SpecialFeatures/SpecialFeatures';
 import Reviews from '../components/Homepage/Reviews/Reviews'
@@ -7,10 +6,10 @@ import AppFooter from '@/components/layout/AppFooter';
 export default function Home() {
   return (
     <div>
-      <MainBanner/>
-      <SpecialFeatures/>
-      <Reviews/>
-      <PartnerSection/>
+      <MainBanner />
+      <SpecialFeatures />
+      <Reviews />
+      <PartnerSection />
       <AppFooter></AppFooter>
     </div>
   );
