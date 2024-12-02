@@ -1,6 +1,6 @@
 import { notification } from 'antd'
 import axios from 'axios'
-import { BASE_API_URL } from '../apiUrl/baseApiUrl'
+import { BASE_API_URL } from '../../constants/apis/'
 
 const axiosClient = axios.create({
     baseURL: BASE_API_URL,
