@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Layout } from 'antd';
 import { LEARNING_SIMULATIONS_ROUTE, LEARNING_THREATS_ROUTE, LEARNING_TOPICS_ROUTE } from '@/constants/routes';
-import SidebarButton from '../ui/SidebarButton';
+import SidebarButton from '../UI/SidebarButton';
 import { FiLayers } from 'react-icons/fi';
 import { IoExtensionPuzzleOutline } from 'react-icons/io5';
 import { LuBadgeInfo } from 'react-icons/lu';

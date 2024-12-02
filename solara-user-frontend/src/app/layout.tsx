@@ -5,7 +5,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
-import AppHeader from "@/components/layout/AppHeader";
+import AppHeader from "@/components/Layout/AppHeader";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

@@ -1,9 +1,9 @@
+import { BASE_API } from '@/constants/apis'
 import { notification } from 'antd'
 import axios from 'axios'
-import { BASE_API_URL } from '../../constants/apis/'
 
 const axiosClient = axios.create({
-    baseURL: BASE_API_URL,
+    baseURL: BASE_API,
     headers: {
         'content-type': 'application/json'
     },

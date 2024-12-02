@@ -1,4 +1,4 @@
-import LearningSpace from '@/components/layout/LearningSpace';
+import LearningSpace from '@/components/Layout/LearningSpace';
 import { Metadata } from 'next';
 import React from 'react'
 

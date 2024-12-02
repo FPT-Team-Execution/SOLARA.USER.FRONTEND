@@ -1,6 +1,6 @@
 "use client"
 
-import Spinner from '@/components/ui/Spinner';
+import Spinner from '@/components/UI/Spinner';
 import { HOME_ROUTE, SIGNIN_ROUTE } from '@/constants/routes';
 import axiosClient from '@/utils/axios/axiosClient';
 import { useAuth } from '@clerk/nextjs'
