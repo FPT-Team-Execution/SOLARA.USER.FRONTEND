@@ -28,7 +28,10 @@ const useTopicStore = create<TopicStore>((set) => ({
                 return
             }
 
-            set({ topics: response.data.responseRequest });
+            set((state) => ({
+                ...state,
+                topics: response.data.responseRequest,
+            }));
 
         } catch (error) {
             console.error('Error fetching topics', error);
@@ -45,7 +48,10 @@ const useTopicStore = create<TopicStore>((set) => ({
                 return;
             }
 
-            set({ topic: response.data.responseRequest })
+            set((state) => ({
+                ...state,
+                topic: response.data.responseRequest,
+            }));
 
         } catch (error) {
             console.error('Error fetching topic', error);
