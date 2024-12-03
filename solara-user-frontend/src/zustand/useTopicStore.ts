@@ -21,6 +21,7 @@ const useTopicStore = create<TopicStore>((set) => ({
     // Get a list of topics with pagination
     getTopics: async (query: GetPagedTopicsRequest) => {
         try {
+
             const response = await axiosClient.get<IBaseModel<IPaginate<TopicDto>>>(GET_TOPICS_API, { params: query });
 
             if (!response.data.isSuccess) {
@@ -28,6 +29,7 @@ const useTopicStore = create<TopicStore>((set) => ({
             }
 
             set({ topics: response.data.responseRequest });
+
         } catch (error) {
             console.error('Error fetching topics', error);
         }
@@ -36,6 +38,7 @@ const useTopicStore = create<TopicStore>((set) => ({
     // Get a single topic by its ID
     getTopic: async (id: string) => {
         try {
+
             const response = await axiosClient.get<IBaseModel<TopicDto>>(GET_TOPIC_API(id));
 
             if (!response.data.isSuccess) {
@@ -43,6 +46,7 @@ const useTopicStore = create<TopicStore>((set) => ({
             }
 
             set({ topic: response.data.responseRequest })
+
         } catch (error) {
             console.error('Error fetching topic', error);
         }
@@ -51,6 +55,7 @@ const useTopicStore = create<TopicStore>((set) => ({
     // Create a new topic
     createTopic: async (request: CreateTopicRequest) => {
         try {
+
             const createResponse = await axiosClient.post<IBaseModel<string>>(POST_TOPIC_API, request);
 
             const topicId = createResponse.data.responseRequest;
@@ -134,7 +139,6 @@ const useTopicStore = create<TopicStore>((set) => ({
                 return;
             }
 
-
             set((state) => {
 
                 if (!state.topics) {
@@ -156,6 +160,7 @@ const useTopicStore = create<TopicStore>((set) => ({
                     }
                 };
             });
+
         } catch (error) {
             console.error('Error deleting topic', error);
         }
