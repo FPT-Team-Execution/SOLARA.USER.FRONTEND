@@ -1,6 +1,7 @@
 import { BASE_API } from '@/constants/apis'
 import { notification } from 'antd'
 import axios from 'axios'
+import { getCookie } from 'cookies-next'
 
 const axiosClient = axios.create({
     baseURL: BASE_API,
@@ -12,6 +13,10 @@ const axiosClient = axios.create({
 })
 
 axiosClient.interceptors.request.use(async (config) => {
+    const token = getCookie('__session'); 
+    if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`; 
+    }
     return config
 })
 

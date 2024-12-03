@@ -3,10 +3,13 @@
 import { GetPagedTopicsRequest } from '@/types/topic'
 import axiosClient from '@/utils/axios/axiosClient'
 import useTopicStore from '@/zustand/useTopicStore'
+import { useAuth } from '@clerk/nextjs'
 import { useRequest } from 'ahooks'
 import { useState } from 'react'
 
 const Page = () => {
+  const { getToken } = useAuth();
+
   const [query, setQuery] = useState<GetPagedTopicsRequest>({
     searchProp: '',
     searchKey: '',
@@ -20,7 +23,6 @@ const Page = () => {
 
   const { } = useRequest(async () => {
     await getTopics(query);
-    console.log(axiosClient.defaults.headers.common.Authorization);
   },
     {
       refreshDeps: [query]
