@@ -1,5 +1,6 @@
 "use client"
 
+import Spinner from '@/components/UI/Spinner'
 import { GetPagedTopicsRequest } from '@/types/topic'
 import useTopicStore from '@/zustand/useTopicStore'
 import { useAuth } from '@clerk/nextjs'
@@ -13,7 +14,7 @@ const Page = () => {
     searchProp: '',
     searchKey: '',
     page: 1,
-    size: 1,
+    size: 10,
     orderOn: '',
     isAscending: true,
   });
@@ -30,7 +31,20 @@ const Page = () => {
 
   return (
     <div>
-      Đây là trang topics
+      {
+        loading ?
+          (
+            <div className='h-screen w-full flex justify-center items-center'>
+              <Spinner />
+            </div>
+          )
+          :
+          (
+            <div>
+              Đây là trang chủ đề
+            </div>
+          )
+      }
     </div>
   );
 }
