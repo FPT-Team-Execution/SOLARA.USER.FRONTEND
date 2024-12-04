@@ -14,8 +14,8 @@ export interface IPaginate<T> {
 }
 
 export interface IPageRequest {
-    searchKey?: string;
     searchProp?: string;
+    searchKey?: string;
     page: number;
     size: number;
     orderOn?: string;

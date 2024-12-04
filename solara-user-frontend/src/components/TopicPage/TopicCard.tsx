@@ -8,7 +8,7 @@ interface IProps {
 
 const TopicCard = (props: IProps) => {
     return (
-        <div className="max-w-56 bg-white shadow-lg rounded-xl">
+        <div className="bg-white shadow-lg rounded-xl">
 
             <img
                 className="w-full h-48 object-cover rounded-tl-xl rounded-tr-xl"
@@ -36,6 +36,7 @@ const TopicCard = (props: IProps) => {
                 </div>
 
             </div>
+            
         </div>
     )
 }
