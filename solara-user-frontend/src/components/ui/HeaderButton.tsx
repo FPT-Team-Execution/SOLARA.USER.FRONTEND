@@ -7,13 +7,14 @@ import React, { ComponentProps } from 'react';
 
 interface NavLinkProps extends ComponentProps<typeof Link> {
     isMultiPath?: boolean; // Kiểm tra nhiều đường dẫn
+    pathIndex: number;
 }
 
-const HeaderButton = ({ className, isMultiPath = false, ...props }: NavLinkProps) => {
+const HeaderButton = ({ className, pathIndex = 1, isMultiPath = false, ...props }: NavLinkProps) => {
     const path = usePathname();
     const segments = props.href.toString().split('/');
     const isActive = isMultiPath
-        ? path.includes(segments[1])
+        ? path.includes(segments[pathIndex])
         : path === props.href;
 
     return (

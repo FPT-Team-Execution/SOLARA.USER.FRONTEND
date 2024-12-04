@@ -3,12 +3,16 @@
 import TopicCard from '@/components/TopicPage/TopicCard'
 import TopicQuery from '@/components/TopicPage/TopicQuery'
 import Spinner from '@/components/UI/Spinner'
+import { LEARNING_TOPICS_SUBS_ROUTE } from '@/constants/routes'
 import { GetPagedTopicsRequest } from '@/types/topic'
 import useTopicStore from '@/zustand/useTopicStore'
 import { useRequest } from 'ahooks'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const Page = () => {
+
+  const router = useRouter();
 
   const [query, setQuery] = useState<GetPagedTopicsRequest>({
     searchProp: 'topicName',
@@ -26,10 +30,16 @@ const Page = () => {
     }));
   };
 
+  const handleNavigate = (id: string): void => {
+    router.push(`${LEARNING_TOPICS_SUBS_ROUTE}?topicId=${id}`)
+  }
+
   const { topics, getTopics } = useTopicStore();
 
   const { loading } = useRequest(async () => {
-
+    if (topics) {
+      return
+    }
     await getTopics(query);
   },
     {
@@ -75,7 +85,9 @@ const Page = () => {
                   <div className='flex gap-4 flex-wrap justify-center items-center'>
                     {topics?.items.map((item, index) => {
                       return (
-                        <TopicCard topic={item} key={index} />
+                        <div className='cursor-pointer' key={index} onClick={() => handleNavigate(item.topicId)}>
+                          <TopicCard topic={item} />
+                        </div>
                       );
                     })}
                   </div>

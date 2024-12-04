@@ -57,7 +57,7 @@ const AppHeader = () => {
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
 
 
-          <HeaderButton href={HOME_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <HeaderButton pathIndex={1} href={HOME_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Trang Chủ
           </HeaderButton>
 
@@ -107,11 +107,11 @@ const AppHeader = () => {
             </PopoverPanel>
           </Popover> */}
 
-          <HeaderButton isMultiPath={true} href={LEARNING_TOPICS_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <HeaderButton pathIndex={1} isMultiPath={true} href={LEARNING_TOPICS_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Học Tập
           </HeaderButton>
 
-          <HeaderButton href={MARKET_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+          <HeaderButton pathIndex={1} href={MARKET_ROUTE} className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
             Nhãn Hàng
           </HeaderButton>
 
@@ -127,7 +127,7 @@ const AppHeader = () => {
               :
               (
 
-                <HeaderButton href={SIGNIN_ROUTE} className="text-sm/6 font-semibold py-1 px-2 rounded text-gray-900">
+                <HeaderButton pathIndex={1} href={SIGNIN_ROUTE} className="text-sm/6 font-semibold py-1 px-2 rounded text-gray-900">
                   Sign in <span aria-hidden="true">&rarr;</span>
                 </HeaderButton>
               )
@@ -164,6 +164,7 @@ const AppHeader = () => {
               <div className="space-y-2 py-6">
 
                 <HeaderButton
+                  pathIndex={1}
                   href={HOME_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
@@ -173,7 +174,7 @@ const AppHeader = () => {
                 {/* <Disclosure as="div" className="-mx-3">
                   <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base/6 font-semibold text-gray-900 hover:bg-gray-50">
 
-                    <HeaderButton href="/learning" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
+                    <HeaderButton pathIndex={1} href="/learning" className="text-sm/6 py-1 px-2 rounded font-semibold text-gray-900">
                       Học Tập
                     </HeaderButton>
 
@@ -194,6 +195,7 @@ const AppHeader = () => {
                 </Disclosure> */}
 
                 <HeaderButton
+                  pathIndex={1}
                   isMultiPath
                   href={LEARNING_TOPICS_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
@@ -202,6 +204,7 @@ const AppHeader = () => {
                 </HeaderButton>
 
                 <HeaderButton
+                  pathIndex={1}
                   href={MARKET_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
@@ -220,6 +223,7 @@ const AppHeader = () => {
                     (
 
                       <HeaderButton
+                        pathIndex={1}
                         href={SIGNIN_ROUTE}
                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                       >

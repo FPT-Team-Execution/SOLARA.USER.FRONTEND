@@ -29,9 +29,9 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
         />
 
         <div>
-          <SidebarButton className='h-12' icon={<FiLayers />} href={LEARNING_TOPICS_ROUTE}>{collapsed ? '' : 'Chủ Đề'}</SidebarButton>
-          <SidebarButton className='h-12' icon={<IoExtensionPuzzleOutline />} href={LEARNING_SIMULATIONS_ROUTE}>{collapsed ? '' : 'Giả Lập'}</SidebarButton>
-          <SidebarButton className='h-12' icon={<LuBadgeInfo />} href={LEARNING_THREATS_ROUTE}>{collapsed ? '' : 'Rủi Ro'}</SidebarButton>
+          <SidebarButton isMultiPath pathIndex={2} className='h-12' icon={<FiLayers />} href={LEARNING_TOPICS_ROUTE}>{collapsed ? '' : 'Chủ Đề'}</SidebarButton>
+          <SidebarButton pathIndex={1} className='h-12' icon={<IoExtensionPuzzleOutline />} href={LEARNING_SIMULATIONS_ROUTE}>{collapsed ? '' : 'Giả Lập'}</SidebarButton>
+          <SidebarButton pathIndex={1} className='h-12' icon={<LuBadgeInfo />} href={LEARNING_THREATS_ROUTE}>{collapsed ? '' : 'Rủi Ro'}</SidebarButton>
         </div>
 
       </Sider>

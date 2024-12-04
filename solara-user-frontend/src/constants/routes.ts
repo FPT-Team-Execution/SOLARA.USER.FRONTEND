@@ -11,6 +11,7 @@ export const HOME_ROUTE = "/";
 // Private routes
 export const LEARNING_ROUTE = "/learning";
 export const LEARNING_TOPICS_ROUTE = "/learning/topics";
+export const LEARNING_TOPICS_SUBS_ROUTE = "/learning/topics/subs";
 export const LEARNING_SIMULATIONS_ROUTE = "/learning/simulations";
 export const LEARNING_THREATS_ROUTE = "/learning/threats";
 
