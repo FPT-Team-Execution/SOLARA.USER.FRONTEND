@@ -7,11 +7,11 @@ import { IBaseModel, IPaginate } from '@/types/general';
 interface TopicStore {
     topic: TopicDto | null
     topics: IPaginate<TopicDto> | null;
-    getTopics: (query: GetPagedTopicsRequest) => void;
-    getTopic: (id: string) => void;
-    createTopic: (request: CreateTopicRequest) => void;
-    updateTopic: (request: UpdateTopicRequest) => void;
-    deleteTopic: (id: string) => void;
+    getTopics: (query: GetPagedTopicsRequest) => Promise<void>;
+    getTopic: (id: string) => Promise<void>;
+    createTopic: (request: CreateTopicRequest) => Promise<void>;
+    updateTopic: (request: UpdateTopicRequest) => Promise<void>;
+    deleteTopic: (id: string) => Promise<void>;
 }
 
 const useTopicStore = create<TopicStore>((set) => ({

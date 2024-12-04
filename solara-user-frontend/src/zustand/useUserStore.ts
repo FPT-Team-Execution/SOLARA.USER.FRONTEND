@@ -3,12 +3,12 @@ import { IBaseModel } from '@/types/general';
 import axiosClient from '@/utils/axios/axiosClient';
 import { create } from 'zustand';
 
-interface SysAuthStore {
+interface UserStore {
     authenticated: boolean
-    setAuthenticated: () => void
+    setAuthenticated: () => Promise<void>
 }
 
-const useSysAuthStore = create<SysAuthStore>((set) => ({
+const useUserStore = create<UserStore>((set) => ({
     authenticated: false,
     setAuthenticated: async () => {
 
@@ -36,4 +36,4 @@ const useSysAuthStore = create<SysAuthStore>((set) => ({
     }
 }))
 
-export default useSysAuthStore;
+export default useUserStore;

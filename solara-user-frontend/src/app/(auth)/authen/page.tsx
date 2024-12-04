@@ -2,7 +2,7 @@
 
 import Spinner from '@/components/UI/Spinner';
 import { HOME_ROUTE, SIGNIN_ROUTE } from '@/constants/routes';
-import useSysAuthStore from '@/zustand/useSysAuthStore';
+import useUserStore from '@/zustand/useUserStore';
 import { useAuth } from '@clerk/nextjs'
 import { useRequest } from 'ahooks';
 import { useRouter } from 'next/navigation';
@@ -11,7 +11,7 @@ import React from 'react'
 const Page = () => {
 
     const { isSignedIn } = useAuth();
-    const { authenticated, setAuthenticated } = useSysAuthStore();
+    const { authenticated, setAuthenticated } = useUserStore();
     const router = useRouter();
 
     const { loading } = useRequest(async () => {
