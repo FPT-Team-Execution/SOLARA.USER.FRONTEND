@@ -1,7 +1,6 @@
 "use client"
 
 import { GetPagedTopicsRequest } from '@/types/topic'
-import axiosClient from '@/utils/axios/axiosClient'
 import useTopicStore from '@/zustand/useTopicStore'
 import { useAuth } from '@clerk/nextjs'
 import { useRequest } from 'ahooks'
@@ -21,7 +20,7 @@ const Page = () => {
 
   const { topics, getTopics } = useTopicStore();
 
-  const { } = useRequest(async () => {
+  const { loading } = useRequest(async () => {
     await getTopics(query);
   },
     {
