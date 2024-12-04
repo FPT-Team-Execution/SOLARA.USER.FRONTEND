@@ -15,7 +15,7 @@ const Page = () => {
     searchKey: '',
     page: 1,
     size: 10,
-    orderOn: 'topicName',
+    orderOn: '',
     isAscending: true,
   });
 

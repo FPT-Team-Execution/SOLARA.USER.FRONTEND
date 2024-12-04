@@ -45,10 +45,13 @@ const TopicQuery = (props: IProps) => {
             {/* OrderOn */}
             <Col className='flex flex-col'>
                 <Select
+                    className='min-w-24'
+                    title='Sắp xếp'
                     value={query.orderOn}
                     onChange={(value) => updateQuery('orderOn', value as string)}
                 >
-                    <Option value={"topicName"}>Tên chủ đề</Option>
+                    <Option value={""}>Sắp sếp</Option>
+                    <Option value={"topicName"}>Tên</Option>
                     <Option value={"description"}>Mô tả</Option>
                     <Option value={'createdOn'}>Ngày tạo</Option>
                 </Select>
