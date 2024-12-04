@@ -2,7 +2,6 @@ import { IPageRequest } from './general';
 
 export type TopicDto = {
     topicId: string;
-    createAt?: Date | null;
     description: string;
     topicName: string;
     totalSubTopic: number;
