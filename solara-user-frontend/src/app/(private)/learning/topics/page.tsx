@@ -1,5 +1,6 @@
 "use client"
 
+import TopicCard from '@/components/TopicPage/TopicCard'
 import Spinner from '@/components/UI/Spinner'
 import { GetPagedTopicsRequest } from '@/types/topic'
 import useTopicStore from '@/zustand/useTopicStore'
@@ -22,6 +23,7 @@ const Page = () => {
   const { topics, getTopics } = useTopicStore();
 
   const { loading } = useRequest(async () => {
+
     await getTopics(query);
   },
     {
@@ -32,18 +34,29 @@ const Page = () => {
   return (
     <div>
       {
-        loading ?
+        loading
+          ?
           (
             <div className='h-screen w-full flex justify-center items-center'>
               <Spinner />
             </div>
           )
           :
-          (
-            <div>
-              Đây là trang chủ đề
-            </div>
-          )
+          topics === null
+            ?
+            (
+              <span>There is no topic</span>
+            )
+            :
+            (
+              <div className='flex gap-4 flex-wrap justify-evenly items-center'>
+                {topics?.items.map((item, index) => {
+                  return (
+                    <TopicCard topic={item} key={index} />
+                  );
+                })}
+              </div>
+            )
       }
     </div>
   );
