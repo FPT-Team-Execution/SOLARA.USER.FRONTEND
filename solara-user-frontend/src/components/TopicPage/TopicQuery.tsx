@@ -50,7 +50,7 @@ const TopicQuery = (props: IProps) => {
                     value={query.orderOn}
                     onChange={(value) => updateQuery('orderOn', value as string)}
                 >
-                    <Option value={""}>Sắp sếp</Option>
+                    <Option value={""}>Sắp xếp</Option>
                     <Option value={"topicName"}>Tên</Option>
                     <Option value={"description"}>Mô tả</Option>
                     <Option value={'createdOn'}>Ngày tạo</Option>

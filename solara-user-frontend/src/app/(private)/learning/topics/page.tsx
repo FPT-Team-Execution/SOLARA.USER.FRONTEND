@@ -37,9 +37,6 @@ const Page = () => {
   const { topics, getTopics } = useTopicStore();
 
   const { loading } = useRequest(async () => {
-    if (topics) {
-      return
-    }
     await getTopics(query);
   },
     {
