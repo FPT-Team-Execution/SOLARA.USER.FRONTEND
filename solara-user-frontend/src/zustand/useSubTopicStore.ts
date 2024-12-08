@@ -2,7 +2,6 @@ import { GET_SUBTOPIC_API, GET_SUBTOPICS_API, POST_COMPLETION_SUBTOPIC_API, POST
 import { IBaseModel, IPaginate } from '@/types/general'
 import { CreateSubTopicRequest, GetPagedSubTopicRequest, SubTopicDto, UpdateSubTopicRequest } from '@/types/subTopic'
 import axiosClient from '@/utils/axios/axiosClient'
-import { error } from 'console'
 import { create } from 'zustand'
 
 interface SubTopicStore {
@@ -34,7 +33,7 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
             }))
 
         } catch (error) {
-            console.error('Error fetching sub topics', error)
+            console.log('Error fetching sub topics', error)
         }
     },
 
@@ -52,7 +51,7 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
             }))
 
         } catch (error) {
-            console.error('Error fetching sub topic', error)
+            console.log('Error fetching sub topic', error)
         }
     },
 
@@ -87,7 +86,7 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
             }
 
         } catch (error) {
-            console.error('Error creating sub topic', error)
+            console.log('Error creating sub topic', error)
         }
     },
 
@@ -127,7 +126,7 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
             })
 
         } catch (error) {
-            console.error('Error updating sub topic', error)
+            console.log('Error updating sub topic', error)
         }
     },
 
@@ -140,7 +139,7 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
             }
 
         } catch (error) {
-            console.error('Error completing sub topic', error);
+            console.log('Error completing sub topic', error);
         }
     }
 
