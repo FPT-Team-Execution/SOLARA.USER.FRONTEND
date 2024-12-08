@@ -8,7 +8,7 @@ const Page = () => {
   const topicId = searchParams.get('topicId');
 
   return (
-    <div>
+    <div className='text-sm'>
       This is sub page {topicId}
     </div>
   )

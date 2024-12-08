@@ -23,12 +23,12 @@ export const DELETE_TOPIC_API = (topicId: string) => `/topics/${topicId}`;
 export const GET_SUBTOPICS_API = (topicId: string) => `/sub-topicstopic/${topicId}`;
 export const GET_SUBTOPIC_API = (subTopicId: string) => `/sub-topics/${subTopicId}`;
 export const POST_SUBTOPIC_API = "/sub-topics";
-export const PUT_SUBTOPIC_API = (subTopicId: string) => `/sub-topics/${subTopicId}`;
+export const PUT_SUBTOPIC_API = "/sub-topics";
 export const POST_COMPLETION_SUBTOPIC_API = (subTopicId: string) => `/sub-topics/${subTopicId}/completion`;
 
 // ExerciseType
 export const GET_EXERCISETYPES_API = "/exercise-types";
-export const GET_EXERCISETYPE_API = (typeId : string) => `/exercise-types/${typeId}`;
+export const GET_EXERCISETYPE_API = (typeId: string) => `/exercise-types/${typeId}`;
 export const POST_EXERCISETYPE_API = "/exercise-types";
 export const PUT_EXERCISETYPE_API = "/exercise-types";
 
