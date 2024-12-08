@@ -20,7 +20,7 @@ export const PUT_TOPIC_API = "/topics";
 export const DELETE_TOPIC_API = (topicId: string) => `/topics/${topicId}`;
 
 // SubTopic
-export const GET_SUBTOPICS_API = (topicId: string) => `/sub-topicstopic/${topicId}`;
+export const GET_SUBTOPICS_API = (topicId: string) => `/sub-topics/topic/${topicId}`;
 export const GET_SUBTOPIC_API = (subTopicId: string) => `/sub-topics/${subTopicId}`;
 export const POST_SUBTOPIC_API = "/sub-topics";
 export const PUT_SUBTOPIC_API = "/sub-topics";

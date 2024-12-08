@@ -135,7 +135,7 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
             const response = await axiosClient.post<IBaseModel<string>>(POST_COMPLETION_SUBTOPIC_API(id))
 
             if (!response.data.isSuccess) {
-                throw error(response.data.message)
+                throw new Error()
             }
 
         } catch (error) {
