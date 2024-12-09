@@ -1,5 +1,6 @@
 "use client"
 
+import SubTopicRoadMap from '@/components/SubTopicPage/SubTopicRoadMap';
 import Spinner from '@/components/UI/Spinner';
 import { GetPagedSubTopicRequest } from '@/types/subTopic';
 import useSubTopicStore from '@/zustand/useSubTopicStore';
@@ -13,7 +14,7 @@ const Page = () => {
   const { subTopics, getSubTopics } = useSubTopicStore();
 
   const [query, setQuery] = useState<GetPagedSubTopicRequest>({
-    searchProp: 'subTopicName',
+    searchProp: '',
     searchKey: '',
     page: 1,
     size: 10,
@@ -29,7 +30,7 @@ const Page = () => {
   })
 
   return (
-    <div className='flex gap-4'>
+    <div className='flex gap-4 h-screen'>
       {
         loading
           ?
@@ -46,16 +47,27 @@ const Page = () => {
             )
             :
             (
-              <div className='bg-yellow-500 w-8/12 rounded-xl'>
+              <>
+                <div className="w-8/12 rounded-xl overflow-auto max-h-screen scroll-smooth">
 
-                d
+                  {/* {subTopics?.items.map((item, index) => {
+                    return (
+                      <div className='cursor-pointer' key={index}>
+                        <h1>{item.name}</h1>
+                      </div>
+                    );
+                  })} */}
 
-              </div>
+                  <SubTopicRoadMap/>
+
+                </div>
+                <div className='flex flex-col border-dashed border-red-50 w-4/12 rounded-xl'>
+                  content
+                </div>
+              </>
             )
       }
-      <div className='bg-red-500 flex flex-col border-dashed border-red-50 w-4/12 rounded-xl'>
-        d
-      </div>
+
     </div>
   )
 }
