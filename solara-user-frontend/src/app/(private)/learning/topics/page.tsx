@@ -12,6 +12,7 @@ import { useState } from 'react'
 
 const Page = () => {
 
+  const { topics, getTopics } = useTopicStore();
   const router = useRouter();
 
   const [query, setQuery] = useState<GetPagedTopicsRequest>({
@@ -34,7 +35,6 @@ const Page = () => {
     router.push(`${LEARNING_TOPICS_SUBS_ROUTE}?topicId=${id}`)
   }
 
-  const { topics, getTopics } = useTopicStore();
 
   const { loading } = useRequest(async () => {
     await getTopics(query);

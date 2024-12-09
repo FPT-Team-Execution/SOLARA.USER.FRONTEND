@@ -17,16 +17,15 @@ const Page = () => {
     searchProp: '',
     searchKey: '',
     page: 1,
-    size: 10,
+    size: 100,
     orderOn: '',
     isAscending: true,
   });
 
-
   const { loading } = useRequest(async () => {
     await getSubTopics(topicId!, query);
   }, {
-    refreshDeps: [topicId]
+    refreshDeps: [topicId, query]
   })
 
   return (
@@ -50,15 +49,7 @@ const Page = () => {
               <>
                 <div className="w-8/12 rounded-xl overflow-auto max-h-screen scroll-smooth">
 
-                  {/* {subTopics?.items.map((item, index) => {
-                    return (
-                      <div className='cursor-pointer' key={index}>
-                        <h1>{item.name}</h1>
-                      </div>
-                    );
-                  })} */}
-
-                  <SubTopicRoadMap/>
+                  <SubTopicRoadMap />
 
                 </div>
                 <div className='flex flex-col border-dashed border-red-50 w-4/12 rounded-xl'>

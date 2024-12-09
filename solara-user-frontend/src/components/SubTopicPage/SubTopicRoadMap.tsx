@@ -1,5 +1,6 @@
 import useSubTopicStore from '@/zustand/useSubTopicStore'
 import React from 'react'
+import { VscDebugStart } from 'react-icons/vsc';
 
 const SubTopicRoadMap = () => {
 
@@ -11,7 +12,9 @@ const SubTopicRoadMap = () => {
 
                 <div className="flex flex-col items-center">
                     <div className="w-20 h-20 bg-gray-700 rounded-md flex items-center justify-center">
-                        <span className="text-gray-500 text-2xl font-bold">★</span>
+                        <span className="text-gray-500 text-2xl font-bold">
+                            <VscDebugStart />
+                        </span>
                     </div>
                     <p className="text-gray-500">BẮT ĐẦU</p>
                 </div>
