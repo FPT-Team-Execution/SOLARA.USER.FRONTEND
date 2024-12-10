@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import useSubTopicStore from '@/zustand/useSubTopicStore'
 import { Button } from 'antd';
 import React from 'react'
