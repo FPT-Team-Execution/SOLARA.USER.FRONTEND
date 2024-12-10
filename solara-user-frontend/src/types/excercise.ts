@@ -8,7 +8,7 @@ export type AnswerDto = {
 };
 
 
-export type ExerciseDto = {
+export type ExcerciseDto = {
     id: string;
     difficulty: string;
     xp: number;
@@ -21,7 +21,7 @@ export type ExerciseDto = {
     ans: AnswerDto[];
 };
 
-export type CreateExerciseOptionRequest = {
+export type CreateExcerciseOptionRequest = {
     optionText: string;
     explanation?: string;
     isCorrect: boolean;
@@ -35,7 +35,7 @@ export type CreateExerciseRequest = {
     videoUrl?: string;
     difficulty: string;
     exerciseTypeId: string;
-    answers: CreateExerciseOptionRequest[];
+    answers: CreateExcerciseOptionRequest[];
 };
 
 export type AddOptionRequest = {
@@ -45,7 +45,7 @@ export type AddOptionRequest = {
     isCorrect: boolean;
 };
 
-export type UpdateExerciseRequest = {
+export type UpdateExcerciseRequest = {
     exerciseId: string;
     subTopicId: string;
     xp: number;
@@ -55,7 +55,7 @@ export type UpdateExerciseRequest = {
     difficulty: string;
 };
 
-export type UpdateExerciseOptionRequest = {
+export type UpdateExcerciseOptionRequest = {
     optionId: string;
     optionText: string;
     explanation?: string;
@@ -68,7 +68,7 @@ export type CreateUserAttemptRequest = {
     options: string[];
 };
 
-export type ExerciseTypeDto = {
+export type ExcerciseTypeDto = {
     id: string;
     name: string;
     description: string;
@@ -78,11 +78,11 @@ export type ExerciseTypeDto = {
     isMultipleChoice: boolean;
 };
 
-export type GetPagedTypesRequest = IPageRequest & {
+export type GetPagedExcerciseTypesRequest = IPageRequest & {
 
 }
 
-export type UpdateTypeRequest = {
+export type UpdateExcerciseTypeRequest = {
     id: string;
     name: string;
     description: string;
@@ -91,7 +91,7 @@ export type UpdateTypeRequest = {
     isMultipleChoice: boolean;
 };
 
-export type CreateTypeRequest = {
+export type CreateExcerciseTypeRequest = {
     name: string;
     description: string;
     externalLink?: string;
