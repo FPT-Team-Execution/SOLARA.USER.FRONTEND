@@ -1,5 +1,6 @@
 "use client"
 
+import SubTopicDetail from '@/components/SubTopicPage/SubTopicDetail';
 import SubTopicRoadMap from '@/components/SubTopicPage/SubTopicRoadMap';
 import Spinner from '@/components/UI/Spinner';
 import { GetPagedSubTopicRequest } from '@/types/subTopic';
@@ -10,10 +11,10 @@ import { useSearchParams } from 'next/navigation';
 const Page = () => {
   const searchParams = useSearchParams();
   const topicId = searchParams.get('topicId');
-  const { subTopic, subTopics, getSubTopics } = useSubTopicStore();
+  const { subTopics, getSubTopics } = useSubTopicStore();
 
   const { loading } = useRequest(async () => {
-    const query : GetPagedSubTopicRequest = {
+    const query: GetPagedSubTopicRequest = {
       searchProp: '',
       searchKey: '',
       page: 1,
@@ -50,8 +51,11 @@ const Page = () => {
                   <SubTopicRoadMap />
 
                 </div>
+
                 <div className='flex flex-col border-dashed border-red-50 w-4/12 rounded-xl'>
-                  {subTopic?.name}
+
+                  <SubTopicDetail />
+
                 </div>
               </>
             )

@@ -5,7 +5,7 @@ export type SubTopicDto = {
     name: string;
     description: string;
     totalXP: number;
-    totalExercise: number;
+    totalExcercise: number;
     createdOn?: Date;
     updatedOn?: Date;
 };
