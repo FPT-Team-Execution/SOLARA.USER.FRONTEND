@@ -5,6 +5,7 @@ import { Button } from 'antd';
 import { useRouter } from 'next/navigation'
 import { AiTwotoneExperiment } from 'react-icons/ai';
 import { TbCards } from 'react-icons/tb';
+import { VscDebugStart } from 'react-icons/vsc';
 
 const SubTopicDetail = () => {
     const { subTopic } = useSubTopicStore();
@@ -32,7 +33,7 @@ const SubTopicDetail = () => {
                 </div>
 
                 <div>
-                    <Button onClick={handleNavigate} className='w-full !py-6 !font-bold !text-lg !bg-green-600 !text-white'>Học Ngay</Button>
+                    <Button icon={<VscDebugStart />} onClick={handleNavigate} className='w-full !py-6 !font-bold !text-lg !bg-green-600 !text-white'>Học Ngay</Button>
                 </div>
 
             </div>
