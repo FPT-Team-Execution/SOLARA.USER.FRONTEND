@@ -1,4 +1,5 @@
 import useSubTopicStore from '@/zustand/useSubTopicStore'
+import { useRequest } from 'ahooks';
 import React from 'react'
 import { FaRegFlag } from 'react-icons/fa';
 import { VscDebugStart } from 'react-icons/vsc';
@@ -6,6 +7,10 @@ import { VscDebugStart } from 'react-icons/vsc';
 const SubTopicRoadMap = () => {
 
     const { subTopic, subTopics, getSubTopic } = useSubTopicStore();
+
+    const { } = useRequest(async () => {
+        getSubTopic(subTopics?.items[0].id!)
+    })
 
     return (
         <div className="bg-gray-100 w-full min-h-screen flex flex-col items-center py-10">
@@ -32,7 +37,7 @@ const SubTopicRoadMap = () => {
                                         <span className="text-white text-2xl font-bold">★</span>
                                         {/* <div className="absolute top-0 right-0 w-3 h-3 bg-green-700 rounded-full animate-ping"></div> */}
                                     </div>
-                                    <p className="text-green-500">{item.name}</p>
+                                    <p className="text-green-500 text-nowrap">{item.name}</p>
                                 </div>
                             </div>
 
