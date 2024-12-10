@@ -27,7 +27,7 @@ export type CreateExcerciseOptionRequest = {
     isCorrect: boolean;
 };
 
-export type CreateExerciseRequest = {
+export type CreateExcerciseRequest = {
     subTopicId: string;
     xp: number;
     question: string;
