@@ -6,26 +6,24 @@ import { GetPagedSubTopicRequest } from '@/types/subTopic';
 import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRequest } from 'ahooks';
 import { useSearchParams } from 'next/navigation';
-import React, { useState } from 'react'
 
 const Page = () => {
   const searchParams = useSearchParams();
   const topicId = searchParams.get('topicId');
-  const { subTopics, getSubTopics } = useSubTopicStore();
-
-  const [query, setQuery] = useState<GetPagedSubTopicRequest>({
-    searchProp: '',
-    searchKey: '',
-    page: 1,
-    size: 100,
-    orderOn: '',
-    isAscending: true,
-  });
+  const { subTopic, subTopics, getSubTopics } = useSubTopicStore();
 
   const { loading } = useRequest(async () => {
+    const query : GetPagedSubTopicRequest = {
+      searchProp: '',
+      searchKey: '',
+      page: 1,
+      size: 100,
+      orderOn: '',
+      isAscending: true,
+    }
     await getSubTopics(topicId!, query);
   }, {
-    refreshDeps: [topicId, query]
+    refreshDeps: [topicId]
   })
 
   return (
@@ -53,7 +51,7 @@ const Page = () => {
 
                 </div>
                 <div className='flex flex-col border-dashed border-red-50 w-4/12 rounded-xl'>
-                  content
+                  {subTopic?.name}
                 </div>
               </>
             )
