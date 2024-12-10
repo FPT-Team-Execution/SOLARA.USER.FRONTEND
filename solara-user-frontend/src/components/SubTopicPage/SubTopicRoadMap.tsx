@@ -9,7 +9,9 @@ const SubTopicRoadMap = () => {
     const { subTopic, subTopics, getSubTopic } = useSubTopicStore();
 
     const { } = useRequest(async () => {
-        getSubTopic(subTopics?.items[0].id!)
+        if (subTopics?.items[0].id) {
+            getSubTopic(subTopics?.items[0].id)
+        }
     })
 
     return (

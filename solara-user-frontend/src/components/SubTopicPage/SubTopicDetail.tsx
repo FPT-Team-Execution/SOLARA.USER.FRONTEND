@@ -1,12 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
+import { LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE } from '@/constants/routes';
 import useSubTopicStore from '@/zustand/useSubTopicStore'
 import { Button } from 'antd';
-import React from 'react'
+import { useRouter } from 'next/navigation'
 import { AiTwotoneExperiment } from 'react-icons/ai';
 import { TbCards } from 'react-icons/tb';
 
 const SubTopicDetail = () => {
     const { subTopic } = useSubTopicStore();
+    const router = useRouter();
+
+    const handleNavigate = (): void => {
+        router.push(`${LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE}?subTopicId=${subTopic?.id}`)
+    }
 
     return (
         <div>
@@ -26,7 +32,7 @@ const SubTopicDetail = () => {
                 </div>
 
                 <div>
-                    <Button className='w-full !py-6 !font-bold !text-lg !bg-green-600 !text-white'>Học Ngay</Button>
+                    <Button onClick={handleNavigate} className='w-full !py-6 !font-bold !text-lg !bg-green-600 !text-white'>Học Ngay</Button>
                 </div>
 
             </div>
