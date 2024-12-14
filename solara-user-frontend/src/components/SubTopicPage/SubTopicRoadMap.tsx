@@ -23,7 +23,7 @@ const SubTopicRoadMap = () => {
                             <FaRegFlag />
                         </span>
                     </div>
-                    <p className="text-gray-500">BẮT ĐẦU</p>
+                    <p className="text-gray-500 p-4">BẮT ĐẦU</p>
                 </div>
 
                 {subTopics?.items.map((item, index) => {
@@ -69,7 +69,7 @@ const SubTopicRoadMap = () => {
                 })}
 
                 <div className="flex flex-col items-center">
-                    <p className="text-gray-500">Coming Soon</p>
+                    <p className="text-gray-500 p-4">Coming Soon</p>
                     <div className="w-20 h-20 bg-gray-700 rounded-md flex items-center justify-center">
                         <span className="text-gray-500 text-2xl font-bold">
                             <FaRegFlag />
