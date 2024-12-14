@@ -50,7 +50,7 @@ const Page = () => {
             :
             (
               <>
-                <div className="w-8/12 bg-red-100 rounded-xl overflow-auto max-h-screen scroll-smooth">
+                <div className="w-8/12 rounded-xl max-h-screen scroll-smooth overflow-hidden">
                   <Flashcard />
                 </div>
 

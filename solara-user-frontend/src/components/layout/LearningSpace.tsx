@@ -23,6 +23,7 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
       <Sider trigger={null} collapsible collapsed={collapsed} theme='light' className='m-4 rounded-2xl'>
 
         <Button
+          className='my-4'
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
