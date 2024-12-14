@@ -23,7 +23,6 @@ const contentStyle: React.CSSProperties = {
   textAlign: 'center',
   justifyContent: 'center',
   minHeight: '100vh',
-  lineHeight: '80px',
 };
 
 const layoutStyle = {

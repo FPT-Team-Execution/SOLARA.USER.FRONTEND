@@ -3,7 +3,7 @@ import React from 'react'
 const Flashcard = () => {
   return (
     <div>
-      
+      Flashcard
     </div>
   )
 }
