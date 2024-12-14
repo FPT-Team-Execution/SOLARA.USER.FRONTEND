@@ -1,5 +1,6 @@
 "use client"
 
+import Spinner from "@/components/UI/Spinner";
 import { GetPagedSubTopicRequest } from "@/types/subTopic";
 import useExcerciseStore from "@/zustand/useExcerciseStore";
 import { useRequest } from "ahooks";
@@ -28,8 +29,38 @@ const Page = () => {
   console.log(excercises);
 
   return (
-    <div>
-      This is excercise page
+    <div className='flex gap-4 h-screen'>
+      {
+        loading
+          ?
+          (
+            <div className='h-screen w-full flex justify-center items-center'>
+              <Spinner />
+            </div>
+          )
+          :
+          excercises === null
+            ?
+            (
+              <span>There is no sub topic</span>
+            )
+            :
+            (
+              <>
+                <div className="w-8/12 bg-red-100 rounded-xl overflow-auto max-h-screen scroll-smooth">
+
+                  f
+
+                </div>
+
+                <div className='flex flex-col border-dashed border-red-50 w-4/12 rounded-xl gap-4'>
+                  <div className="bg-green-100 h-4/6 rounded-xl">a</div>
+                  <div className="bg-yellow-100 h-2/6 rounded-xl">a</div>
+                </div>
+              </>
+            )
+      }
+
     </div>
   )
 }
