@@ -20,8 +20,7 @@ interface ExcerciseStore {
     updateExcerciseOption: (request: UpdateExcerciseOptionRequest) => Promise<void>
 }
 
-const useExcerciseStore = create<ExcerciseStore>((set) => (
-    {
+const useExcerciseStore = create<ExcerciseStore>((set) => ({
         excercise: null,
         excercises: null,
 
