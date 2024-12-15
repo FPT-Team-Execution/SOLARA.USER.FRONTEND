@@ -43,13 +43,12 @@ const Flashcard = () => {
     };
 
     const navigatePrev = () => {
-
+        
         if (no <= 0) {
             return
         }
         setFlip(false)
         setNo((prev) => prev - 1)
-        
     }
 
     return (
@@ -71,8 +70,7 @@ const Flashcard = () => {
                             <div className="flex min-h-full flex-col items-center justify-center">
                                 <h2 className="text-2xl font-bold mb-4">Answer</h2>
                                 <p className="text-lg text-pretty text-center mb-4">
-                                    {'Chưa cóa answer ahihi! '}
-                                    {excercise?.id}
+                                    {excercise?.ans[0].optionText}
                                 </p>
                             </div>
                         </div>
