@@ -1,4 +1,3 @@
-import { ExcerciseDto } from '@/types/excercise';
 import useExcerciseStore from '@/zustand/useExcerciseStore'
 import { useRequest } from 'ahooks';
 import { Button } from 'antd';
@@ -15,28 +14,42 @@ const Flashcard = () => {
         setFlip(!flip)
     }
 
-    const { run } = useRequest(async () => {
-        await getExcercise(excercises?.items[no].id!);
-    },
-        {
-            refreshDeps: [no]
+    const { } = useRequest(async () => {
+
+        if (!excercises || !excercises.items || !excercises.items[no]) {
+            return;
         }
-    )
+
+        const id = excercises.items[no].id;
+
+        if (id == null) {
+            return;
+        }
+
+        await getExcercise(id);
+    }, {
+        refreshDeps: [no]
+    });
 
     const navigateNext = () => {
-        if (no >= excercises?.total! - 1) {
-            return
+
+        if (!excercises || no >= (excercises.total || 0) - 1) {
+            return;
         }
-        setFlip(false)
-        setNo((prev) => prev + 1)
-    }
+
+        setFlip(false);
+        setNo((prev) => prev + 1);
+
+    };
 
     const navigatePrev = () => {
+
         if (no <= 0) {
             return
         }
         setFlip(false)
         setNo((prev) => prev - 1)
+        
     }
 
     return (
