@@ -29,8 +29,6 @@ const Page = () => {
     await getExcercises(subTopicId!, query);
   })
 
-  console.log(excercises);
-
   return (
     <div className='flex gap-4 h-full'>
       {
