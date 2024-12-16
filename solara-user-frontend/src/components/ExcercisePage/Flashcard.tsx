@@ -43,7 +43,7 @@ const Flashcard = () => {
     };
 
     const navigatePrev = () => {
-        
+
         if (no <= 0) {
             return
         }
@@ -70,7 +70,17 @@ const Flashcard = () => {
                             <div className="flex min-h-full flex-col items-center justify-center">
                                 <h2 className="text-2xl font-bold mb-4">Answer</h2>
                                 <p className="text-lg text-pretty text-center mb-4">
-                                    {excercise?.ans[0].optionText}
+                                    {
+                                        excercise?.ans[0] === undefined
+                                            ?
+                                            'No answer'
+                                            :
+                                            excercise?.ans[0].optionText === undefined
+                                                ?
+                                                excercise?.ans[0].optionText
+                                                :
+                                                'No answer'
+                                    }
                                 </p>
                             </div>
                         </div>
