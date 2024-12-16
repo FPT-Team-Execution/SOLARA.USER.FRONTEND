@@ -22,7 +22,7 @@ const contentStyle: React.CSSProperties = {
   display: 'flex',
   textAlign: 'center',
   justifyContent: 'center',
-  minHeight: '100vh',
+  minHeight: 'calc(100vh - 70px)',
 };
 
 const layoutStyle = {
