@@ -1,7 +1,7 @@
 import useSubTopicStore from '@/zustand/useSubTopicStore'
 import { useRequest } from 'ahooks';
 import React from 'react'
-import { FaRegFlag } from 'react-icons/fa';
+// import { FaRegFlag } from 'react-icons/fa';
 
 const SubTopicRoadMap = () => {
 
@@ -14,17 +14,17 @@ const SubTopicRoadMap = () => {
     })
 
     return (
-        <div className="bg-gray-100 w-full min-h-full max-h-full flex flex-col items-center py-10">
+        <div className="bg-gray-100 w-full min-h-full max-h-full flex flex-col justify-center items-center py-10">
             <div className="flex w-full flex-col items-center">
 
-                <div className="flex flex-col items-center">
+                {/* <div className="flex flex-col items-center">
                     <div className="w-20 h-20 bg-gray-700 rounded-md flex items-center justify-center">
                         <span className="text-gray-500 text-2xl font-bold">
                             <FaRegFlag />
                         </span>
                     </div>
                     <p className="text-gray-500 p-4">BẮT ĐẦU</p>
-                </div>
+                </div> */}
 
                 {subTopics?.items.map((item, index) => {
 
@@ -68,14 +68,14 @@ const SubTopicRoadMap = () => {
                     );
                 })}
 
-                <div className="flex flex-col items-center">
+                {/* <div className="flex flex-col items-center">
                     <p className="text-gray-500 p-4">Coming Soon</p>
                     <div className="w-20 h-20 bg-gray-700 rounded-md flex items-center justify-center">
                         <span className="text-gray-500 text-2xl font-bold">
                             <FaRegFlag />
                         </span>
                     </div>
-                </div>
+                </div> */}
 
             </div>
 
