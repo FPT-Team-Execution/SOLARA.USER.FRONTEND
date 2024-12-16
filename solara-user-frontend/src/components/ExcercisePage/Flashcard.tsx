@@ -75,11 +75,7 @@ const Flashcard = () => {
                                             ?
                                             'No answer'
                                             :
-                                            excercise?.ans[0].optionText === undefined
-                                                ?
-                                                excercise?.ans[0].optionText
-                                                :
-                                                'No answer'
+                                            excercise?.ans[0].optionText
                                     }
                                 </p>
                             </div>
