@@ -28,12 +28,12 @@ const Page = () => {
   })
 
   return (
-    <div className='flex gap-4 h-screen'>
+    <div className='flex gap-4 h-full'>
       {
         loading
           ?
           (
-            <div className='h-screen w-full flex justify-center items-center'>
+            <div className='h-full w-full flex justify-center items-center'>
               <Spinner />
             </div>
           )
@@ -46,7 +46,7 @@ const Page = () => {
             :
             (
               <>
-                <div className="w-8/12 rounded-xl overflow-auto max-h-screen scroll-smooth">
+                <div className="w-8/12 rounded-xl overflow-auto max-h-full scroll-smooth">
 
                   <SubTopicRoadMap />
 
