@@ -46,7 +46,7 @@ const Page = () => {
             :
             (
               <>
-                <div className="w-8/12 rounded-xl overflow-auto max-h-full scroll-smooth">
+                <div className="w-8/12 rounded-xl overflow-auto h-[calc(100vh-134px)] scroll-smooth">
 
                   <SubTopicRoadMap />
 

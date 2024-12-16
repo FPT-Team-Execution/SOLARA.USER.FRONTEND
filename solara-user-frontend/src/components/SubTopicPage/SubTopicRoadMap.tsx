@@ -14,7 +14,7 @@ const SubTopicRoadMap = () => {
     })
 
     return (
-        <div className="bg-gray-100 w-full min-h-full max-h-full flex flex-col justify-center items-center py-10">
+        <div className="bg-gray-100 w-full  flex flex-col justify-center items-center py-10">
             <div className="flex w-full flex-col items-center">
 
                 {/* <div className="flex flex-col items-center">
