@@ -26,7 +26,7 @@ const SidebarButton = ({ className, pathIndex = 1, isMultiPath = false, children
             <div className={cn(
                 "transition-colors",
                 "text-black",
-                "flex items-center justify-center m-2 rounded-2xl gap-2",
+                "flex items-center rounded-2xl gap-2",
                 isActive ? "bg-yellow-300" : "hover:text-black hover:bg-yellow-300",
                 className
             )}>
