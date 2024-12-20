@@ -41,3 +41,10 @@ export const PUT_EXERCISE = "/exercises";
 export const PUT_EXERCISE_OPTIONS_API = (exerciseId: string) => `/exercises/${exerciseId}/options`;
 export const DELETE_EXERCISE = (exerciseId: string) => `/exercises/${exerciseId}`;
 export const DELETE_BULK_EXERCISE = "/exercises/bulk";
+
+// Learning Package
+export const GET_LEARNING_PACKAGES_API = "/learning-packages";
+export const GET_LEARNING_PACKAGE_API = (packageId: string) => `/learning-packages/${packageId}`;
+export const POST_LEARNING_PACKAGES_API = "/learning-packages";
+export const PUT_LEARNING_PACKAGES_API = (packageId: string) => `/learning-packages/${packageId}`;
+export const PATCH_LEARNING_PACKAGES_API = (packageId: string) => `/learning-packages/${packageId}`;
