@@ -1,5 +1,4 @@
 import { Footer } from 'antd/es/layout/layout'
-import React from 'react'
 
 const footerStyle: React.CSSProperties = {
     textAlign: 'center',

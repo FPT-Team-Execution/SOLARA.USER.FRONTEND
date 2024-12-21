@@ -1,6 +1,5 @@
 import useSubTopicStore from '@/zustand/useSubTopicStore'
 import { useRequest } from 'ahooks';
-import React from 'react'
 // import { FaRegFlag } from 'react-icons/fa';
 
 const SubTopicRoadMap = () => {
