@@ -48,3 +48,6 @@ export const GET_LEARNING_PACKAGE_API = (packageId: string) => `/learning-packag
 export const POST_LEARNING_PACKAGES_API = "/learning-packages";
 export const PUT_LEARNING_PACKAGES_API = (packageId: string) => `/learning-packages/${packageId}`;
 export const PATCH_LEARNING_PACKAGES_API = (packageId: string) => `/learning-packages/${packageId}`;
+
+// Payment
+export const POST_PAYMENT_CHECKOUT_API = "/payments/checkout"

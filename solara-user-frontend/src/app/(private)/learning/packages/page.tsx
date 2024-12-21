@@ -2,14 +2,21 @@
 
 import PackageCard from '@/components/PackagePage/PackageCard'
 import Spinner from '@/components/UI/Spinner'
-import { GET_LEARNING_PACKAGES_API } from '@/constants/apis'
+import { GET_LEARNING_PACKAGES_API, POST_PAYMENT_CHECKOUT_API } from '@/constants/apis'
 import { IBaseModel, IPaginate } from '@/types/general'
 import { GetPagedPackageRequest, LearningPackageDto } from '@/types/package'
+import { CheckOutInfo, CheckOutRequest } from '@/types/payment'
 import axiosClient from '@/utils/axios/axiosClient'
+import { useUser } from '@clerk/nextjs'
 import { useRequest } from 'ahooks'
-import { useState } from 'react'
+import { Modal } from 'antd'
+import { useRouter } from 'next/navigation'
+import { PayOSConfig, usePayOS } from 'payos-checkout'
+import { useEffect, useState } from 'react'
 
 const Page = () => {
+
+  const router = useRouter();
 
   const [packages, setPackages] = useState<IPaginate<LearningPackageDto>>();
 
@@ -29,6 +36,73 @@ const Page = () => {
     setPackages(response.data.responseRequest)
   })
 
+  // const [isOpen, setIsOpen] = useState(false);
+  const [isCreatingLink, setIsCreatingLink] = useState<boolean>(false);
+  const { user } = useUser();
+
+  // const [payOSConfig, setPayOSConfig] = useState<PayOSConfig>({
+  //   RETURN_URL: window.location.origin,
+  //   ELEMENT_ID: "embedded-payment-container",
+  //   CHECKOUT_URL: "",
+  //   embedded: true,
+  //   onSuccess: (event) => {
+  //     setIsOpen(false);
+  //   },
+  //   onCancel: (event) => {
+
+  //   },
+  //   onExit: (event) => {
+
+  //   },
+  // });
+
+  // const { open, exit } = usePayOS(payOSConfig);
+
+  const handleGetPaymentLink = async (packageId: string) => {
+    try {
+      setIsCreatingLink(true);
+      // exit();
+      const checkOutRequest: CheckOutRequest = {
+        canceledReturnUrl: "http://localhost:3000/learning/packages",
+        isCreateInvoice: false,
+        packageId: packageId,
+        successReturnUrl: "http://localhost:3000/learning/packages",
+        buyerAddress: "HCM",
+        buyerEmail: "datntse172600@fpt.edu.vn",
+        buyerName: user!.fullName!,
+        buyerPhone: "0339315466",
+      }
+      const response = await axiosClient.post<IBaseModel<CheckOutInfo>>(POST_PAYMENT_CHECKOUT_API, checkOutRequest);
+
+      router.push(response.data.responseRequest!.checkOutUrl!);
+
+      ///// Code style for Embedded form of payos
+      // setPayOSConfig((oldConfig) => ({
+      //   ...oldConfig,
+      //   CHECKOUT_URL: response.data.responseRequest!.checkOutUrl!,
+      // }));
+
+      // setIsOpen(true);
+      // setIsCreatingLink(false);
+
+    } catch (error) {
+      setIsCreatingLink(false);
+    }
+  };
+
+  ///// Code style for Embedded form of payos
+  // const handleCancelPayment = () => {
+  //   setIsOpen(false);
+  //   exit();
+  // }
+
+  ///// Code style for Embedded form of payos
+  // useEffect(() => {
+  //   if (payOSConfig.CHECKOUT_URL != "" && isOpen && !isCreatingLink) {
+  //     open();
+  //   }
+  // }, [payOSConfig]);
+
   return (
     <div className='flex gap-4 h-full'>
       {
@@ -40,7 +114,7 @@ const Page = () => {
             </div>
           )
           :
-          <div className='flex justify-between w-full flex-col gap-4'>
+          <div className='flex justify-evenly w-full flex-col gap-4'>
 
             <div className="container mx-auto">
               <div className="flex flex-wrap">
@@ -64,11 +138,29 @@ const Page = () => {
               {
                 packages?.items.map((item) => {
                   return (
-                    <PackageCard key={item.id} package={item}></PackageCard>
+                    <PackageCard loading={isCreatingLink} handleGetPaymentLink={handleGetPaymentLink} key={item.id} package={item}></PackageCard>
                   )
                 })
               }
             </div>
+            
+            {/* ///// Code style for Embedded form of payos */}
+            {/* <Modal className='' footer={null} title="Thanh toán" open={isOpen} onCancel={handleCancelPayment}>
+              {isOpen && (
+                <div style={{ maxWidth: "400px" }}>
+                  Sau khi thực hiện thanh toán thành công, vui lòng đợi từ 5 - 10s để
+                  hệ thống tự động cập nhật.
+                </div>
+
+              )}
+              <div
+                id="embedded-payment-container"
+                style={{
+                  height: "450px",
+                }}
+              >
+              </div>
+            </Modal> */}
 
           </div>
       }

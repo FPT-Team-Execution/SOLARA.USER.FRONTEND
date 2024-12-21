@@ -1,21 +1,28 @@
 import { LearningPackageDto } from '@/types/package';
-import React from 'react';
 import { Card, Button, Typography, notification } from 'antd';
 import { CiCircleCheck } from 'react-icons/ci';
+import { useRequest } from 'ahooks';
+import axiosClient from '@/utils/axios/axiosClient';
+import { POST_PAYMENT_CHECKOUT_API } from '@/constants/apis';
+import { IBaseModel } from '@/types/general';
+import { CheckOutInfo, CheckOutRequest } from '@/types/payment';
+import { PayOSConfig, usePayOS } from 'payos-checkout';
+import { useUser } from '@clerk/nextjs';
+import { formatPrice } from '@/utils/price/formatPrice';
+import { useEffect, useState } from 'react';
 
 const { Title, Paragraph } = Typography;
 
 interface IProps {
   package: LearningPackageDto;
+  loading: boolean;
+  handleGetPaymentLink: (packageId: string) => Promise<void>;
 }
 
 const PackageCard = (props: IProps) => {
-  const { package: pkg } = props;
 
-  const formatPrice = (price: number | undefined) => {
-    if (!price) return '₫0';
-    return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-  };
+  const { package: pkg, handleGetPaymentLink, loading } = props;
+
 
   return (
     <Card
@@ -42,7 +49,7 @@ const PackageCard = (props: IProps) => {
         <p className="text-gray-500 text-sm">{pkg.durationDay} ngày</p>
       </div>
 
-      <Button onClick={() => notification.success({ message: "Bạn muốn mua cái này?" })} className='w-full mb-6 !py-6 !font-bold !text-lg !bg-green-600 !text-white'>Đăng ký ngay</Button>
+      <Button loading={loading} onClick={() => handleGetPaymentLink(pkg.id)} className='w-full mb-6 !py-6 !font-bold !text-lg !bg-green-600 !text-white'>Đăng ký ngay</Button>
 
       <hr className='mb-4' />
 
