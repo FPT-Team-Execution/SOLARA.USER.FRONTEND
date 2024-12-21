@@ -67,10 +67,10 @@ const Page = () => {
         isCreateInvoice: false,
         packageId: packageId,
         successReturnUrl: "http://localhost:3000/learning/packages",
-        buyerAddress: "HCM",
-        buyerEmail: "datntse172600@fpt.edu.vn",
+        buyerAddress: "Vietnam",
+        buyerEmail: user!.emailAddresses[0].toString()!,
         buyerName: user!.fullName!,
-        buyerPhone: "0339315466",
+        buyerPhone: "",
       }
       const response = await axiosClient.post<IBaseModel<CheckOutInfo>>(POST_PAYMENT_CHECKOUT_API, checkOutRequest);
 
@@ -143,7 +143,7 @@ const Page = () => {
                 })
               }
             </div>
-            
+
             {/* ///// Code style for Embedded form of payos */}
             {/* <Modal className='' footer={null} title="Thanh toán" open={isOpen} onCancel={handleCancelPayment}>
               {isOpen && (
