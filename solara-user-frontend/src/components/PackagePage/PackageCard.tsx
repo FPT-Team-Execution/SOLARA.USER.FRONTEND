@@ -1,9 +1,14 @@
+import { LearningPackageDto } from '@/types/package'
 import React from 'react'
 
-const PackageCard = () => {
+interface IProps {
+  package: LearningPackageDto
+}
+
+const PackageCard = (props: IProps) => {
   return (
     <div>
-      
+        {props.package.name}
     </div>
   )
 }
