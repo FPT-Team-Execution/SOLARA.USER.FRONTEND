@@ -9,10 +9,11 @@ import { CheckOutInfo, CheckOutRequest } from '@/types/payment'
 import axiosClient from '@/utils/axios/axiosClient'
 import { useUser } from '@clerk/nextjs'
 import { useRequest } from 'ahooks'
-import { Modal } from 'antd'
 import { useRouter } from 'next/navigation'
-import { PayOSConfig, usePayOS } from 'payos-checkout'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+// import { Modal } from 'antd'
+// import { useEffect } from 'react'
+// import { PayOSConfig, usePayOS } from 'payos-checkout'
 
 const Page = () => {
 
@@ -85,7 +86,7 @@ const Page = () => {
       // setIsOpen(true);
       // setIsCreatingLink(false);
 
-    } catch (error) {
+    } catch {
       setIsCreatingLink(false);
     }
   };
