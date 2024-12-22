@@ -13,3 +13,11 @@ export type CheckOutInfo = {
     checkOutUrl?: string;
     qrCode?: string
 }
+
+export type UpdatePaymentOrderRequest = {
+    code: string;
+    id: string;
+    status: string;
+    cancel: boolean;
+    orderCode: string;
+};

@@ -51,3 +51,4 @@ export const PATCH_LEARNING_PACKAGES_API = (packageId: string) => `/learning-pac
 
 // Payment
 export const POST_PAYMENT_CHECKOUT_API = "/payments/checkout"
+export const PUT_PAYMENT_UPDATE_API = "/payments"

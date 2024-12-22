@@ -64,10 +64,10 @@ const Page = () => {
       setIsCreatingLink(true);
       // exit();
       const checkOutRequest: CheckOutRequest = {
-        canceledReturnUrl: "http://localhost:3000/learning/packages",
+        canceledReturnUrl: "http://localhost:3000/learning/packages/payment",
         isCreateInvoice: false,
         packageId: packageId,
-        successReturnUrl: "http://localhost:3000/learning/packages",
+        successReturnUrl: "http://localhost:3000/learning/packages/payment",
         buyerAddress: "Vietnam",
         buyerEmail: user!.emailAddresses[0].toString()!,
         buyerName: user!.fullName!,
