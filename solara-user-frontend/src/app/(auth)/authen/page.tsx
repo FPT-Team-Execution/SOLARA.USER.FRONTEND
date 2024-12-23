@@ -10,14 +10,15 @@ import React from 'react'
 
 const Page = () => {
 
-    const { isSignedIn } = useAuth();
+    const { isSignedIn, getToken } = useAuth();
     const { authenticated, setAuthenticated } = useUserStore();
     const router = useRouter();
 
     const { loading } = useRequest(async () => {
         if (isSignedIn) {
             if (!authenticated) {
-                await setAuthenticated();
+                const token = await getToken({ template: "Solara" })
+                await setAuthenticated(token!);
             }
             router.push(HOME_ROUTE)
         } else {

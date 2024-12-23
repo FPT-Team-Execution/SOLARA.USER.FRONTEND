@@ -5,16 +5,19 @@ import { create } from 'zustand';
 
 interface UserStore {
     authenticated: boolean
-    setAuthenticated: () => Promise<void>
+    setAuthenticated: (token: string) => Promise<void>
 }
 
 const useUserStore = create<UserStore>((set) => ({
     authenticated: false,
-    setAuthenticated: async () => {
+    setAuthenticated: async (token: string) => {
 
         try {
-
-            const response = await axiosClient.post<IBaseModel<string>>(AUTH_CLERK_API);
+            const response = await axiosClient.post<IBaseModel<string>>(AUTH_CLERK_API, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             if (!response.data.isSuccess) {
                 set((state) => ({
