@@ -1,4 +1,4 @@
-import { IPageRequest } from "./general";
+import { IPageRequest } from "../interfaces/general";
 
 export type LearningPackageDto = {
     id: string;

@@ -1,5 +1,5 @@
 import { GET_SUBTOPIC_API, GET_SUBTOPICS_API, POST_COMPLETION_SUBTOPIC_API, POST_SUBTOPIC_API, PUT_SUBTOPIC_API } from '@/constants/apis'
-import { IBaseModel, IPaginate } from '@/types/general'
+import { IBaseModel, IPaginate } from '@/interfaces/general'
 import { CreateSubTopicRequest, GetPagedSubTopicRequest, SubTopicDto, UpdateSubTopicRequest } from '@/types/subTopic'
 import axiosClient from '@/utils/axios/axiosClient'
 import { create } from 'zustand'

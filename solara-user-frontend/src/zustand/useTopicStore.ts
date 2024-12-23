@@ -2,7 +2,7 @@ import axiosClient from '@/utils/axios/axiosClient';
 import { CreateTopicRequest, GetPagedTopicsRequest, TopicDto, UpdateTopicRequest } from './../types/topic';
 import { create } from 'zustand';
 import { DELETE_TOPIC_API, GET_TOPIC_API, GET_TOPICS_API, POST_TOPIC_API, PUT_TOPIC_API } from '@/constants/apis';
-import { IBaseModel, IPaginate } from '@/types/general';
+import { IBaseModel, IPaginate } from '@/interfaces/general';
 
 interface TopicStore {
     topic: TopicDto | null

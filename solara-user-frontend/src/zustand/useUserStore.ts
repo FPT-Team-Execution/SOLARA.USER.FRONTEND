@@ -1,5 +1,5 @@
 import { AUTH_CLERK_API } from '@/constants/apis';
-import { IBaseModel } from '@/types/general';
+import { IBaseModel } from '@/interfaces/general';
 import axiosClient from '@/utils/axios/axiosClient';
 import { create } from 'zustand';
 

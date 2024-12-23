@@ -4,7 +4,7 @@ import StatusCheck from "@/components/PaymentPage/StatusCheck";
 import Spinner from "@/components/UI/Spinner";
 import { PUT_PAYMENT_UPDATE_API } from "@/constants/apis";
 import { LEARNING_PACKAGES_ROUTE, LEARNING_TOPICS_ROUTE } from "@/constants/routes";
-import { IBaseModel } from "@/types/general";
+import { IBaseModel } from "@/interfaces/general";
 import { UpdatePaymentOrderRequest } from "@/types/payment";
 import axiosClient from "@/utils/axios/axiosClient";
 import { useRequest } from "ahooks";

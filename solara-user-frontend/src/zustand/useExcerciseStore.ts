@@ -2,7 +2,7 @@
 import { GET_EXERCISE_API, GET_EXERCISES_API } from '@/constants/apis';
 import { UpdateExcerciseOptionRequest } from './../types/excercise';
 import { AddOptionRequest, CreateExcerciseRequest, CreateUserAttemptRequest, ExcerciseDto, GetPagedExcerciseTypesRequest, UpdateExcerciseRequest } from '@/types/excercise'
-import { IBaseModel, IPaginate } from '@/types/general'
+import { IBaseModel, IPaginate } from '@/interfaces/general'
 import axiosClient from '@/utils/axios/axiosClient';
 import { create } from 'zustand'
 

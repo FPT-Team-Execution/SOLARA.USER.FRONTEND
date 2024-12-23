@@ -1,4 +1,4 @@
-import { IPageRequest } from "./general";
+import { IPageRequest } from "../interfaces/general";
 
 export type SubTopicDto = {
     id: string;
