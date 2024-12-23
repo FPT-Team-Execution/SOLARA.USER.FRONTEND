@@ -1,6 +1,5 @@
 import { AUTHEN_ROUTE } from '@/constants/routes'
 import { SignUp } from '@clerk/nextjs'
-import React from 'react'
 
 const Page = () => {
 

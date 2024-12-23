@@ -3,7 +3,7 @@
 import { cn } from '@/utils/cn/cn'; // Hàm kết hợp các class CSS
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 
 interface SidebarButtonProps extends ComponentProps<typeof Link> {
     children: React.ReactNode; // Văn bản hoặc phần tử con

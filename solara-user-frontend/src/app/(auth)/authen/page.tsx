@@ -6,7 +6,6 @@ import useUserStore from '@/zustand/useUserStore';
 import { useAuth } from '@clerk/nextjs'
 import { useRequest } from 'ahooks';
 import { useRouter } from 'next/navigation';
-import React from 'react'
 
 const Page = () => {
 

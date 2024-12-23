@@ -1,15 +1,7 @@
 import { LearningPackageDto } from '@/types/package';
-import { Card, Button, Typography, notification } from 'antd';
+import { Card, Button, Typography } from 'antd';
 import { CiCircleCheck } from 'react-icons/ci';
-import { useRequest } from 'ahooks';
-import axiosClient from '@/utils/axios/axiosClient';
-import { POST_PAYMENT_CHECKOUT_API } from '@/constants/apis';
-import { IBaseModel } from '@/types/general';
-import { CheckOutInfo, CheckOutRequest } from '@/types/payment';
-import { PayOSConfig, usePayOS } from 'payos-checkout';
-import { useUser } from '@clerk/nextjs';
 import { formatPrice } from '@/utils/price/formatPrice';
-import { useEffect, useState } from 'react';
 
 const { Title, Paragraph } = Typography;
 

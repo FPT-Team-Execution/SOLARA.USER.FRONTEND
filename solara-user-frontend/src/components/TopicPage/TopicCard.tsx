@@ -1,7 +1,6 @@
 import { TopicDto } from '@/types/topic'
 import { formatDateTime } from '@/utils/dateTime/formatDateTime'
 import Image from 'next/image'
-import React from 'react'
 
 interface IProps {
     topic: TopicDto

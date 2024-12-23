@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IProps {
     status?: boolean;

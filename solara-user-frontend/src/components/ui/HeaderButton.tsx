@@ -3,7 +3,7 @@
 import { cn } from '@/utils/cn/cn';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 
 interface NavLinkProps extends ComponentProps<typeof Link> {
     isMultiPath?: boolean; // Kiểm tra nhiều đường dẫn
