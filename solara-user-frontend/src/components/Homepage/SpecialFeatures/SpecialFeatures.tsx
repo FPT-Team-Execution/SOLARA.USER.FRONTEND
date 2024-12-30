@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './SpecialFeatures.css';
 import VectorSpecialFeaturesBg from './VectorSpecialFeaturesBg';
 import Vector2Title from './Vector2Title';
 import Link from 'next/link';
 
-const FeatureCard = ({ icon, title, description, link }) => (
+interface IProps {
+  icon: ReactElement,
+  title: string,
+  description: string,
+  link: string
+}
+
+const FeatureCard = ({ icon, title, description, link }: IProps) => (
   <div className="bg-[#296630] p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center pad">
     <div className="bg-[#FFCD0A] p-2 sm:p-3 rounded-lg mb-3 sm:mb-4" style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Link legacyBehavior href={link}>
         <a className="!text-inherit flex items-center justify-center">
-          {React.cloneElement(icon, { 
-            className: "w-12 h-12 sm:w-16 sm:h-16" 
+          {React.cloneElement(icon, {
+            className: "w-12 h-12 sm:w-16 sm:h-16"
           })}
         </a>
       </Link>
@@ -50,7 +57,7 @@ const FeatureGrid = () => {
       ),
       title: "Lời Khuyên & Hướng Dẫn",
       description: "Thư viện kiến nghiệm",
-      link:"/"
+      link: "/"
     },
     {
       icon: (
@@ -78,12 +85,12 @@ const FeatureGrid = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {features.map((feature, index) => (
-              <FeatureCard 
-                key={index} 
-                icon={feature.icon} 
-                title={feature.title} 
-                description={feature.description} 
-                link={feature.link} 
+              <FeatureCard
+                key={index}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                link={feature.link}
               />
             ))}
           </div>
