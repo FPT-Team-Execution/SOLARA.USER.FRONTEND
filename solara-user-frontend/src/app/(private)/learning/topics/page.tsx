@@ -2,7 +2,7 @@
 
 import TopicCard from '@/components/TopicPage/TopicCard'
 import TopicQuery from '@/components/TopicPage/TopicQuery'
-import Spinner from '@/components/UI/Spinner'
+import Spinner from '@/components/ui/Spinner'
 import { LEARNING_TOPICS_SUBS_ROUTE } from '@/constants/routes'
 import { GetPagedTopicsRequest } from '@/types/topic'
 import useTopicStore from '@/zustand/useTopicStore'

@@ -1,7 +1,7 @@
 "use client"
 
 import PackageCard from '@/components/PackagePage/PackageCard'
-import Spinner from '@/components/UI/Spinner'
+import Spinner from '@/components/ui/Spinner'
 import { GET_LEARNING_PACKAGES_API, POST_PAYMENT_CHECKOUT_API } from '@/constants/apis'
 import { IBaseModel, IPaginate } from '@/interfaces/general'
 import { GetPagedPackageRequest, LearningPackageDto } from '@/types/package'

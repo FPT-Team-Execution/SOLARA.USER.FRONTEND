@@ -3,7 +3,7 @@
 import Advertisement from "@/components/ExcercisePage/Advertisement";
 import ExcerciseList from "@/components/ExcercisePage/ExcerciseList";
 import Flashcard from "@/components/ExcercisePage/Flashcard";
-import Spinner from "@/components/UI/Spinner";
+import Spinner from "@/components/ui/Spinner";
 import { GetPagedSubTopicRequest } from "@/types/subTopic";
 import useExcerciseStore from "@/zustand/useExcerciseStore";
 import { useRequest } from "ahooks";
