@@ -1,4 +1,4 @@
-import LearningSpace from '@/components/Layout/LearningSpace';
+import LearningSpace from '@/components/layout/LearningSpace';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

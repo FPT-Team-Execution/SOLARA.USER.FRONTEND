@@ -2,7 +2,7 @@
 
 import SubTopicDetail from '@/components/SubTopicPage/SubTopicDetail';
 import SubTopicRoadMap from '@/components/SubTopicPage/SubTopicRoadMap';
-import Spinner from '@/components/UI/Spinner';
+import Spinner from '@/components/ui/Spinner';
 import { GetPagedSubTopicRequest } from '@/types/subTopic';
 import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRequest } from 'ahooks';
