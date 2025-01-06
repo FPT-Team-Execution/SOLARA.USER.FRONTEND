@@ -1,7 +1,7 @@
 "use client"
 
 import StatusCheck from "@/components/PaymentPage/StatusCheck";
-import Spinner from "@/components/UI/Spinner";
+import Spinner from "@/components/ui/Spinner";
 import { PUT_PAYMENT_UPDATE_API } from "@/constants/apis";
 import { LEARNING_PACKAGES_ROUTE, LEARNING_TOPICS_ROUTE } from "@/constants/routes";
 import { IBaseModel } from "@/interfaces/general";
