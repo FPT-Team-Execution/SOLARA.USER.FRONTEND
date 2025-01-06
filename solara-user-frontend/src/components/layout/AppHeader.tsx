@@ -10,7 +10,7 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import HeaderButton from '../UI/HeaderButton'
+import HeaderButton from '../ui/HeaderButton'
 import Link from 'next/link'
 import { useAuth, UserButton } from '@clerk/nextjs'
 import { HOME_ROUTE, LEARNING_TOPICS_ROUTE, MARKET_ROUTE, SIGNIN_ROUTE } from '@/constants/routes'
