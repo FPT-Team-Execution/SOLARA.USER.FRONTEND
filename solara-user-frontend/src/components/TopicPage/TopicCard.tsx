@@ -12,7 +12,7 @@ const TopicCard = (props: IProps) => {
 
             <Image
                 className="w-full h-48 object-cover rounded-tl-xl rounded-tr-xl"
-                src={`https://media.istockphoto.com/id/1333043586/photo/tornado-in-stormy-landscape-climate-change-and-natural-disaster-concept.jpg?s=612x612&w=0&k=20&c=uo4HoloU79NEle1-rgVoLhKBE-RrfPSeinKAdczCo2I=`}
+                src={props.topic.thumbnail ? props.topic.thumbnail : `https://media.istockphoto.com/id/1333043586/photo/tornado-in-stormy-landscape-climate-change-and-natural-disaster-concept.jpg?s=612x612&w=0&k=20&c=uo4HoloU79NEle1-rgVoLhKBE-RrfPSeinKAdczCo2I=`}
                 alt="Topic"
                 width={1920}
                 height={1080}

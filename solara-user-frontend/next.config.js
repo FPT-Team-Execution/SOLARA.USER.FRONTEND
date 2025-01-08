@@ -3,7 +3,7 @@ const config = {
   // Cấu hình của bạn
   reactStrictMode: false, // Tắt Strict Mode
   images: {
-    domains: ['media.istockphoto.com', 'img.freepik.com'],
+    domains: ['psszjkdspnyifyjbmyau.supabase.co'],
   },
 };
 
