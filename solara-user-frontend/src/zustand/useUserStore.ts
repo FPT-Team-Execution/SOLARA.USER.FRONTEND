@@ -2,6 +2,7 @@ import { AUTH_CLERK_API } from '@/constants/apis';
 import { IBaseModel } from '@/interfaces/general';
 import axiosClient from '@/utils/axios/axiosClient';
 import { create } from 'zustand';
+import { setCookie } from 'cookies-next';
 
 interface UserStore {
     authenticated: boolean
@@ -27,9 +28,12 @@ const useUserStore = create<UserStore>((set) => ({
                 return;
             }
 
+            setCookie('__appUserId', response.data.responseRequest);
+
             set((state) => ({
                 ...state,
                 authenticated: true,
+                appUserId: response.data.responseRequest
             }));
 
         } catch {
