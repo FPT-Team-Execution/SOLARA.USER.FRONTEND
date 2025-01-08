@@ -68,5 +68,5 @@ jobs:
         with:
           app-name: 'solara-cursus'
           slot-name: 'Production'
-          package: .
+          package: ./release
           
