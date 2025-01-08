@@ -11,6 +11,9 @@ export const GET_USER_CLERK_PROFILE_API = "/users/clerk/profile";
 export const POST_USERS_API = "/users";
 export const PUT_USER_API = "/users";
 export const PUT_USER_PROFILE_API = "/users/clerk/profile";
+export const GET_USER_LEVEL = (appUserId: string) => `/users/${appUserId}/level`;
+export const GET_USER_TOPIC = (appUserId: string) => `/users/${appUserId}/topics`;
+export const GET_USER_SUBTOPIC = (appUserId: string) => `/users/${appUserId}/sub-topics`;
 
 // Topic
 export const GET_TOPICS_API = "/topics";
@@ -51,4 +54,4 @@ export const PATCH_LEARNING_PACKAGES_API = (packageId: string) => `/learning-pac
 
 // Payment
 export const POST_PAYMENT_CHECKOUT_API = "/payments/checkout"
-export const PUT_PAYMENT_UPDATE_API = "/payments"
+export const PUT_PAYMENT_UPDATE_API = "/payments/complete"

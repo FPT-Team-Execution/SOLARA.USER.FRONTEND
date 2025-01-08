@@ -61,13 +61,14 @@ const Page = () => {
 
   const handleGetPaymentLink = async (packageId: string) => {
     try {
+      const currentOrigin = window.location.origin;
       setIsCreatingLink(true);
       // exit();
       const checkOutRequest: CheckOutRequest = {
-        canceledReturnUrl: "http://localhost:3000/learning/packages/payment",
+        canceledReturnUrl: `${currentOrigin}/learning/packages/payment`,
         isCreateInvoice: false,
         packageId: packageId,
-        successReturnUrl: "http://localhost:3000/learning/packages/payment",
+        successReturnUrl: `${currentOrigin}/learning/packages/payment`,
         buyerAddress: "Vietnam",
         buyerEmail: user!.emailAddresses[0].toString()!,
         buyerName: user!.fullName!,

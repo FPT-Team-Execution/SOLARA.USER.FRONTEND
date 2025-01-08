@@ -7,6 +7,7 @@ export type TopicDto = {
     totalSubTopic: number;
     createdOn?: Date | null;
     updatedOn?: Date | null;
+    thumbnail?: string;
 }
 
 export type GetPagedTopicsRequest = IPageRequest & {

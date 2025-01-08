@@ -1,7 +1,6 @@
 import { LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE } from '@/constants/routes';
 import useSubTopicStore from '@/zustand/useSubTopicStore'
 import { Button } from 'antd';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation'
 import { AiTwotoneExperiment } from 'react-icons/ai';
 import { TbCards } from 'react-icons/tb';
@@ -18,13 +17,6 @@ const SubTopicDetail = () => {
     return (
         <div>
             <div className="bg-gray-100 p-4 rounded-lg shadow">
-                <Image
-                    src="https://img.freepik.com/premium-vector/texture-background-hd-vector-image_887635-52.jpg"
-                    alt="Storm"
-                    width={400}
-                    height={192}
-                    className="w-full h-48 object-cover rounded-lg mb-4"
-                />
                 <h2 className="text-2xl font-bold mb-2">{subTopic?.name}</h2>
                 <p className="text-gray-700 text-sm">{subTopic?.description}</p>
 
