@@ -11,7 +11,7 @@ const TopicCard = (props: IProps) => {
         <div className="bg-white shadow-lg rounded-xl">
 
             <Image
-                className="w-full h-48 object-cover rounded-tl-xl rounded-tr-xl"
+                className="w-full min-h-48 max-h-48 object-cover rounded-tl-xl rounded-tr-xl"
                 src={props.topic.thumbnail ? props.topic.thumbnail : `https://media.istockphoto.com/id/1333043586/photo/tornado-in-stormy-landscape-climate-change-and-natural-disaster-concept.jpg?s=612x612&w=0&k=20&c=uo4HoloU79NEle1-rgVoLhKBE-RrfPSeinKAdczCo2I=`}
                 alt="Topic"
                 width={1920}
@@ -26,7 +26,7 @@ const TopicCard = (props: IProps) => {
                 </div>
 
                 <h2 className="text-left text-xl font-semibold text-green-600 mt-4">{props.topic.topicName}</h2>
-                <p className="text-left text-sm text-gray-500">{props.topic.description}</p>
+                <p className="text-left text-sm min-h-10 text-gray-500">{props.topic.description}</p>
 
                 <div className="flex gap-2 mt-4">
                     <button className="bg-green-500 text-white px-2 rounded-lg text-sm">
