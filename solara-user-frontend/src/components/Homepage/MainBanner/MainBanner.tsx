@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CustomButton from "../Button/CustomButton";
 import styles from "./MainBanner.module.css";
+import { LEARNING_SIMULATIONS_ROUTE, LEARNING_TOPICS_ROUTE } from "@/constants/routes";
 
 export default function Home() {
     return (
@@ -29,12 +30,12 @@ export default function Home() {
 
             {/* Nút */}
             <div className={styles.buttonContainer}>
-                <Link href="/learning">
+                <Link href={LEARNING_TOPICS_ROUTE}>
                     <CustomButton className={styles.learnButton}>
                         Học ngay
                     </CustomButton>
                 </Link>
-                <Link href="/simulation">
+                <Link href={LEARNING_SIMULATIONS_ROUTE}>
                     <CustomButton className={`${styles.simulationButton}`}>
                         Khám phá giả lập
                     </CustomButton>
