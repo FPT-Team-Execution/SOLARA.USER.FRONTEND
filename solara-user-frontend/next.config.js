@@ -4,7 +4,7 @@ const config = {
   distDir: 'build',
   output: 'standalone',
   images: {
-    domains: ['psszjkdspnyifyjbmyau.supabase.co'],
+    domains: ['psszjkdspnyifyjbmyau.supabase.co', 'bcp.cdnchinhphu.vn', 'images2.thanhnien.vn'],
   },
 };
 

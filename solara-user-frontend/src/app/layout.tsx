@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
 import AppHeader from "@/components/layout/AppHeader";
+import AutoAuthen from "@/components/layout/AutoAuthen";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -50,6 +51,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         >
           <AntdRegistry>
             <Layout style={layoutStyle}>
+              <AutoAuthen></AutoAuthen>
               <AppHeader></AppHeader>
               <Content style={contentStyle}>{children}</Content>
             </Layout>
