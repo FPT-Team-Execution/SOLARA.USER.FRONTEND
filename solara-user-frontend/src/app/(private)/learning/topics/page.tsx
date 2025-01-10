@@ -82,7 +82,7 @@ const Page = () => {
                   <div className='flex gap-4 flex-wrap justify-center items-center'>
                     {topics?.items.map((item, index) => {
                       return (
-                        <div className='cursor-pointer' key={index} onClick={() => handleNavigate(item.topicId)}>
+                        <div className='cursor-pointer w-full sm:w-1/2 md:w-1/3 max-w-[300px]' key={index} onClick={() => handleNavigate(item.topicId)}>
                           <TopicCard topic={item} />
                         </div>
                       );
