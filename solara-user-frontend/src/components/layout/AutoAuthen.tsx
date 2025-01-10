@@ -3,7 +3,6 @@
 import useUserStore from '@/zustand/useUserStore';
 import { useAuth } from '@clerk/nextjs';
 import { useRequest } from 'ahooks';
-import React from 'react'
 
 const AutoAuthen = () => {
     const { isSignedIn, getToken } = useAuth();
