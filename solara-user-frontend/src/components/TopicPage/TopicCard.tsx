@@ -11,7 +11,7 @@ const TopicCard = (props: IProps) => {
         <div className="bg-white shadow-lg rounded-xl">
 
             <Image
-                className="w-full min-h-48 max-h-48 object-cover rounded-tl-xl rounded-tr-xl"
+                className="w-full min-h-32 max-h-32 object-cover rounded-tl-xl rounded-tr-xl"
                 src={props.topic.thumbnail ? props.topic.thumbnail : `https://media.istockphoto.com/id/1333043586/photo/tornado-in-stormy-landscape-climate-change-and-natural-disaster-concept.jpg?s=612x612&w=0&k=20&c=uo4HoloU79NEle1-rgVoLhKBE-RrfPSeinKAdczCo2I=`}
                 alt="Topic"
                 width={1920}
