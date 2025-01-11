@@ -6,13 +6,14 @@ import { useRequest } from 'ahooks';
 
 const AutoAuthen = () => {
     const { isSignedIn, getToken } = useAuth();
-    const { authenticated, setAuthenticated } = useUserStore();
+    const { authenticated, setAuthenticated, getUserLevel } = useUserStore();
 
     const { } = useRequest(async () => {
         if (isSignedIn) {
             if (!authenticated) {
                 const token = await getToken({ template: "Solara" })
                 await setAuthenticated(token!);
+                await getUserLevel();
             }
         }
     }, {

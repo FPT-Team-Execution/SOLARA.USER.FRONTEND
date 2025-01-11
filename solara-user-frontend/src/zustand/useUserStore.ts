@@ -3,19 +3,19 @@ import { IBaseModel } from '@/interfaces/general';
 import axiosClient from '@/utils/axios/axiosClient';
 import { create } from 'zustand';
 import { getCookie, setCookie } from 'cookies-next';
-import { UserLevelDto } from '@/types/level';
+import { UserLevelDto } from '@/types/userLevel';
 
 interface UserStore {
     authenticated: boolean,
     appUserId: string | null,
-    level: UserLevelDto | null,
+    userLevel: UserLevelDto | null,
     setAuthenticated: (token: string) => Promise<void>,
     getUserLevel: () => Promise<void>,
 }
 
 const useUserStore = create<UserStore>((set) => ({
     authenticated: false,
-    level: null,
+    userLevel: null,
     appUserId: null,
 
     setAuthenticated: async (token: string) => {
@@ -62,7 +62,7 @@ const useUserStore = create<UserStore>((set) => ({
 
             set((state) => ({
                 ...state,
-                level: response.data.responseRequest
+                userLevel: response.data.responseRequest
             }))
 
         } catch {

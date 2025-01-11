@@ -1,9 +1,16 @@
+"use client"
+
+import useUserStore from "@/zustand/useUserStore"
+import { useRequest } from "ahooks";
+
 const UserLevel = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+
+    const { userLevel } = useUserStore();
+
+    return (
+        <div>
+        </div>
+    )
 }
 
 export default UserLevel
