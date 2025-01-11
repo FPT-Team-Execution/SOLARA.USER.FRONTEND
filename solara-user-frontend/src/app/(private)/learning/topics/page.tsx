@@ -64,9 +64,18 @@ const Page = () => {
             (
               <div>
 
-                <div>
+                <div className='flex'>
+                  <div className='w-1/2'>
+                    <h1 className='text-sm font-semibold p-4 text-left'>Đang học</h1>
+                  </div>
+                  <div className='w-1/2'>
+                    <h1 className='text-sm font-semibold p-4 text-left'>Hoàn thành</h1>
+                  </div>
+                </div>
+
+                <div className='flex'>
                   <div>
-                    <h1 className='text-sm font-semibold p-4 text-left'>Gần đây</h1>
+                    <h1 className='text-sm font-semibold p-4 text-left'>Yêu thích</h1>
                   </div>
                 </div>
 

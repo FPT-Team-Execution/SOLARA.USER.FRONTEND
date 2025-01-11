@@ -1,12 +1,14 @@
 "use client"
 
+import CommingSoon from "@/components/ui/CommingSoon"
+
 
 const Page = () => {
 
 
   return (
-    <div>
-      This is market page
+    <div className="h-full">
+      <CommingSoon />
     </div>
   )
 }
