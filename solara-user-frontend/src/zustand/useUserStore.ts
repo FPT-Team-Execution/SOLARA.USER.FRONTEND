@@ -1,17 +1,23 @@
-import { AUTH_CLERK_API } from '@/constants/apis';
+import { AUTH_CLERK_API, GET_USER_LEVEL } from '@/constants/apis';
 import { IBaseModel } from '@/interfaces/general';
 import axiosClient from '@/utils/axios/axiosClient';
 import { create } from 'zustand';
-import { setCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
+import { UserLevelDto } from '@/types/level';
 
 interface UserStore {
     authenticated: boolean,
-    
-    setAuthenticated: (token: string) => Promise<void>
+    appUserId: string | null,
+    level: UserLevelDto | null,
+    setAuthenticated: (token: string) => Promise<void>,
+    getUserLevel: () => Promise<void>,
 }
 
 const useUserStore = create<UserStore>((set) => ({
     authenticated: false,
+    level: null,
+    appUserId: null,
+
     setAuthenticated: async (token: string) => {
 
         try {
@@ -41,7 +47,28 @@ const useUserStore = create<UserStore>((set) => ({
 
         }
 
-    }
+    },
+
+    getUserLevel: async () => {
+        try {
+
+            const appUserId = getCookie('__appUserId')
+
+            const response = await axiosClient.get<IBaseModel<UserLevelDto>>(GET_USER_LEVEL(appUserId as string))
+
+            if (!response.data.isSuccess) {
+                return
+            }
+
+            set((state) => ({
+                ...state,
+                level: response.data.responseRequest
+            }))
+
+        } catch {
+
+        }
+    },
 }))
 
 export default useUserStore;
