@@ -5,7 +5,8 @@ import { create } from 'zustand';
 import { setCookie } from 'cookies-next';
 
 interface UserStore {
-    authenticated: boolean
+    authenticated: boolean,
+    
     setAuthenticated: (token: string) => Promise<void>
 }
 
