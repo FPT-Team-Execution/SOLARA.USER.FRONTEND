@@ -18,7 +18,7 @@ const UserLevel = () => {
             {
                 !userLevel
                     ?
-                    <div className="flex mx-auto">
+                    <div className="flex mx-auto items-center justify-center">
                         <LoadingBar />
                     </div>
                     :
