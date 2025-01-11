@@ -4,5 +4,6 @@ export type UserLevelDto = {
     currentXp: number,
     thresholdXp: number,
     currentLevel: string,
+    achievementAmount: number,
     nextLevel: string
 }
