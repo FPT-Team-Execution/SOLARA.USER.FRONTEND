@@ -2,6 +2,7 @@ import { GET_SUBTOPIC_API, GET_SUBTOPICS_API, POST_COMPLETION_SUBTOPIC_API, POST
 import { IBaseModel, IPaginate } from '@/interfaces/general'
 import { CreateSubTopicRequest, GetPagedSubTopicRequest, SubTopicDto, UpdateSubTopicRequest } from '@/types/subTopic'
 import axiosClient from '@/utils/axios/axiosClient'
+import { getCookie } from 'cookies-next'
 import { create } from 'zustand'
 
 interface SubTopicStore {
@@ -132,7 +133,8 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
 
     completeSubTopic: async (id: string) => {
         try {
-            const response = await axiosClient.post<IBaseModel<string>>(POST_COMPLETION_SUBTOPIC_API(id))
+            const appUserId = getCookie('__appUserId');
+            const response = await axiosClient.post<IBaseModel<string>>(POST_COMPLETION_SUBTOPIC_API(id), appUserId)
 
             if (!response.data.isSuccess) {
                 throw new Error()

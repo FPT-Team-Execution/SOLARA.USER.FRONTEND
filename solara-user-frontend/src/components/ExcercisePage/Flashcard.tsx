@@ -1,11 +1,15 @@
 import useExcerciseStore from '@/zustand/useExcerciseStore'
+import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRequest } from 'ahooks';
 import { Button, Progress } from 'antd';
 import { useState } from 'react'
+import { MdOutlineDone } from 'react-icons/md';
 
 const Flashcard = () => {
 
     const { excercises, excercise, getExcercise } = useExcerciseStore();
+    const { completeSubTopic } = useSubTopicStore();
+    const [isComplete, setIsComplete] = useState<boolean>(false);
 
     const [flip, setFlip] = useState<boolean>(false);
     const [no, setNo] = useState<number>(0);
@@ -25,6 +29,12 @@ const Flashcard = () => {
 
         await getExcercise(id);
         calculateProgress();
+
+        if (no === excercises.total - 1) {
+            setIsComplete(true);
+        } else {
+            setIsComplete(false);
+        }
     }, {
         refreshDeps: [no]
     });
@@ -62,6 +72,10 @@ const Flashcard = () => {
         setNo((prev) => prev - 1)
     }
 
+    const handleComplete = async () => {
+        await completeSubTopic(excercise!.subTopicId!);
+    }
+
     return (
         <div className='flex w-full h-full flex-col'>
             <div onClick={handleFlip} className="group h-5/6 w-full [perspective:1000px] cursor-pointer">
@@ -94,11 +108,12 @@ const Flashcard = () => {
             </div>
             <div className='flex flex-col w-full h-1/6 gap-4 justify-center items-center'>
                 <div className='w-full'>
-                    <Progress percent={progress} percentPosition={{ align: 'center', type: 'inner' }} strokeColor="green" showInfo={false} style={{width: '100%'}} />
+                    <Progress percent={progress} percentPosition={{ align: 'center', type: 'inner' }} strokeColor="green" showInfo={false} style={{ width: '100%' }} />
                 </div>
                 <div className='flex w-full gap-4'>
-                    <Button className='!w-6/12 !h-14' onClick={navigatePrev}>Trở về</Button>
-                    <Button className='!w-6/12 !h-14' onClick={navigateNext}>Kế tiếp</Button>
+                    <Button className='!w-5/12 !h-14' onClick={navigatePrev}>Trở về</Button>
+                    <Button onClick={handleComplete} disabled={!isComplete} className='!w-2/12 !h-14' icon={<MdOutlineDone />}></Button>
+                    <Button className='!w-5/12 !h-14' onClick={navigateNext}>Kế tiếp</Button>
                 </div>
             </div>
         </div>
