@@ -89,11 +89,11 @@ const ExcerciseSpace = () => {
                         :
                         excercise?.exerciseTypeId == excerciseType.situationChoice
                             ?
-                            <SituationChoice />
+                            <SituationChoice excercise={excercise} />
                             :
                             excercise?.exerciseTypeId == excerciseType.trueFalse
                                 ?
-                                <TrueFalse />
+                                <TrueFalse excercise={excercise} />
                                 :
                                 <h1>Chế độ học đang được phát triển...</h1>
 
