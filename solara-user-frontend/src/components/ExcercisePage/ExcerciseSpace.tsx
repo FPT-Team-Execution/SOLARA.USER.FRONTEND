@@ -6,6 +6,10 @@ import { Button, Progress } from 'antd';
 import { useState } from 'react'
 import { MdOutlineDone } from 'react-icons/md';
 import Flashcard from './Flashcard';
+import { excerciseType } from '@/enums/excerciseType';
+import BestChoice from './BestChoice';
+import SituationChoice from './SituationChoice';
+import TrueFalse from './TrueFalse';
 
 const ExcerciseSpace = () => {
 
@@ -23,12 +27,6 @@ const ExcerciseSpace = () => {
         if (!excercises || !excercises.items || !excercises.items[no]) {
             return;
         }
-
-        // const id = excercises.items[no].id;
-
-        // if (id == null) {
-        //     return;
-        // }
 
         setExcercise(excercises.items[no])
         calculateProgress();
@@ -81,11 +79,24 @@ const ExcerciseSpace = () => {
     return (
         <div className='flex w-full h-full flex-col'>
             {
-                excercise?.exerciseTypeId == '1278d31e-4a29-4b7e-8114-8bed7e2a4a4a'
+                excercise?.exerciseTypeId == excerciseType.flashcard
                     ?
                     <Flashcard excercise={excercise!} flip={flip} handleFlip={handleFlip} />
                     :
-                    <></>
+                    excercise?.exerciseTypeId == excerciseType.bestChoice
+                        ?
+                        <BestChoice />
+                        :
+                        excercise?.exerciseTypeId == excerciseType.situationChoice
+                            ?
+                            <SituationChoice />
+                            :
+                            excercise?.exerciseTypeId == excerciseType.trueFalse
+                                ?
+                                <TrueFalse />
+                                :
+                                <h1>Chế độ học đang được phát triển...</h1>
+
             }
             <div className='flex flex-col w-full h-1/6 gap-4 justify-center items-center'>
                 <div className='w-full'>
