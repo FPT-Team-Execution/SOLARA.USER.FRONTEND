@@ -1,4 +1,4 @@
-import { AnswerDto, AttemptResponse, CreateUserAttemptRequest } from '@/types/excercise'
+import { AnswerDto } from '@/types/excercise'
 import { Card } from 'antd'
 import React from 'react'
 

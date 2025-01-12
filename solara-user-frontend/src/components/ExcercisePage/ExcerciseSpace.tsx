@@ -104,7 +104,7 @@ const ExcerciseSpace = () => {
 
         try {
             const response = await axiosClient.post<IBaseModel<AttemptResponse[]>>(
-                POST_ATTEMPT_EXCERCISE_API(excercise?.id!),
+                POST_ATTEMPT_EXCERCISE_API(excercise!.id),
                 request
             );
 
