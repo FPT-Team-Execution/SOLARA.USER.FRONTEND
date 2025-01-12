@@ -47,7 +47,6 @@ const Flashcard = () => {
         if (excercises?.total === undefined) {
             return;
         }
-        console.log(no)
         const progress = no / (excercises?.total - 1) * 100
         setProgress(progress);
     }
