@@ -8,7 +8,7 @@ interface IProps {
 
 const TopicCard = (props: IProps) => {
     return (
-        <div className="bg-white shadow-lg rounded-xl">
+        <div className="bg-white shadow-lg rounded-xl hover:shadow-xl transition-shadow duration-300">
 
             <Image
                 className="w-full min-h-32 max-h-32 object-cover rounded-tl-xl rounded-tr-xl"

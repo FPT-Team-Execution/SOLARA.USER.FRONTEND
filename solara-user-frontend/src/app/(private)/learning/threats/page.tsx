@@ -1,9 +1,11 @@
 "use client"
 
+import CommingSoon from "@/components/ui/CommingSoon"
+
 const Page = () => {
   return (
-    <div>
-      This is learning/threat page
+    <div className="h-full">
+      <CommingSoon />
     </div>
   )
 }

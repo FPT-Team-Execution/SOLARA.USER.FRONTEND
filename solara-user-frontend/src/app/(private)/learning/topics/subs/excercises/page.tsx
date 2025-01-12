@@ -2,9 +2,9 @@
 
 import Advertisement from "@/components/ExcercisePage/Advertisement";
 import ExcerciseList from "@/components/ExcercisePage/ExcerciseList";
-import Flashcard from "@/components/ExcercisePage/Flashcard";
+import ExcerciseSpace from "@/components/ExcercisePage/ExcerciseSpace";
 import Spinner from "@/components/ui/Spinner";
-import { GetPagedSubTopicRequest } from "@/types/subTopic";
+import { GetPagedExcercisesRequest } from "@/types/excercise";
 import useExcerciseStore from "@/zustand/useExcerciseStore";
 import { useRequest } from "ahooks";
 import { useSearchParams } from "next/navigation";
@@ -18,8 +18,9 @@ const Page = () => {
   const { excercises, getExcercises } = useExcerciseStore();
 
   const { loading } = useRequest(async () => {
-    const query: GetPagedSubTopicRequest = {
+    const query: GetPagedExcercisesRequest = {
       searchProp: '',
+      exerciseTypeId: '',
       searchKey: '',
       page: 1,
       size: 100,
@@ -48,8 +49,8 @@ const Page = () => {
             :
             (
               <>
-                <div className="w-8/12 rounded-xl max-h-full scroll-smooth overflow-hidden">
-                  <Flashcard />
+                <div className="w-8/12 rounded-t-xl max-h-full scroll-smooth overflow-hidden">
+                  <ExcerciseSpace />
                 </div>
 
                 <div className='flex flex-col border-dashed border-red-50 w-4/12 rounded-xl gap-4'>

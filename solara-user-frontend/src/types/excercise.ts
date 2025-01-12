@@ -21,6 +21,10 @@ export type ExcerciseDto = {
     ans: AnswerDto[];
 };
 
+export type GetPagedExcercisesRequest = IPageRequest & {
+    exerciseTypeId?: string
+}
+
 export type CreateExcerciseOptionRequest = {
     optionText: string;
     explanation?: string;
@@ -64,7 +68,6 @@ export type UpdateExcerciseOptionRequest = {
 
 export type CreateUserAttemptRequest = {
     userId: string;
-    exerciseId: string;
     options: string[];
 };
 
@@ -79,7 +82,6 @@ export type ExcerciseTypeDto = {
 };
 
 export type GetPagedExcerciseTypesRequest = IPageRequest & {
-
 }
 
 export type UpdateExcerciseTypeRequest = {
@@ -98,3 +100,9 @@ export type CreateExcerciseTypeRequest = {
     maxOptions?: number;
     isMultipleChoice: boolean;
 };
+
+export type AttemptResponse = {
+    optionId: string,
+    isCorrect: boolean,
+    explanation: string
+}
