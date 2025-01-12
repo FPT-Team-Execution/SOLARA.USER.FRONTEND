@@ -2,7 +2,7 @@
 
 import Advertisement from "@/components/ExcercisePage/Advertisement";
 import ExcerciseList from "@/components/ExcercisePage/ExcerciseList";
-import Flashcard from "@/components/ExcercisePage/Flashcard";
+import ExcerciseSpace from "@/components/ExcercisePage/ExcerciseSpace";
 import Spinner from "@/components/ui/Spinner";
 import { GetPagedExcercisesRequest } from "@/types/excercise";
 import useExcerciseStore from "@/zustand/useExcerciseStore";
@@ -20,7 +20,7 @@ const Page = () => {
   const { loading } = useRequest(async () => {
     const query: GetPagedExcercisesRequest = {
       searchProp: '',
-      exerciseTypeId: '1278d31e-4a29-4b7e-8114-8bed7e2a4a4a',
+      exerciseTypeId: '',
       searchKey: '',
       page: 1,
       size: 100,
@@ -50,7 +50,7 @@ const Page = () => {
             (
               <>
                 <div className="w-8/12 rounded-xl max-h-full scroll-smooth overflow-hidden">
-                  <Flashcard />
+                  <ExcerciseSpace />
                 </div>
 
                 <div className='flex flex-col border-dashed border-red-50 w-4/12 rounded-xl gap-4'>
