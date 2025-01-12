@@ -132,7 +132,7 @@ const AppHeader = () => {
               (
 
                 <HeaderButton pathIndex={1} href={SIGNIN_ROUTE} className="text-sm/6 font-semibold py-1 px-2 rounded text-gray-900">
-                  Sign in <span aria-hidden="true">&rarr;</span>
+                  Đăng nhập <span aria-hidden="true">&rarr;</span>
                 </HeaderButton>
               )
           }
