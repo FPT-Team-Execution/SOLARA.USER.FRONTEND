@@ -2,7 +2,7 @@ import { AnswerDto, AttemptResponse, CreateUserAttemptRequest, ExcerciseDto } fr
 import useExcerciseStore from '@/zustand/useExcerciseStore'
 import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRequest } from 'ahooks';
-import { Button, Modal, notification, Progress } from 'antd';
+import { Button, Modal, Progress } from 'antd';
 import { useState } from 'react'
 import { MdOutlineDone } from 'react-icons/md';
 import Flashcard from './Flashcard';
