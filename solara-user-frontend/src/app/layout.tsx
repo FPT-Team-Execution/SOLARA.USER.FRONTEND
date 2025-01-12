@@ -7,6 +7,7 @@ import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
 import AppHeader from "@/components/layout/AppHeader";
 import AutoAuthen from "@/components/layout/AutoAuthen";
+import { viVN } from '@clerk/localizations'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
 
   return (
-    <ClerkProvider dynamic>
+    <ClerkProvider dynamic localization={viVN}>
       <head>
         <link rel="icon" href="sm-logo.png" />
       </head>
