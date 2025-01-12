@@ -96,7 +96,6 @@ const ExcerciseSpace = () => {
                                 <TrueFalse excercise={excercise} />
                                 :
                                 <h1>Chế độ học đang được phát triển...</h1>
-
             }
             <div className='flex flex-col w-full !h-1/6 gap-4 justify-center items-center'>
                 <div className='w-full'>
