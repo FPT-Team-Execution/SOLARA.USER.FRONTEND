@@ -14,7 +14,7 @@ const Flashcard = ({ handleFlip, excercise, flip }: IProps) => {
                 {/* Front Face */}
                 <div className="absolute inset-0 h-full w-full rounded-xl [backface-visibility:hidden]">
                     <div className="flex min-h-full flex-col items-center justify-center">
-                        <h2 className="text-2xl font-bold mb-4">Question</h2>
+                        <h2 className="text-2xl font-bold mb-4">Câu hỏi:</h2>
                         <p className="text-lg text-pretty text-center mb-4">
                             {excercise?.question}
                         </p>
@@ -27,22 +27,24 @@ const Flashcard = ({ handleFlip, excercise, flip }: IProps) => {
                         {
                             excercise?.ans[0] === undefined
                                 ?
-                                'No answer'
+                                'Chưa có câu trả lời'
                                 :
                                 (
-                                    <div>
-                                        <h2 className="text-2xl font-bold mb-4">Answer</h2>
-                                        <p className="text-lg text-pretty text-center mb-4">
-                                            {excercise?.ans[0].optionText}
-                                        </p>
+                                    <div className='flex flex-col gap-4'>
+                                        <div>
+                                            <h2 className="text-2xl font-bold mb-2">Trả lời:</h2>
+                                            <p className="text-lg text-pretty text-center">
+                                                {excercise?.ans[0].optionText}
+                                            </p>
+                                        </div>
                                         {
                                             excercise?.ans[0].explanation === undefined
                                                 ?
                                                 <></>
                                                 : (
                                                     <div>
-                                                        <h2 className="text-xl font-bold mb-4">Explanation</h2>
-                                                        <p className="text-lg text-pretty text-center mb-4">
+                                                        <h2 className="text-2xl font-bold mb-2">Giải thích:</h2>
+                                                        <p className="text-lg text-pretty text-center">
                                                             {excercise?.ans[0].explanation}
                                                         </p>
                                                     </div>

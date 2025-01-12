@@ -85,7 +85,7 @@ const ExcerciseSpace = () => {
                     :
                     excercise?.exerciseTypeId == excerciseType.bestChoice
                         ?
-                        <BestChoice />
+                        <BestChoice excercise={excercise!} />
                         :
                         excercise?.exerciseTypeId == excerciseType.situationChoice
                             ?
