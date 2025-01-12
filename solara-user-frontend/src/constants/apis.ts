@@ -40,6 +40,7 @@ export const GET_EXERCISES_API = (subTopicId: string) => `/exercises/sub-topic/$
 export const GET_EXERCISE_API = (exerciseId: string) => `/exercises/${exerciseId}`;
 export const POST_EXERCISE_API = "/exercises";
 export const POST_EXERCISE_OPTIONS_API = (exerciseId: string) => `/exercises/${exerciseId}/options`;
+export const POST_ATTEMPT_EXCERCISE_API = (exerciseId: string) => `/exercises/${exerciseId}/attempt`;
 export const PUT_EXERCISE = "/exercises";
 export const PUT_EXERCISE_OPTIONS_API = (exerciseId: string) => `/exercises/${exerciseId}/options`;
 export const DELETE_EXERCISE = (exerciseId: string) => `/exercises/${exerciseId}`;

@@ -1,8 +1,8 @@
-import { ExcerciseDto } from '@/types/excercise';
+import { AnswerDto, AttemptResponse, CreateUserAttemptRequest, ExcerciseDto } from '@/types/excercise';
 import useExcerciseStore from '@/zustand/useExcerciseStore'
 import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRequest } from 'ahooks';
-import { Button, Progress } from 'antd';
+import { Button, Modal, notification, Progress } from 'antd';
 import { useState } from 'react'
 import { MdOutlineDone } from 'react-icons/md';
 import Flashcard from './Flashcard';
@@ -10,14 +10,32 @@ import { excerciseType } from '@/enums/excerciseType';
 import BestChoice from './BestChoice';
 import SituationChoice from './SituationChoice';
 import TrueFalse from './TrueFalse';
+import { getCookie } from 'cookies-next';
+import axiosClient from '@/utils/axios/axiosClient';
+import { IBaseModel } from '@/interfaces/general';
+import { POST_ATTEMPT_EXCERCISE_API } from '@/constants/apis';
+import AnswerResult from './AnswerResult';
 
 const ExcerciseSpace = () => {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        navigateNext()
+        setIsModalOpen(false);
+    };
+
+    const [attemptLoading, setAttemptLoading] = useState<boolean>(false);
 
     const { excercises } = useExcerciseStore();
     const [excercise, setExcercise] = useState<ExcerciseDto>();
     const { completeSubTopic } = useSubTopicStore();
     const [isComplete, setIsComplete] = useState<boolean>(false);
-
+    const [attemptResult, setAttemptResult] = useState<AttemptResponse>();
     const [flip, setFlip] = useState<boolean>(false);
     const [no, setNo] = useState<number>(0);
     const [progress, setProgress] = useState<number>(0);
@@ -76,8 +94,41 @@ const ExcerciseSpace = () => {
         await completeSubTopic(excercise!.subTopicId!);
     }
 
+    const handleAttempt = async (answer: AnswerDto) => {
+        showModal()
+        setAttemptLoading(true);
+        const request: CreateUserAttemptRequest = {
+            options: [answer.id],
+            userId: getCookie('__appUserId') as string,
+        };
+
+        try {
+            const response = await axiosClient.post<IBaseModel<AttemptResponse[]>>(
+                POST_ATTEMPT_EXCERCISE_API(excercise?.id!),
+                request
+            );
+
+            if (response.data?.responseRequest && response.data.responseRequest.length > 0) {
+                const result = response.data.responseRequest[0];
+
+                setAttemptResult(result);
+
+            } else {
+                console.warn('responseRequest is empty or undefined');
+            }
+
+            setAttemptLoading(false);
+        } catch (error) {
+            console.error('Error during attempt:', error);
+        }
+    };
+
     return (
+
         <div className='flex w-full h-full flex-col'>
+            <Modal loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isModalOpen} onOk={handleOk}>
+                <AnswerResult attemptResult={attemptResult} />
+            </Modal>
             {
                 excercise?.exerciseTypeId == excerciseType.flashcard
                     ?
@@ -85,15 +136,15 @@ const ExcerciseSpace = () => {
                     :
                     excercise?.exerciseTypeId == excerciseType.bestChoice
                         ?
-                        <BestChoice excercise={excercise!} />
+                        <BestChoice handleAttempt={handleAttempt} excercise={excercise!} />
                         :
                         excercise?.exerciseTypeId == excerciseType.situationChoice
                             ?
-                            <SituationChoice excercise={excercise} />
+                            <SituationChoice handleAttempt={handleAttempt} excercise={excercise} />
                             :
                             excercise?.exerciseTypeId == excerciseType.trueFalse
                                 ?
-                                <TrueFalse excercise={excercise} />
+                                <TrueFalse handleAttempt={handleAttempt} excercise={excercise} />
                                 :
                                 <h1>Chế độ học đang được phát triển...</h1>
             }

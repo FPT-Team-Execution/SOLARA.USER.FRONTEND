@@ -1,11 +1,12 @@
-import { ExcerciseDto } from "@/types/excercise"
+import { AnswerDto, ExcerciseDto } from "@/types/excercise"
 import Answer from "./Answer"
 
 interface IProps {
+    handleAttempt: (answer: AnswerDto) => Promise<void>
     excercise: ExcerciseDto
 }
 
-const SituationChoice = ({ excercise }: IProps) => {
+const SituationChoice = ({ excercise, handleAttempt }: IProps) => {
     return (
         <div className='flex w-full h-5/6 flex-col justify-center items-center gap-8'>
             <div>
@@ -18,7 +19,7 @@ const SituationChoice = ({ excercise }: IProps) => {
                 {excercise.ans.map((item, index) => {
                     return (
                         <div key={index} className={`w-1/${excercise.ans.length}`}>
-                            <Answer no={index} answer={item} />
+                            <Answer handleAttempt={handleAttempt} no={index} answer={item} />
                         </div>
                     )
                 })}

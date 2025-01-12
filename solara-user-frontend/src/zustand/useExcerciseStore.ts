@@ -15,60 +15,60 @@ interface ExcerciseStore {
     createExcercise: (request: CreateExcerciseRequest) => Promise<void>
     updateExcercise: (request: UpdateExcerciseRequest) => Promise<void>
     deleteExcercise: (id: string) => Promise<void>
-    attemptExcercise: (request: CreateUserAttemptRequest) => Promise<void>
+    attemptExcercise: (exerciseId: string, request: CreateUserAttemptRequest) => Promise<void>
     createExcerciseOption: (request: AddOptionRequest) => Promise<void>
     updateExcerciseOption: (request: UpdateExcerciseOptionRequest) => Promise<void>
 }
 
 const useExcerciseStore = create<ExcerciseStore>((set) => ({
-        excercise: null,
-        excercises: null,
+    excercise: null,
+    excercises: null,
 
-        getExcercise: async (id: string) => {
-            try {
-                const response = await axiosClient.get<IBaseModel<ExcerciseDto>>(GET_EXERCISE_API(id))
+    getExcercise: async (id: string) => {
+        try {
+            const response = await axiosClient.get<IBaseModel<ExcerciseDto>>(GET_EXERCISE_API(id))
 
-                if (!response.data.isSuccess) {
-                    return
-                }
-
-                set((state) => ({
-                    ...state,
-                    excercise: response.data.responseRequest
-                }))
-
-            } catch (error) {
-                console.log('Error fetching excercise', error)
+            if (!response.data.isSuccess) {
+                return
             }
 
-        },
+            set((state) => ({
+                ...state,
+                excercise: response.data.responseRequest
+            }))
 
-        getExcercises: async (subTopicId: string, query: GetPagedExcercisesRequest) => {
-            try {
-                const response = await axiosClient.get<IBaseModel<IPaginate<ExcerciseDto>>>(GET_EXERCISES_API(subTopicId), { params: query })
+        } catch (error) {
+            console.log('Error fetching excercise', error)
+        }
 
-                if (!response.data.isSuccess) {
-                    return
-                }
+    },
 
-                set((state) => ({
-                    ...state,
-                    excercises: response.data.responseRequest
-                }))
+    getExcercises: async (subTopicId: string, query: GetPagedExcercisesRequest) => {
+        try {
+            const response = await axiosClient.get<IBaseModel<IPaginate<ExcerciseDto>>>(GET_EXERCISES_API(subTopicId), { params: query })
 
-            } catch (error) {
-                console.log('Error fetching excercises', error)
+            if (!response.data.isSuccess) {
+                return
             }
-        },
 
-        bulkExcercise: async (id: string[]) => { },
-        createExcercise: async (request: CreateExcerciseRequest) => { },
-        updateExcercise: async (request: UpdateExcerciseRequest) => { },
-        deleteExcercise: async (id: string) => { },
-        attemptExcercise: async (request: CreateUserAttemptRequest) => { },
-        createExcerciseOption: async (request: AddOptionRequest) => { },
-        updateExcerciseOption: async (request: UpdateExcerciseOptionRequest) => { }
-    }
+            set((state) => ({
+                ...state,
+                excercises: response.data.responseRequest
+            }))
+
+        } catch (error) {
+            console.log('Error fetching excercises', error)
+        }
+    },
+
+    bulkExcercise: async (id: string[]) => { },
+    createExcercise: async (request: CreateExcerciseRequest) => { },
+    updateExcercise: async (request: UpdateExcerciseRequest) => { },
+    deleteExcercise: async (id: string) => { },
+    attemptExcercise: async (exerciseId: string, request: CreateUserAttemptRequest) => { },
+    createExcerciseOption: async (request: AddOptionRequest) => { },
+    updateExcerciseOption: async (request: UpdateExcerciseOptionRequest) => { }
+}
 ));
 
 export default useExcerciseStore

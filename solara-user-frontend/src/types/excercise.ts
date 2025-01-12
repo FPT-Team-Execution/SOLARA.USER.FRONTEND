@@ -68,7 +68,6 @@ export type UpdateExcerciseOptionRequest = {
 
 export type CreateUserAttemptRequest = {
     userId: string;
-    exerciseId: string;
     options: string[];
 };
 
@@ -101,3 +100,9 @@ export type CreateExcerciseTypeRequest = {
     maxOptions?: number;
     isMultipleChoice: boolean;
 };
+
+export type AttemptResponse = {
+    optionId: string,
+    isCorrect: boolean,
+    explanation: string
+}
