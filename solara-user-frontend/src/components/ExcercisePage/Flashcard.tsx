@@ -1,3 +1,4 @@
+import { ExcerciseDto } from '@/types/excercise';
 import useExcerciseStore from '@/zustand/useExcerciseStore'
 import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRequest } from 'ahooks';
@@ -7,7 +8,8 @@ import { MdOutlineDone } from 'react-icons/md';
 
 const Flashcard = () => {
 
-    const { excercises, excercise, getExcercise } = useExcerciseStore();
+    const { excercises } = useExcerciseStore();
+    const [excercise, setExcercise] = useState<ExcerciseDto>();
     const { completeSubTopic } = useSubTopicStore();
     const [isComplete, setIsComplete] = useState<boolean>(false);
 
@@ -21,13 +23,13 @@ const Flashcard = () => {
             return;
         }
 
-        const id = excercises.items[no].id;
+        // const id = excercises.items[no].id;
 
-        if (id == null) {
-            return;
-        }
+        // if (id == null) {
+        //     return;
+        // }
 
-        await getExcercise(id);
+        setExcercise(excercises.items[no])
         calculateProgress();
 
         if (no === excercises.total - 1) {
@@ -91,16 +93,36 @@ const Flashcard = () => {
                     {/* Back Face */}
                     <div className="absolute inset-0 h-full w-full rounded-xl px-12 text-center [transform:rotateY(180deg)] [backface-visibility:hidden]">
                         <div className="flex min-h-full flex-col items-center justify-center">
-                            <h2 className="text-2xl font-bold mb-4">Answer</h2>
-                            <p className="text-lg text-pretty text-center mb-4">
-                                {
-                                    excercise?.ans[0] === undefined
-                                        ?
-                                        'No answer'
-                                        :
-                                        excercise?.ans[0].optionText
-                                }
-                            </p>
+
+                            {
+                                excercise?.ans[0] === undefined
+                                    ?
+                                    'No answer'
+                                    :
+                                    (
+                                        <div>
+                                            <h2 className="text-2xl font-bold mb-4">Answer</h2>
+                                            <p className="text-lg text-pretty text-center mb-4">
+                                                {excercise?.ans[0].optionText}
+                                            </p>
+                                            {
+                                                excercise?.ans[0].explanation === undefined
+                                                    ?
+                                                    <></>
+                                                    : (
+                                                        <div>
+                                                            <h2 className="text-xl font-bold mb-4">Explanation</h2>
+                                                            <p className="text-lg text-pretty text-center mb-4">
+                                                                {excercise?.ans[0].explanation}
+                                                            </p>
+                                                        </div>
+                                                    )
+                                            }
+                                        </div>
+                                    )
+
+                            }
+
                         </div>
                     </div>
                 </div>

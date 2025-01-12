@@ -1,9 +1,8 @@
 
-
 const ExcerciseList = () => {
   return (
     <div>
-      ExcerciseList
+      ExcerciseList Comming Soon
     </div>
   )
 }
