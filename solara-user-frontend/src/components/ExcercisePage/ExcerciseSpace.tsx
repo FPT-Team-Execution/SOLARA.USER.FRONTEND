@@ -126,7 +126,7 @@ const ExcerciseSpace = () => {
     return (
 
         <div className='flex w-full h-full flex-col'>
-            <Modal loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isModalOpen} onOk={handleOk}>
+            <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isModalOpen} onOk={handleOk}>
                 <AnswerResult attemptResult={attemptResult} />
             </Modal>
             {
