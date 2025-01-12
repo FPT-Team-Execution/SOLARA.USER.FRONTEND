@@ -79,7 +79,7 @@ export type ExcerciseTypeDto = {
 };
 
 export type GetPagedExcerciseTypesRequest = IPageRequest & {
-
+    exerciseTypeId?: string
 }
 
 export type UpdateExcerciseTypeRequest = {
