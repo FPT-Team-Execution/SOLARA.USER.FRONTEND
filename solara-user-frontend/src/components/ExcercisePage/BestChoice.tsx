@@ -8,9 +8,9 @@ interface IProps {
 
 const BestChoice = ({ excercise }: IProps) => {
     return (
-        <div className='flex w-full h-full flex-col justify-center items-center gap-8'>
+        <div className='flex w-full h-5/6 flex-col justify-center items-center gap-8'>
             <div>
-                <h2 className="text-2xl font-bold mb-4">Câu hỏi:</h2>
+                <h2 className="text-2xl font-bold">Câu hỏi:</h2>
                 <p className="text-lg text-pretty text-center">
                     {excercise?.question}
                 </p>
