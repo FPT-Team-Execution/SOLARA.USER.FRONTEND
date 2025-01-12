@@ -4,7 +4,7 @@ import Advertisement from "@/components/ExcercisePage/Advertisement";
 import ExcerciseList from "@/components/ExcercisePage/ExcerciseList";
 import Flashcard from "@/components/ExcercisePage/Flashcard";
 import Spinner from "@/components/ui/Spinner";
-import { GetPagedSubTopicRequest } from "@/types/subTopic";
+import { GetPagedExcercisesRequest } from "@/types/excercise";
 import useExcerciseStore from "@/zustand/useExcerciseStore";
 import { useRequest } from "ahooks";
 import { useSearchParams } from "next/navigation";
@@ -18,8 +18,9 @@ const Page = () => {
   const { excercises, getExcercises } = useExcerciseStore();
 
   const { loading } = useRequest(async () => {
-    const query: GetPagedSubTopicRequest = {
+    const query: GetPagedExcercisesRequest = {
       searchProp: '',
+      exerciseTypeId: '1278d31e-4a29-4b7e-8114-8bed7e2a4a4a',
       searchKey: '',
       page: 1,
       size: 100,

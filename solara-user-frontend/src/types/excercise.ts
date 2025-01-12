@@ -21,6 +21,10 @@ export type ExcerciseDto = {
     ans: AnswerDto[];
 };
 
+export type GetPagedExcercisesRequest = IPageRequest & {
+    exerciseTypeId?: string
+}
+
 export type CreateExcerciseOptionRequest = {
     optionText: string;
     explanation?: string;
@@ -79,7 +83,6 @@ export type ExcerciseTypeDto = {
 };
 
 export type GetPagedExcerciseTypesRequest = IPageRequest & {
-    exerciseTypeId?: string
 }
 
 export type UpdateExcerciseTypeRequest = {
