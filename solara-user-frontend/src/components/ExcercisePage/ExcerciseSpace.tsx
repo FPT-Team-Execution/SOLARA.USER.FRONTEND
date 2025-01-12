@@ -98,7 +98,7 @@ const ExcerciseSpace = () => {
                                 <h1>Chế độ học đang được phát triển...</h1>
 
             }
-            <div className='flex flex-col w-full h-1/6 gap-4 justify-center items-center'>
+            <div className='flex flex-col w-full gap-4 justify-center items-center'>
                 <div className='w-full'>
                     <Progress percent={progress} percentPosition={{ align: 'center', type: 'inner' }} strokeColor="green" showInfo={false} style={{ width: '100%' }} />
                 </div>
