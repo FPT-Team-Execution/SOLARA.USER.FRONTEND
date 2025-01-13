@@ -6,7 +6,6 @@ import useTopicStore from '@/zustand/useTopicStore';
 import { Button } from 'antd';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
-import { LEARNING_TOPICS_ROUTE } from '@/constants/routes';
 
 const SubTopicRoadMap = () => {
 

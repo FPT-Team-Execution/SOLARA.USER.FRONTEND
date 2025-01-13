@@ -18,7 +18,6 @@ import CompleteResult from './CompleteResult';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRouter } from 'next/navigation';
-import { LEARNING_TOPICS_SUBS_ROUTE } from '@/constants/routes';
 
 const ExcerciseSpace = () => {
 
