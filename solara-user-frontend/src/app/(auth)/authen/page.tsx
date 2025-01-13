@@ -9,14 +9,13 @@ import { useRouter } from 'next/navigation';
 
 const Page = () => {
 
-    const { isSignedIn, getToken } = useAuth();
+    const { isSignedIn } = useAuth();
     const { authenticated, setAuthenticated } = useUserStore();
     const router = useRouter();
 
     const { loading } = useRequest(async () => {
         if (isSignedIn) {
             if (!authenticated) {
-                const token = await getToken({ template: "Solara" })
                 await setAuthenticated();
             }
             router.push(HOME_ROUTE)
