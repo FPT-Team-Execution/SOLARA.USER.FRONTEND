@@ -8,6 +8,7 @@ import { Content } from "antd/es/layout/layout";
 import AppHeader from "@/components/layout/AppHeader";
 import AutoAuthen from "@/components/layout/AutoAuthen";
 import { viVN } from '@clerk/localizations'
+import { auth, clerkClient } from "@clerk/nextjs/server";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,7 +40,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
+export default async function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
+
+  const client = await clerkClient()
+  const { userId } = await auth();
+
+  if (userId) {
+    const user = await client.users.getUser(userId);
+    if (user) {
+      if (!user.publicMetadata.role)
+        await client.users.updateUserMetadata(userId!, {
+          publicMetadata: {
+            "role": "User",
+          },
+        })
+    }
+  }
 
   return (
     <ClerkProvider dynamic localization={viVN}>
