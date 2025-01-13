@@ -6,7 +6,7 @@ import { Button, Modal, Progress } from 'antd';
 import { useState } from 'react'
 import { MdOutlineDone } from 'react-icons/md';
 import Flashcard from './Flashcard';
-import { excerciseType } from '@/enums/excerciseType';
+import { ExcerciseType } from '@/enums/excerciseType';
 import BestChoice from './BestChoice';
 import SituationChoice from './SituationChoice';
 import TrueFalse from './TrueFalse';
@@ -130,19 +130,19 @@ const ExcerciseSpace = () => {
                 <AnswerResult attemptResult={attemptResult} />
             </Modal>
             {
-                excercise?.exerciseTypeId == excerciseType.flashcard
+                excercise?.exerciseTypeId == ExcerciseType.flashcard
                     ?
                     <Flashcard excercise={excercise!} flip={flip} handleFlip={handleFlip} />
                     :
-                    excercise?.exerciseTypeId == excerciseType.bestChoice
+                    excercise?.exerciseTypeId == ExcerciseType.bestChoice
                         ?
                         <BestChoice handleAttempt={handleAttempt} excercise={excercise!} />
                         :
-                        excercise?.exerciseTypeId == excerciseType.situationChoice
+                        excercise?.exerciseTypeId == ExcerciseType.situationChoice
                             ?
                             <SituationChoice handleAttempt={handleAttempt} excercise={excercise} />
                             :
-                            excercise?.exerciseTypeId == excerciseType.trueFalse
+                            excercise?.exerciseTypeId == ExcerciseType.trueFalse
                                 ?
                                 <TrueFalse handleAttempt={handleAttempt} excercise={excercise} />
                                 :

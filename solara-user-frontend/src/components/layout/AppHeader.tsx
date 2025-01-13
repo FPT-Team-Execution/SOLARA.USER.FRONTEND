@@ -15,7 +15,7 @@ import Link from 'next/link'
 import { useAuth, UserButton } from '@clerk/nextjs'
 import { HOME_ROUTE, LEARNING_TOPICS_ROUTE, MARKET_ROUTE, SIGNIN_ROUTE } from '@/constants/routes'
 import Image from 'next/image'
-import UserLevel from './UserLevel'
+import LearningProgress from './LearningProgress'
 
 // const learnings = [
 //   { name: 'Flashcard', description: 'Get a better understanding of your traffic', href: '/learning/flashcard', icon: ChartPieIcon },
@@ -124,7 +124,7 @@ const AppHeader = () => {
             isSignedIn ?
               (
                 <>
-                  <UserLevel />
+                  <LearningProgress />
                   <UserButton />
                 </>
               )
