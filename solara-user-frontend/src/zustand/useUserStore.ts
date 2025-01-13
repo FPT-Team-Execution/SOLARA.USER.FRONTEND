@@ -10,7 +10,7 @@ interface UserStore {
     authenticated: boolean,
     appUserId: string | null,
     userLevel: UserLevelDto | null,
-    setAuthenticated: (token: string) => Promise<void>,
+    setAuthenticated: () => Promise<void>,
     getUserLevel: () => Promise<void>,
 }
 
@@ -20,18 +20,14 @@ const useUserStore = create<UserStore>((set) => ({
     userLevel: null,
     appUserId: null,
 
-    setAuthenticated: async (token: string) => {
+    setAuthenticated: async () => {
         set((state) => ({
             ...state,
             loading: true,
         }))
 
         try {
-            const response = await axiosClient.post<IBaseModel<string>>(AUTH_CLERK_API, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await axiosClient.post<IBaseModel<string>>(AUTH_CLERK_API);
 
             if (!response.data.isSuccess) {
                 set((state) => ({

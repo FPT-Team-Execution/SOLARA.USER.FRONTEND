@@ -1,17 +1,17 @@
 "use client"
 
 import useUserStore from '@/zustand/useUserStore';
-import { useAuth } from '@clerk/nextjs';
+import { useAuth, useSession } from '@clerk/nextjs';
 import { useRequest } from 'ahooks';
 
 const AutoAuthen = () => {
-    const { isSignedIn, getToken } = useAuth();
+    const { isSignedIn } = useAuth();
     const { setAuthenticated, getUserLevel } = useUserStore();
-
+    const { session } = useSession();
     const { } = useRequest(async () => {
         if (isSignedIn) {
-            const token = await getToken({ template: "Solara" })
-            await setAuthenticated(token!);
+            await session?.touch();
+            await setAuthenticated();
             await getUserLevel();
         }
     }, {
