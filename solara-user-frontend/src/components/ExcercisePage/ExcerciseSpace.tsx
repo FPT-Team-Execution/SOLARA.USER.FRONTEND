@@ -1,6 +1,5 @@
 import { AnswerDto, AttemptResponse, CreateUserAttemptRequest, ExcerciseDto } from '@/types/excercise';
 import useExcerciseStore from '@/zustand/useExcerciseStore'
-import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRequest } from 'ahooks';
 import { Button, Modal, Progress } from 'antd';
 import { useState } from 'react'
@@ -13,32 +12,47 @@ import TrueFalse from './TrueFalse';
 import { getCookie } from 'cookies-next';
 import axiosClient from '@/utils/axios/axiosClient';
 import { IBaseModel } from '@/interfaces/general';
-import { POST_ATTEMPT_EXCERCISE_API } from '@/constants/apis';
+import { POST_ATTEMPT_EXCERCISE_API, POST_COMPLETION_SUBTOPIC_API } from '@/constants/apis';
 import AnswerResult from './AnswerResult';
+import CompleteResult from './CompleteResult';
 
 const ExcerciseSpace = () => {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isAttemptModalOpen, setIsAttemptModalOpen] = useState(false);
+    const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
 
-    const showModal = () => {
-        setIsModalOpen(true);
+    const showAttemptModal = () => {
+        setIsAttemptModalOpen(true);
     };
 
-    const handleOk = () => {
+    const handleAttemptModalOk = () => {
         navigateNext()
-        setIsModalOpen(false);
+        setIsAttemptModalOpen(false);
     };
 
+    const showCompleteModal = () => {
+        setIsCompleteModalOpen(true);
+    };
+
+    const handleCompleteModalOk = () => {
+        if (completeResult?.isSuccess) {
+            setNo(0);
+        }
+        setAttempted(false);
+        setIsCompleteModalOpen(false);
+    };
+
+    const [completeLoading, setCompleteLoading] = useState<boolean>(false);
     const [attemptLoading, setAttemptLoading] = useState<boolean>(false);
     const [attempted, setAttempted] = useState(false);
-    const { excercises } = useExcerciseStore();
     const [excercise, setExcercise] = useState<ExcerciseDto>();
-    const { completeSubTopic } = useSubTopicStore();
     const [isComplete, setIsComplete] = useState<boolean>(false);
     const [attemptResult, setAttemptResult] = useState<AttemptResponse>();
+    const [completeResult, setCompleteResult] = useState<IBaseModel<string>>();
     const [flip, setFlip] = useState<boolean>(false);
     const [no, setNo] = useState<number>(0);
     const [progress, setProgress] = useState<number>(0);
+    const { excercises } = useExcerciseStore();
 
     const { } = useRequest(async () => {
 
@@ -59,16 +73,14 @@ const ExcerciseSpace = () => {
     });
 
     const handleFlip = async () => {
-        // Lật trạng thái ngay lập tức
+
         setFlip((prev) => !prev);
 
-        // Kiểm tra xem đã gọi API chưa
         if (attempted) {
             console.log("Attempt already submitted, skipping API call.");
             return;
         }
 
-        // Thực hiện gọi API lần đầu
         try {
             const exerciseId = excercise?.id;
             const answerId = excercise?.ans?.[0]?.id;
@@ -95,7 +107,7 @@ const ExcerciseSpace = () => {
             );
 
             console.log("Attempt submitted successfully:", response.data);
-            setAttempted(true); // Đánh dấu rằng đã thực hiện API call
+            setAttempted(true);
         } catch (error) {
             console.error("Error submitting attempt:", error);
         }
@@ -131,11 +143,22 @@ const ExcerciseSpace = () => {
     }
 
     const handleComplete = async () => {
-        await completeSubTopic(excercise!.subTopicId!);
+        try {
+            showCompleteModal();
+            setCompleteLoading(true);
+
+            const appUserId = getCookie('__appUserId');
+            const response = await axiosClient.post<IBaseModel<string>>(POST_COMPLETION_SUBTOPIC_API(excercise!.subTopicId), appUserId)
+
+            setCompleteResult(response.data);
+            setCompleteLoading(false);
+        } catch (error) {
+            console.log('Error completing sub topic', error);
+        }
     }
 
     const handleAttempt = async (answer: AnswerDto) => {
-        showModal()
+        showAttemptModal()
         setAttemptLoading(true);
         const request: CreateUserAttemptRequest = {
             options: [answer.id],
@@ -166,7 +189,10 @@ const ExcerciseSpace = () => {
     return (
 
         <div className='flex w-full h-full flex-col'>
-            <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isModalOpen} onOk={handleOk}>
+            <Modal closable={false} loading={completeLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isCompleteModalOpen} onOk={handleCompleteModalOk}>
+                <CompleteResult completeResult={completeResult!} />
+            </Modal>
+            <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isAttemptModalOpen} onOk={handleAttemptModalOk}>
                 <AnswerResult attemptResult={attemptResult} />
             </Modal>
             {
