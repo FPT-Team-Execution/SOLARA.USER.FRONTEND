@@ -1,44 +1,63 @@
 import { AnswerDto, AttemptResponse, CreateUserAttemptRequest, ExcerciseDto } from '@/types/excercise';
 import useExcerciseStore from '@/zustand/useExcerciseStore'
-import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRequest } from 'ahooks';
 import { Button, Modal, Progress } from 'antd';
 import { useState } from 'react'
 import { MdOutlineDone } from 'react-icons/md';
 import Flashcard from './Flashcard';
-import { excerciseType } from '@/enums/excerciseType';
+import { ExcerciseType } from '@/enums/excerciseType';
 import BestChoice from './BestChoice';
 import SituationChoice from './SituationChoice';
 import TrueFalse from './TrueFalse';
 import { getCookie } from 'cookies-next';
 import axiosClient from '@/utils/axios/axiosClient';
 import { IBaseModel } from '@/interfaces/general';
-import { POST_ATTEMPT_EXCERCISE_API } from '@/constants/apis';
+import { POST_ATTEMPT_EXCERCISE_API, POST_COMPLETION_SUBTOPIC_API } from '@/constants/apis';
 import AnswerResult from './AnswerResult';
+import CompleteResult from './CompleteResult';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import useSubTopicStore from '@/zustand/useSubTopicStore';
+import { useRouter } from 'next/navigation';
 
 const ExcerciseSpace = () => {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isAttemptModalOpen, setIsAttemptModalOpen] = useState(false);
+    const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
 
-    const showModal = () => {
-        setIsModalOpen(true);
+    const showAttemptModal = () => {
+        setIsAttemptModalOpen(true);
     };
 
-    const handleOk = () => {
+    const handleAttemptModalOk = () => {
         navigateNext()
-        setIsModalOpen(false);
+        setIsAttemptModalOpen(false);
     };
 
-    const [attemptLoading, setAttemptLoading] = useState<boolean>(false);
+    const showCompleteModal = () => {
+        setIsCompleteModalOpen(true);
+    };
 
-    const { excercises } = useExcerciseStore();
+    const handleCompleteModalOk = () => {
+        if (completeResult?.isSuccess) {
+            setNo(0);
+        }
+        setAttempted(false);
+        setIsCompleteModalOpen(false);
+    };
+
+    const [completeLoading, setCompleteLoading] = useState<boolean>(false);
+    const [attemptLoading, setAttemptLoading] = useState<boolean>(false);
+    const [attempted, setAttempted] = useState(false);
     const [excercise, setExcercise] = useState<ExcerciseDto>();
-    const { completeSubTopic } = useSubTopicStore();
     const [isComplete, setIsComplete] = useState<boolean>(false);
     const [attemptResult, setAttemptResult] = useState<AttemptResponse>();
+    const [completeResult, setCompleteResult] = useState<IBaseModel<string>>();
     const [flip, setFlip] = useState<boolean>(false);
     const [no, setNo] = useState<number>(0);
     const [progress, setProgress] = useState<number>(0);
+    const { excercises } = useExcerciseStore();
+    const { subTopic } = useSubTopicStore();
+    const router = useRouter();
 
     const { } = useRequest(async () => {
 
@@ -58,9 +77,46 @@ const ExcerciseSpace = () => {
         refreshDeps: [no]
     });
 
-    const handleFlip = () => {
-        setFlip(!flip)
-    }
+    const handleFlip = async () => {
+
+        setFlip((prev) => !prev);
+
+        if (attempted) {
+            console.log("Attempt already submitted, skipping API call.");
+            return;
+        }
+
+        try {
+            const exerciseId = excercise?.id;
+            const answerId = excercise?.ans?.[0]?.id;
+
+            if (!exerciseId || !answerId) {
+                console.error("Exercise ID or Answer ID is missing");
+                return;
+            }
+
+            const userId = getCookie('__appUserId') as string;
+            if (!userId) {
+                console.error("User ID is missing");
+                return;
+            }
+
+            const request: CreateUserAttemptRequest = {
+                options: [answerId],
+                userId,
+            };
+
+            const response = await axiosClient.post<IBaseModel<AttemptResponse[]>>(
+                POST_ATTEMPT_EXCERCISE_API(exerciseId),
+                request
+            );
+
+            console.log("Attempt submitted successfully:", response.data);
+            setAttempted(true);
+        } catch (error) {
+            console.error("Error submitting attempt:", error);
+        }
+    };
 
     const calculateProgress = () => {
         if (excercises?.total === undefined) {
@@ -77,6 +133,7 @@ const ExcerciseSpace = () => {
         }
 
         setFlip(false);
+        setAttempted(false);
         setNo((prev) => prev + 1);
 
     };
@@ -91,11 +148,22 @@ const ExcerciseSpace = () => {
     }
 
     const handleComplete = async () => {
-        await completeSubTopic(excercise!.subTopicId!);
+        try {
+            showCompleteModal();
+            setCompleteLoading(true);
+
+            const appUserId = getCookie('__appUserId');
+            const response = await axiosClient.post<IBaseModel<string>>(POST_COMPLETION_SUBTOPIC_API(excercise!.subTopicId), appUserId)
+
+            setCompleteResult(response.data);
+            setCompleteLoading(false);
+        } catch (error) {
+            console.log('Error completing sub topic', error);
+        }
     }
 
     const handleAttempt = async (answer: AnswerDto) => {
-        showModal()
+        showAttemptModal()
         setAttemptLoading(true);
         const request: CreateUserAttemptRequest = {
             options: [answer.id],
@@ -125,37 +193,53 @@ const ExcerciseSpace = () => {
 
     return (
 
-        <div className='flex w-full h-full flex-col'>
-            <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isModalOpen} onOk={handleOk}>
+        <div className='flex w-full h-full flex-col gap-4'>
+            <Modal closable={false} loading={completeLoading} centered title="Kết quả" okText={completeResult?.isSuccess ? 'Ôn lại' : 'Học tiếp'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isCompleteModalOpen} onOk={handleCompleteModalOk}>
+                <CompleteResult completeResult={completeResult!} />
+            </Modal>
+            <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isAttemptModalOpen} onOk={handleAttemptModalOk}>
                 <AnswerResult attemptResult={attemptResult} />
             </Modal>
+
+            <div className="flex w-5/6 gap-4 rounded-lg text-black items-center">
+                <Button
+                    onClick={() => router.back()}
+                    className="!w-12 !h-12 flex items-center justify-center !bg-yellow-300 !text-white !rounded-lg"
+                >
+                    <ArrowLeftIcon className="text-black" />
+                </Button>
+                <div className='flex flex-col items-start'>
+                    <h1 className='text-2xl font-bold'><span className='text-green-600'>{subTopic?.name}</span></h1>
+                </div>
+            </div>
+
             {
-                excercise?.exerciseTypeId == excerciseType.flashcard
+                excercise?.exerciseTypeId == ExcerciseType.flashcard
                     ?
                     <Flashcard excercise={excercise!} flip={flip} handleFlip={handleFlip} />
                     :
-                    excercise?.exerciseTypeId == excerciseType.bestChoice
+                    excercise?.exerciseTypeId == ExcerciseType.bestChoice
                         ?
                         <BestChoice handleAttempt={handleAttempt} excercise={excercise!} />
                         :
-                        excercise?.exerciseTypeId == excerciseType.situationChoice
+                        excercise?.exerciseTypeId == ExcerciseType.situationChoice
                             ?
                             <SituationChoice handleAttempt={handleAttempt} excercise={excercise} />
                             :
-                            excercise?.exerciseTypeId == excerciseType.trueFalse
+                            excercise?.exerciseTypeId == ExcerciseType.trueFalse
                                 ?
                                 <TrueFalse handleAttempt={handleAttempt} excercise={excercise} />
                                 :
                                 <h1>Chế độ học đang được phát triển...</h1>
             }
-            <div className='flex flex-col w-full !h-1/6 gap-4 justify-center items-center'>
+            <div className='flex flex-col w-full gap-4 justify-center items-center'>
                 <div className='w-full'>
                     <Progress percent={progress} percentPosition={{ align: 'center', type: 'inner' }} strokeColor="green" showInfo={false} style={{ width: '100%' }} />
                 </div>
                 <div className='flex w-full gap-4'>
-                    <Button className='!w-5/12 !h-14' onClick={navigatePrev}>Trở về</Button>
-                    <Button onClick={handleComplete} disabled={!isComplete} className='!w-2/12 !h-14' icon={<MdOutlineDone />}></Button>
-                    <Button className='!w-5/12 !h-14' onClick={navigateNext}>Kế tiếp</Button>
+                    <Button className='!w-5/12 !h-14 !rounded-lg' onClick={navigatePrev}>Trở về</Button>
+                    <Button onClick={handleComplete} disabled={!isComplete} className='!w-2/12 !h-14 !rounded-lg' icon={<MdOutlineDone />}></Button>
+                    <Button className='!w-5/12 !h-14 !rounded-lg' onClick={navigateNext}>Kế tiếp</Button>
                 </div>
             </div>
         </div>

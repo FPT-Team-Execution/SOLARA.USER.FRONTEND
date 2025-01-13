@@ -1,8 +1,7 @@
-import { GET_SUBTOPIC_API, GET_SUBTOPICS_API, POST_COMPLETION_SUBTOPIC_API, POST_SUBTOPIC_API, PUT_SUBTOPIC_API } from '@/constants/apis'
+import { GET_SUBTOPIC_API, GET_SUBTOPICS_API, POST_SUBTOPIC_API, PUT_SUBTOPIC_API } from '@/constants/apis'
 import { IBaseModel, IPaginate } from '@/interfaces/general'
 import { CreateSubTopicRequest, GetPagedSubTopicRequest, SubTopicDto, UpdateSubTopicRequest } from '@/types/subTopic'
 import axiosClient from '@/utils/axios/axiosClient'
-import { getCookie } from 'cookies-next'
 import { create } from 'zustand'
 
 interface SubTopicStore {
@@ -13,7 +12,6 @@ interface SubTopicStore {
     getSubTopic: (id: string) => Promise<void>
     createSubTopic: (request: CreateSubTopicRequest) => Promise<void>
     updateSubTopic: (request: UpdateSubTopicRequest) => Promise<void>
-    completeSubTopic: (id: string) => Promise<void>
 }
 
 const useSubTopicStore = create<SubTopicStore>((set) => ({
@@ -138,20 +136,6 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
             console.log('Error updating sub topic', error)
         }
     },
-
-    completeSubTopic: async (id: string) => {
-        try {
-            const appUserId = getCookie('__appUserId');
-            const response = await axiosClient.post<IBaseModel<string>>(POST_COMPLETION_SUBTOPIC_API(id), appUserId)
-
-            if (!response.data.isSuccess) {
-                throw new Error()
-            }
-
-        } catch (error) {
-            console.log('Error completing sub topic', error);
-        }
-    }
 
 }))
 

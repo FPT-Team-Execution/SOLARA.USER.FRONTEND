@@ -5,6 +5,7 @@ import SubTopicRoadMap from '@/components/SubTopicPage/SubTopicRoadMap';
 import Spinner from '@/components/ui/Spinner';
 import { GetPagedSubTopicRequest } from '@/types/subTopic';
 import useSubTopicStore from '@/zustand/useSubTopicStore';
+import useTopicStore from '@/zustand/useTopicStore';
 import { useRequest } from 'ahooks';
 import { useSearchParams } from 'next/navigation';
 
@@ -12,6 +13,7 @@ const Page = () => {
   const searchParams = useSearchParams();
   const topicId = searchParams.get('topicId');
   const { subTopics, getSubTopics } = useSubTopicStore();
+  const { getTopic } = useTopicStore();
 
   const { loading } = useRequest(async () => {
     const query: GetPagedSubTopicRequest = {
@@ -23,6 +25,7 @@ const Page = () => {
       isAscending: true,
     }
     await getSubTopics(topicId!, query);
+    await getTopic(topicId!);
   }, {
     refreshDeps: [topicId]
   })

@@ -63,8 +63,8 @@ const TopicQuery = (props: IProps) => {
                     value={query.isAscending}
                     onChange={(value) => updateQuery('isAscending', value as boolean)}
                 >
-                    <Option value={true}>ASC</Option>
-                    <Option value={false}>DESC</Option>
+                    <Option value={true}>Tăng dần</Option>
+                    <Option value={false}>Giảm dần</Option>
                 </Select>
             </Col>
 

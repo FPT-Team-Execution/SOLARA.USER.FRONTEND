@@ -8,8 +8,10 @@ import achievementAmountIcon from "../../../public/medal.png";
 import currentLevelIcon from "../../../public/trophy.png";
 import { LevelTitle } from "@/enums/levelTitle";
 import LoadingBar from "../ui/LoadingBar";
+import { getLevelDescription } from "@/utils/string/userLevelFormat";
+import { UserLevel } from "@/enums/userLevel";
 
-const UserLevel = () => {
+const LearningProgress = () => {
 
     const { userLevel } = useUserStore();
 
@@ -25,7 +27,7 @@ const UserLevel = () => {
                     <div className="flex mx-auto">
                         <UserLevelCard levelIcon={streakIcon} levelTitle={LevelTitle.streak} levelValue={userLevel?.streak} />
                         <UserLevelCard levelIcon={totalXpIcon} levelTitle={LevelTitle.totalXp} levelValue={userLevel?.totalXp} />
-                        <UserLevelCard levelIcon={currentLevelIcon} levelTitle={LevelTitle.currentLevel} levelValue={userLevel?.currentLevel} />
+                        <UserLevelCard levelIcon={currentLevelIcon} levelTitle={LevelTitle.currentLevel} levelValue={getLevelDescription(userLevel?.currentLevel as keyof typeof UserLevel)} />
                         <UserLevelCard levelIcon={achievementAmountIcon} levelTitle={LevelTitle.achievementAmount} levelValue={userLevel?.achievementAmount} />
                     </div>
 
@@ -35,4 +37,4 @@ const UserLevel = () => {
     )
 }
 
-export default UserLevel
+export default LearningProgress
