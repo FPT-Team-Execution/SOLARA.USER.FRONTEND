@@ -17,7 +17,7 @@ const Page = () => {
         if (isSignedIn) {
             if (!authenticated) {
                 const token = await getToken({ template: "Solara" })
-                await setAuthenticated(token!);
+                await setAuthenticated();
             }
             router.push(HOME_ROUTE)
         } else {
