@@ -30,7 +30,7 @@ const ExcerciseSpace = () => {
     };
 
     const [attemptLoading, setAttemptLoading] = useState<boolean>(false);
-
+    const [attempted, setAttempted] = useState(false);
     const { excercises } = useExcerciseStore();
     const [excercise, setExcercise] = useState<ExcerciseDto>();
     const { completeSubTopic } = useSubTopicStore();
@@ -58,9 +58,48 @@ const ExcerciseSpace = () => {
         refreshDeps: [no]
     });
 
-    const handleFlip = () => {
-        setFlip(!flip)
-    }
+    const handleFlip = async () => {
+        // Lật trạng thái ngay lập tức
+        setFlip((prev) => !prev);
+
+        // Kiểm tra xem đã gọi API chưa
+        if (attempted) {
+            console.log("Attempt already submitted, skipping API call.");
+            return;
+        }
+
+        // Thực hiện gọi API lần đầu
+        try {
+            const exerciseId = excercise?.id;
+            const answerId = excercise?.ans?.[0]?.id;
+
+            if (!exerciseId || !answerId) {
+                console.error("Exercise ID or Answer ID is missing");
+                return;
+            }
+
+            const userId = getCookie('__appUserId') as string;
+            if (!userId) {
+                console.error("User ID is missing");
+                return;
+            }
+
+            const request: CreateUserAttemptRequest = {
+                options: [answerId],
+                userId,
+            };
+
+            const response = await axiosClient.post<IBaseModel<AttemptResponse[]>>(
+                POST_ATTEMPT_EXCERCISE_API(exerciseId),
+                request
+            );
+
+            console.log("Attempt submitted successfully:", response.data);
+            setAttempted(true); // Đánh dấu rằng đã thực hiện API call
+        } catch (error) {
+            console.error("Error submitting attempt:", error);
+        }
+    };
 
     const calculateProgress = () => {
         if (excercises?.total === undefined) {
@@ -77,6 +116,7 @@ const ExcerciseSpace = () => {
         }
 
         setFlip(false);
+        setAttempted(false);
         setNo((prev) => prev + 1);
 
     };
