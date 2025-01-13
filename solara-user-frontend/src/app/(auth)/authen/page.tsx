@@ -13,27 +13,13 @@ const Page = () => {
     const { authenticated, setAuthenticated } = useUserStore();
     const router = useRouter();
 
-    const { loading } = useRequest(async () => {
-        if (isSignedIn) {
-            if (!authenticated) {
-                const token = await getToken({ template: "Solara" })
-                await setAuthenticated(token!);
-            }
-            router.push(HOME_ROUTE)
-        } else {
-            router.push(SIGNIN_ROUTE)
-        }
 
-    }, {
-        refreshDeps: [isSignedIn]
-    })
+    router.push(HOME_ROUTE)
+
 
 
     return (
         <div className='flex items-center justify-center'>
-            {
-                loading ? <Spinner /> : <></>
-            }
         </div>
     )
 }
