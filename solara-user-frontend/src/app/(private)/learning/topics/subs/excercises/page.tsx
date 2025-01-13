@@ -6,7 +6,9 @@ import ExcerciseSpace from "@/components/ExcercisePage/ExcerciseSpace";
 import Spinner from "@/components/ui/Spinner";
 import { GetPagedExcercisesRequest } from "@/types/excercise";
 import useExcerciseStore from "@/zustand/useExcerciseStore";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useRequest } from "ahooks";
+import { Button } from "antd";
 import { useSearchParams } from "next/navigation";
 
 
@@ -49,7 +51,8 @@ const Page = () => {
             :
             (
               <>
-                <div className="w-8/12 rounded-t-xl max-h-full scroll-smooth overflow-hidden">
+                
+                <div className="w-8/12 max-h-full scroll-smooth overflow-hidden">
                   <ExcerciseSpace />
                 </div>
 

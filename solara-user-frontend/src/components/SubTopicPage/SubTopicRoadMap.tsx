@@ -25,8 +25,8 @@ const SubTopicRoadMap = () => {
 
             <div className="flex w-5/6 gap-4 rounded-lg text-black items-center">
                 <Button
-                    onClick={() => router.push(LEARNING_TOPICS_ROUTE)}
-                    className="!w-12 !h-12 flex items-center justify-center !bg-yellow-300 !text-white !rounded-md"
+                    onClick={() => router.back()}
+                    className="!w-12 !h-12 flex items-center justify-center !bg-yellow-300 !text-white !rounded-lg"
                 >
                     <ArrowLeftIcon className="text-black" />
                 </Button>

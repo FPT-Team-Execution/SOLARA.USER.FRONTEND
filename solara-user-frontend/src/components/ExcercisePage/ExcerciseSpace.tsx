@@ -15,6 +15,10 @@ import { IBaseModel } from '@/interfaces/general';
 import { POST_ATTEMPT_EXCERCISE_API, POST_COMPLETION_SUBTOPIC_API } from '@/constants/apis';
 import AnswerResult from './AnswerResult';
 import CompleteResult from './CompleteResult';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import useSubTopicStore from '@/zustand/useSubTopicStore';
+import { useRouter } from 'next/navigation';
+import { LEARNING_TOPICS_SUBS_ROUTE } from '@/constants/routes';
 
 const ExcerciseSpace = () => {
 
@@ -53,6 +57,8 @@ const ExcerciseSpace = () => {
     const [no, setNo] = useState<number>(0);
     const [progress, setProgress] = useState<number>(0);
     const { excercises } = useExcerciseStore();
+    const { subTopic } = useSubTopicStore();
+    const router = useRouter();
 
     const { } = useRequest(async () => {
 
@@ -188,13 +194,26 @@ const ExcerciseSpace = () => {
 
     return (
 
-        <div className='flex w-full h-full flex-col'>
+        <div className='flex w-full h-full flex-col gap-4'>
             <Modal closable={false} loading={completeLoading} centered title="Kết quả" okText={completeResult?.isSuccess ? 'Ôn lại' : 'Học tiếp'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isCompleteModalOpen} onOk={handleCompleteModalOk}>
                 <CompleteResult completeResult={completeResult!} />
             </Modal>
             <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isAttemptModalOpen} onOk={handleAttemptModalOk}>
                 <AnswerResult attemptResult={attemptResult} />
             </Modal>
+
+            <div className="flex w-5/6 gap-4 rounded-lg text-black items-center">
+                <Button
+                    onClick={() => router.back()}
+                    className="!w-12 !h-12 flex items-center justify-center !bg-yellow-300 !text-white !rounded-lg"
+                >
+                    <ArrowLeftIcon className="text-black" />
+                </Button>
+                <div className='flex flex-col items-start'>
+                    <h1 className='text-2xl font-bold'><span className='text-green-600'>{subTopic?.name}</span></h1>
+                </div>
+            </div>
+
             {
                 excercise?.exerciseTypeId == ExcerciseType.flashcard
                     ?
@@ -219,9 +238,9 @@ const ExcerciseSpace = () => {
                     <Progress percent={progress} percentPosition={{ align: 'center', type: 'inner' }} strokeColor="green" showInfo={false} style={{ width: '100%' }} />
                 </div>
                 <div className='flex w-full gap-4'>
-                    <Button className='!w-5/12 !h-14' onClick={navigatePrev}>Trở về</Button>
-                    <Button onClick={handleComplete} disabled={!isComplete} className='!w-2/12 !h-14' icon={<MdOutlineDone />}></Button>
-                    <Button className='!w-5/12 !h-14' onClick={navigateNext}>Kế tiếp</Button>
+                    <Button className='!w-5/12 !h-14 !rounded-lg' onClick={navigatePrev}>Trở về</Button>
+                    <Button onClick={handleComplete} disabled={!isComplete} className='!w-2/12 !h-14 !rounded-lg' icon={<MdOutlineDone />}></Button>
+                    <Button className='!w-5/12 !h-14 !rounded-lg' onClick={navigateNext}>Kế tiếp</Button>
                 </div>
             </div>
         </div>
