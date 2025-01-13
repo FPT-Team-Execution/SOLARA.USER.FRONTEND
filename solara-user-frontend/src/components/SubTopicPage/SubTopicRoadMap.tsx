@@ -5,11 +5,14 @@ import RoadMap from './RoadMap';
 import useTopicStore from '@/zustand/useTopicStore';
 import { Button } from 'antd';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
+import { useRouter } from 'next/navigation';
+import { LEARNING_TOPICS_ROUTE } from '@/constants/routes';
 
 const SubTopicRoadMap = () => {
 
     const { subTopic, subTopics, setSubTopic } = useSubTopicStore();
     const { topic } = useTopicStore();
+    const router = useRouter();
 
     const { } = useRequest(async () => {
         if (subTopics?.items[0].id) {
@@ -20,11 +23,12 @@ const SubTopicRoadMap = () => {
     return (
         <div className="bg-gray-100 w-full gap-8 flex flex-col justify-center items-center py-10">
 
-            <div className="flex w-5/6 gap-4 rounded-lg  text-black items-center">
+            <div className="flex w-5/6 gap-4 rounded-lg text-black items-center">
                 <Button
+                    onClick={() => router.push(LEARNING_TOPICS_ROUTE)}
                     className="!w-12 !h-12 flex items-center justify-center !bg-yellow-300 !text-white !rounded-md"
                 >
-                    <ArrowLeftIcon className="w-6 h-6 text-black" />
+                    <ArrowLeftIcon className="text-black" />
                 </Button>
                 <div className='flex flex-col items-start'>
                     <h1 className='text-2xl font-bold'>Chủ đề <span className='text-green-600'>{topic?.topicName}</span></h1>
