@@ -1,6 +1,7 @@
 import useSubTopicStore from '@/zustand/useSubTopicStore'
 import { useRequest } from 'ahooks';
 // import { FaRegFlag } from 'react-icons/fa';
+import RoadMap from './RoadMap';
 
 const SubTopicRoadMap = () => {
 
@@ -16,14 +17,7 @@ const SubTopicRoadMap = () => {
         <div className="bg-gray-100 w-full  flex flex-col justify-center items-center py-10">
             <div className="flex w-full flex-col items-center">
 
-                {/* <div className="flex flex-col items-center">
-                    <div className="w-20 h-20 bg-gray-700 rounded-md flex items-center justify-center">
-                        <span className="text-gray-500 text-2xl font-bold">
-                            <FaRegFlag />
-                        </span>
-                    </div>
-                    <p className="text-gray-500 p-4">BẮT ĐẦU</p>
-                </div> */}
+
 
                 {subTopics?.items.map((item, index) => {
 
@@ -32,12 +26,12 @@ const SubTopicRoadMap = () => {
                     return (
                         <>
                             <div key={index} className={`flex w-4/6 flex-col   ${even ? "items-start" : "items-end"}`}>
-                                <div onClick={() => setSubTopic(item)} className={`flex rounded-full ${item.id === subTopic?.id ? "bg-slate-300" : "bg-slate-200"} ${even ? "pr-2" : "flex-row-reverse pl-2"} gap-2 items-center justify-center cursor-pointer`}>
+                                <div onClick={() => setSubTopic(item)} className={`flex rounded-full ${item.id === subTopic?.id ? "bg-green-600" : "bg-slate-200"} ${even ? "pr-2" : "flex-row-reverse pl-2"} gap-2 items-center justify-center cursor-pointer`}>
                                     <div className="w-20 h-20 bg-green-600 rounded-full border-4 border-green-300 flex items-center justify-center relative">
                                         <span className="text-white text-2xl font-bold">★</span>
                                         {/* <div className="absolute top-0 right-0 w-3 h-3 bg-green-700 rounded-full animate-ping"></div> */}
                                     </div>
-                                    <p className="text-green-500 text-nowrap">{item.name}</p>
+                                    <p className={`text-nowrap min-w-16 px-2 ${item.id === subTopic?.id ?  "text-white" :  "text-black"}`}>{item.name}</p>
                                 </div>
                             </div>
 
@@ -48,19 +42,11 @@ const SubTopicRoadMap = () => {
                                     )
                                     :
                                     (
-                                        <div className={`w-full flex ${even ? "flex-col" : "flex-col-reverse"} justify-evenly items-center`}>
-
-                                            <div className="w-6/12 h-12 flex flex-col items-start">
-                                                <div className="w-4 h-12 bg-gray-600"></div>
+                                        <>
+                                            <div>
+                                                <RoadMap even={even}></RoadMap>
                                             </div>
-
-                                            <div className={`${even ? "rounded-bl-full rounded-tr-full" : "rounded-br-full rounded-tl-full"} w-6/12 h-4 bg-gray-600`}></div>
-
-                                            <div className="w-6/12 h-12 flex flex-col items-end">
-                                                <div className="w-4 h-12 bg-gray-600"></div>
-                                            </div>
-
-                                        </div>
+                                        </>
                                     )
                             }
                         </>
