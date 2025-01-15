@@ -1,5 +1,5 @@
 import { BASE_API } from '@/constants/apis'
-import { notification } from 'antd'
+// import { notification } from 'antd'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
 
@@ -28,10 +28,10 @@ axiosClient.interceptors.response.use(
         return response
     },
     (error) => {
-        notification.error({
-            message: 'Error',
-            description: error.message
-        })
+        // notification.error({
+        //     message: 'Error',
+        //     description: error.message
+        // })
         throw error
     }
 )
