@@ -19,9 +19,9 @@ const TopicCardLite = ({ userTopic, buttonTitle, status }: IProps) => {
             case TopicOfUserStatusEnum.Completed: {
                 return (
                     <Image
-                        className="absolute top-[-15px] left-[10px]"
-                        width={30}
-                        height={30}
+                        className="absolute top-[-10px] left-[10px]"
+                        width={20}
+                        height={20}
                         src={checkmark}
                         alt=""
                     />
@@ -30,9 +30,9 @@ const TopicCardLite = ({ userTopic, buttonTitle, status }: IProps) => {
             case TopicOfUserStatusEnum.InProgress: {
                 return (
                     <Image
-                        className="absolute top-[-15px] left-[10px] animate-pulse"
-                        width={30}
-                        height={30}
+                        className="absolute top-[-10px] left-[10px] animate-pulse"
+                        width={20}
+                        height={20}
                         src={fastForward}
                         alt=""
                     />
@@ -42,17 +42,17 @@ const TopicCardLite = ({ userTopic, buttonTitle, status }: IProps) => {
     }
 
     return (
-        <div className="relative max-w-sm p-4 flex items-center gap-4 bg-white border shadow-lg rounded-xl hover:shadow-xl transition-shadow duration-300">
+        <div className="relative max-w-sm p-2 flex items-center gap-2 bg-white border shadow-lg rounded-xl hover:shadow-xl transition-shadow duration-300">
 
             {handleShowStatus()}
 
-            <h5 className="text-left font-medium tracking-tight text-gray-900">
+            <h5 className="text-left px-2 font-medium tracking-tight text-gray-900">
                 {userTopic.topicName}
             </h5>
 
             <Link
                 href={`${LEARNING_TOPICS_SUBS_ROUTE}?topicId=${userTopic.topicId}`}
-                className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-green-600 rounded"
+                className="inline-flex items-center hover:text-yellow-300 px-2 py-1 text-sm text-center text-white bg-green-600 rounded"
             >
                 {buttonTitle}
                 <svg
