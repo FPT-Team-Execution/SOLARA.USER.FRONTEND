@@ -3,6 +3,7 @@ import './SpecialFeatures.css';
 import VectorSpecialFeaturesBg from './VectorSpecialFeaturesBg';
 import Vector2Title from './Vector2Title';
 import Link from 'next/link';
+import { HOME_ROUTE, LEARNING_SIMULATIONS_ROUTE, LEARNING_TOPICS_ROUTE, MARKET_ROUTE } from '@/constants/routes';
 
 interface IProps {
   icon: ReactElement,
@@ -37,7 +38,7 @@ const FeatureGrid = () => {
       ),
       title: "Flashcard Tương Tác",
       description: "Học tập hiệu quả",
-      link: "/learning"
+      link: LEARNING_TOPICS_ROUTE
     },
     {
       icon: (
@@ -47,7 +48,7 @@ const FeatureGrid = () => {
       ),
       title: "Giả Lập Thực Tế",
       description: "Trải nghiệm hấp dẫn",
-      link: "/simulation"
+      link: LEARNING_SIMULATIONS_ROUTE
     },
     {
       icon: (
@@ -57,7 +58,7 @@ const FeatureGrid = () => {
       ),
       title: "Lời Khuyên & Hướng Dẫn",
       description: "Thư viện kiến nghiệm",
-      link: "/"
+      link: HOME_ROUTE
     },
     {
       icon: (
@@ -67,7 +68,7 @@ const FeatureGrid = () => {
       ),
       title: "Chợ Dụng Cụ Sinh Tồn",
       description: "Mua sắm hiệu quả",
-      link: "/products"
+      link: MARKET_ROUTE
     }
   ];
 

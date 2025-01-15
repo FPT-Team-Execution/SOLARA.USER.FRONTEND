@@ -10,6 +10,11 @@ export type TopicDto = {
     thumbnail?: string;
 }
 
+export type TopicOfUserDto = TopicDto & {
+    lastIncompleteExerciseId: string,
+    lastIncompleteSubTopicId: string
+}
+
 export type GetPagedTopicsRequest = IPageRequest & {
 
 }

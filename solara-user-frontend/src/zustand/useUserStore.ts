@@ -1,4 +1,4 @@
-import { AUTH_CLERK_API, GET_USER_LEVEL } from '@/constants/apis';
+import { AUTH_CLERK_API, GET_USER_LEVEL_API } from '@/constants/apis';
 import { IBaseModel } from '@/interfaces/general';
 import axiosClient from '@/utils/axios/axiosClient';
 import { create } from 'zustand';
@@ -62,7 +62,7 @@ const useUserStore = create<UserStore>((set) => ({
 
             const appUserId = getCookie('__appUserId')
 
-            const response = await axiosClient.get<IBaseModel<UserLevelDto>>(GET_USER_LEVEL(appUserId as string))
+            const response = await axiosClient.get<IBaseModel<UserLevelDto>>(GET_USER_LEVEL_API(appUserId as string))
 
             if (!response.data.isSuccess) {
                 return
