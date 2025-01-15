@@ -6,6 +6,7 @@ import Link from "next/link";
 import Vector2Title from "../SpecialFeatures/Vector2Title";
 // import VectorSpecialFeaturesBg from "../SpecialFeatures/VectorSpecialFeaturesBg"
 import "./PartnerSection.css"
+import { MARKET_ROUTE } from "@/constants/routes";
 
 const PartnerSection = () => {
   const partners = [
@@ -28,7 +29,7 @@ const PartnerSection = () => {
           <p className="text-partner text-sm md:text-base lg:text-lg leading-relaxed italic text-[#1C3A1F]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </p>
-          <Link href="/partners" legacyBehavior>
+          <Link href={MARKET_ROUTE} legacyBehavior>
             <a>
               <CustomButton className="custom-button px-4 py-2 md:px-6 md:py-3 mt-4 text-sm md:text-base lg:text-lg text-white">
                 <p className="text-white">Tìm hiểu thêm</p>
