@@ -3,15 +3,23 @@
 import TopicCard from '@/components/TopicPage/TopicCard'
 import TopicQuery from '@/components/TopicPage/TopicQuery'
 import Spinner from '@/components/ui/Spinner'
+import { GET_USER_TOPIC_API } from '@/constants/apis'
 import { LEARNING_TOPICS_SUBS_ROUTE } from '@/constants/routes'
-import { GetPagedTopicsRequest } from '@/types/topic'
+import { TopicOfUserStatusEnum } from '@/enums/userTopicStatus'
+import { IBaseModel } from '@/interfaces/general'
+import { GetPagedTopicsRequest, TopicOfUserDto } from '@/types/topic'
+import axiosClient from '@/utils/axios/axiosClient'
 import useTopicStore from '@/zustand/useTopicStore'
+import { useAuth } from '@clerk/clerk-react'
 import { useRequest } from 'ahooks'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const Page = () => {
 
+  const [completedTopics, setCompletedTopics] = useState<TopicOfUserDto[]>();
+  const [inProgressTopics, setInProgressTopics] = useState<TopicOfUserDto[]>();
+  const { userId } = useAuth();
   const { topics, getTopics } = useTopicStore();
   const router = useRouter();
 
@@ -35,6 +43,31 @@ const Page = () => {
     router.push(`${LEARNING_TOPICS_SUBS_ROUTE}?topicId=${id}`)
   }
 
+  const { loading: getCompletedLoading } = useRequest(async () => {
+    const response = await axiosClient.get<IBaseModel<TopicOfUserDto[]>>(GET_USER_TOPIC_API(userId as string),
+      {
+        params: TopicOfUserStatusEnum.Completed
+      })
+
+    if (!response.data.isSuccess) {
+      return
+    }
+
+    setCompletedTopics(response.data.responseRequest)
+  })
+
+  const { loading: getInProgressLoading } = useRequest(async () => {
+    const response = await axiosClient.get<IBaseModel<TopicOfUserDto[]>>(GET_USER_TOPIC_API(userId as string),
+      {
+        params: TopicOfUserStatusEnum.InProgress
+      })
+
+    if (!response.data.isSuccess) {
+      return
+    }
+
+    setInProgressTopics(response.data.responseRequest)
+  })
 
   const { loading } = useRequest(async () => {
     await getTopics(query);
@@ -55,7 +88,24 @@ const Page = () => {
               <h1 className='text-sm font-semibold p-4 text-left'>Đang học</h1>
             </div>
             <div>
-              s
+              {
+                getCompletedLoading
+                  ?
+                  <div>
+                    <Spinner></Spinner>
+                  </div>
+                  :
+                  completedTopics ?
+                    completedTopics.map((item) => {
+                      return (
+                        <>
+                          {item.topicName}
+                        </>
+                      )
+                    })
+                    :
+                    <span>Bạn vẫn chưa hoàn thành bài học nào!</span>
+              }
             </div>
           </div>
           <div className='w-1/2'>
@@ -63,7 +113,24 @@ const Page = () => {
               <h1 className='text-sm font-semibold p-4 text-left'>Hoàn thành</h1>
             </div>
             <div>
-              s
+              {
+                getInProgressLoading
+                  ?
+                  <div>
+                    <Spinner></Spinner>
+                  </div>
+                  :
+                  inProgressTopics ?
+                    inProgressTopics.map((item) => {
+                      return (
+                        <>
+                          {item.topicName}
+                        </>
+                      )
+                    })
+                    :
+                    <span>Bạn vẫn chưa học bài học nào!</span>
+              }
             </div>
           </div>
         </div>
