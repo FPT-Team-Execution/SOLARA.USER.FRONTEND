@@ -86,7 +86,7 @@ const Page = () => {
         <div className='flex p-4 gap-4'>
           <div className='w-1/2 space-y-4'>
             <div>
-              <h1 className='text-sm font-semibold text-left'>Đang học</h1>
+              <h1 className='text-sm font-bold text-left'>Đang học</h1>
             </div>
             <div>
               {
@@ -113,7 +113,7 @@ const Page = () => {
           </div>
           <div className='w-1/2 space-y-4'>
             <div>
-              <h1 className='text-sm font-semibold text-left'>Hoàn thành</h1>
+              <h1 className='text-sm font-bold text-left'>Hoàn thành</h1>
             </div>
             <div>
               {
@@ -142,7 +142,7 @@ const Page = () => {
 
         <div className='space-y-4'>
           <div>
-            <h1 className='text-sm font-semibold p-4 text-left'>Các chủ đề phổ biến</h1>
+            <h1 className='text-sm font-bold p-4 text-left'>Các chủ đề phổ biến</h1>
           </div>
 
           <div className='flex justify-center items-center'>
