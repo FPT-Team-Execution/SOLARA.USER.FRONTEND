@@ -1,12 +1,16 @@
+import { getCookie } from 'cookies-next';
 import axiosClient from '@/utils/axios/axiosClient';
-import { CreateTopicRequest, GetPagedTopicsRequest, TopicDto, UpdateTopicRequest } from './../types/topic';
+import { CreateTopicRequest, GetPagedTopicsRequest, TopicDto, TopicOfUserDto, UpdateTopicRequest } from './../types/topic';
 import { create } from 'zustand';
-import { DELETE_TOPIC_API, GET_TOPIC_API, GET_TOPICS_API, POST_TOPIC_API, PUT_TOPIC_API } from '@/constants/apis';
+import { DELETE_TOPIC_API, GET_TOPIC_API, GET_TOPICS_API, GET_USER_TOPIC_API, POST_TOPIC_API, PUT_TOPIC_API } from '@/constants/apis';
 import { IBaseModel, IPaginate } from '@/interfaces/general';
+import { TopicOfUserStatusEnum } from '@/enums/userTopicStatus';
 
 interface TopicStore {
     topic: TopicDto | null
     topics: IPaginate<TopicDto> | null;
+    userTopics: TopicOfUserDto[] | null;
+    getUserTopics: (status: TopicOfUserStatusEnum) => Promise<void>;
     getTopics: (query: GetPagedTopicsRequest) => Promise<void>;
     getTopic: (id: string) => Promise<void>;
     createTopic: (request: CreateTopicRequest) => Promise<void>;
@@ -17,6 +21,26 @@ interface TopicStore {
 const useTopicStore = create<TopicStore>((set) => ({
     topic: null,
     topics: null,
+    userTopics: null,
+
+    getUserTopics: async (status: TopicOfUserStatusEnum) => {
+        try {
+            const appUserId = getCookie("__appUserId");
+            const response = await axiosClient.get<IBaseModel<TopicOfUserDto[]>>(GET_USER_TOPIC_API(appUserId as string), { params: status })
+
+            if (!response.data.isSuccess) {
+                return
+            }
+
+            set((state) => ({
+                ...state,
+                userTopics: response.data.responseRequest
+            }));
+
+        } catch {
+
+        }
+    },
 
     // Get a list of topics with pagination
     getTopics: async (query: GetPagedTopicsRequest) => {
