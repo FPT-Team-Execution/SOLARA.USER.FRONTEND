@@ -10,13 +10,17 @@ const TopicCard = (props: IProps) => {
     return (
         <div className="bg-white shadow-lg rounded-xl hover:shadow-xl transition-shadow duration-300">
 
-            <Image
-                className="w-full min-h-32 max-h-32 object-cover rounded-tl-xl rounded-tr-xl"
-                src={props.topic.thumbnail ? props.topic.thumbnail : `https://media.istockphoto.com/id/1333043586/photo/tornado-in-stormy-landscape-climate-change-and-natural-disaster-concept.jpg?s=612x612&w=0&k=20&c=uo4HoloU79NEle1-rgVoLhKBE-RrfPSeinKAdczCo2I=`}
-                alt="Topic"
-                width={1920}
-                height={1080}
-            />
+            {
+                props.topic.thumbnail &&
+                <Image
+                    className="w-full min-h-32 max-h-32 object-cover rounded-tl-xl rounded-tr-xl"
+                    src={props.topic.thumbnail}
+                    alt="Topic"
+                    width={1920}
+                    height={1080}
+                />
+            }
+
 
             <div className="p-2">
 
