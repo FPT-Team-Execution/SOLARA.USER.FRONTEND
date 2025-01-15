@@ -19,7 +19,7 @@ const TopicCardLite = ({ userTopic, buttonTitle, status }: IProps) => {
             case TopicOfUserStatusEnum.Completed: {
                 return (
                     <Image
-                        className="absolute top-[-10px] left-[-15px"
+                        className="absolute top-[-10px] left-[-15px]"
                         width={30}
                         height={30}
                         src={checkmark}
