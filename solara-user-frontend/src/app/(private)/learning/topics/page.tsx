@@ -1,7 +1,9 @@
 "use client"
 
 import TopicCard from '@/components/TopicPage/TopicCard'
+import TopicCardLite from '@/components/TopicPage/TopicCardLite'
 import TopicQuery from '@/components/TopicPage/TopicQuery'
+import LoadingBar from '@/components/ui/LoadingBar'
 import Spinner from '@/components/ui/Spinner'
 import { GET_USER_TOPIC_API } from '@/constants/apis'
 import { LEARNING_TOPICS_SUBS_ROUTE } from '@/constants/routes'
@@ -10,8 +12,8 @@ import { IBaseModel } from '@/interfaces/general'
 import { GetPagedTopicsRequest, TopicOfUserDto } from '@/types/topic'
 import axiosClient from '@/utils/axios/axiosClient'
 import useTopicStore from '@/zustand/useTopicStore'
-import { useAuth } from '@clerk/clerk-react'
 import { useRequest } from 'ahooks'
+import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -19,7 +21,6 @@ const Page = () => {
 
   const [completedTopics, setCompletedTopics] = useState<TopicOfUserDto[]>();
   const [inProgressTopics, setInProgressTopics] = useState<TopicOfUserDto[]>();
-  const { userId } = useAuth();
   const { topics, getTopics } = useTopicStore();
   const router = useRouter();
 
@@ -44,9 +45,9 @@ const Page = () => {
   }
 
   const { loading: getCompletedLoading } = useRequest(async () => {
-    const response = await axiosClient.get<IBaseModel<TopicOfUserDto[]>>(GET_USER_TOPIC_API(userId as string),
+    const response = await axiosClient.get<IBaseModel<TopicOfUserDto[]>>(GET_USER_TOPIC_API(getCookie("__appUserId") as string),
       {
-        params: TopicOfUserStatusEnum.Completed
+        params: { status: TopicOfUserStatusEnum.Completed }
       })
 
     if (!response.data.isSuccess) {
@@ -57,9 +58,9 @@ const Page = () => {
   })
 
   const { loading: getInProgressLoading } = useRequest(async () => {
-    const response = await axiosClient.get<IBaseModel<TopicOfUserDto[]>>(GET_USER_TOPIC_API(userId as string),
+    const response = await axiosClient.get<IBaseModel<TopicOfUserDto[]>>(GET_USER_TOPIC_API(getCookie("__appUserId") as string),
       {
-        params: TopicOfUserStatusEnum.InProgress
+        params: { status: TopicOfUserStatusEnum.InProgress }
       })
 
     if (!response.data.isSuccess) {
@@ -82,52 +83,56 @@ const Page = () => {
 
       <div>
 
-        <div className='flex'>
-          <div className='w-1/2'>
+        <div className='flex p-4 gap-4'>
+          <div className='w-1/2 space-y-4'>
             <div>
-              <h1 className='text-sm font-semibold p-4 text-left'>Đang học</h1>
+              <h1 className='text-sm font-semibold text-left'>Đang học</h1>
             </div>
             <div>
               {
                 getCompletedLoading
                   ?
-                  <div>
-                    <Spinner></Spinner>
+                  <div className='flex justify-center items-center'>
+                    <LoadingBar />
                   </div>
                   :
                   completedTopics ?
-                    completedTopics.map((item) => {
-                      return (
-                        <>
-                          {item.topicName}
-                        </>
-                      )
-                    })
+                    <div className='flex items-start flex-wrap gap-4'>
+                      {
+                        completedTopics.map((item, index) => {
+                          return (
+                            <TopicCardLite status={TopicOfUserStatusEnum.InProgress} buttonTitle='Học tiếp' key={index} userTopic={item} />
+                          )
+                        })
+                      }
+                    </div>
                     :
                     <span>Bạn vẫn chưa hoàn thành bài học nào!</span>
               }
             </div>
           </div>
-          <div className='w-1/2'>
+          <div className='w-1/2 space-y-4'>
             <div>
-              <h1 className='text-sm font-semibold p-4 text-left'>Hoàn thành</h1>
+              <h1 className='text-sm font-semibold text-left'>Hoàn thành</h1>
             </div>
             <div>
               {
                 getInProgressLoading
                   ?
-                  <div>
-                    <Spinner></Spinner>
+                  <div className='flex justify-center items-center'>
+                    <LoadingBar />
                   </div>
                   :
                   inProgressTopics ?
-                    inProgressTopics.map((item) => {
-                      return (
-                        <>
-                          {item.topicName}
-                        </>
-                      )
-                    })
+                    <div className='flex items-start flex-wrap gap-4'>
+                      {
+                        inProgressTopics.map((item, index) => {
+                          return (
+                            <TopicCardLite status={TopicOfUserStatusEnum.Completed} buttonTitle='Ôn lại' key={index} userTopic={item} />
+                          )
+                        })
+                      }
+                    </div>
                     :
                     <span>Bạn vẫn chưa học bài học nào!</span>
               }
