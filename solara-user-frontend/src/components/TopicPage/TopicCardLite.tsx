@@ -19,7 +19,7 @@ const TopicCardLite = ({ userTopic, buttonTitle, status }: IProps) => {
             case TopicOfUserStatusEnum.Completed: {
                 return (
                     <Image
-                        className="absolute top-[-10px] left-[-15px]"
+                        className="absolute top-[-15px] left-[10px]"
                         width={30}
                         height={30}
                         src={checkmark}
@@ -30,7 +30,7 @@ const TopicCardLite = ({ userTopic, buttonTitle, status }: IProps) => {
             case TopicOfUserStatusEnum.InProgress: {
                 return (
                     <Image
-                        className="absolute top-[-10px] left-[-15px] animate-pulse"
+                        className="absolute top-[-15px] left-[10px] animate-pulse"
                         width={30}
                         height={30}
                         src={fastForward}
