@@ -50,11 +50,11 @@ const Page = () => {
             (
               <>
                 
-                <div className="w-8/12 max-h-full scroll-smooth overflow-hidden">
+                <div className="md:w-8/12 max-h-full scroll-smooth overflow-hidden">
                   <ExcerciseSpace />
                 </div>
 
-                <div className='flex flex-col border-dashed border-red-50 w-4/12 rounded-xl gap-4'>
+                <div className='hidden md:flex md:flex-col border-dashed border-red-50 w-4/12 rounded-xl gap-4'>
 
                   <div className="bg-green-100 h-4/6 rounded-xl">
                     <ExcerciseList />

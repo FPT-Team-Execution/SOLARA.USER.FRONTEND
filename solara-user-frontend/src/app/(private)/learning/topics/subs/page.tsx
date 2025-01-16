@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import SubTopicDetail from '@/components/SubTopicPage/SubTopicDetail';
 import SubTopicRoadMap from '@/components/SubTopicPage/SubTopicRoadMap';
@@ -32,7 +32,7 @@ const Page = () => {
   })
 
   return (
-    <div className='flex gap-4 h-full'>
+    <div className='flex flex-col-reverse md:flex-row gap-4 h-full'>
       {
         loading
           ?
@@ -50,13 +50,13 @@ const Page = () => {
             :
             (
               <>
-                <div className="w-8/12 rounded-xl overflow-auto h-[calc(100vh-134px)] scroll-smooth">
+                <div className="w-full md:w-8/12 rounded-xl bg-gray-100 overflow-auto h-[calc(100vh-134px)] scroll-smooth">
 
                   <SubTopicRoadMap />
 
                 </div>
 
-                <div className='flex flex-col border-dashed border-red-50 w-4/12 rounded-xl'>
+                <div className='w-full md:w-4/12 flex flex-col border-dashed border-red-50 rounded-xl mt-4 md:mt-0'>
 
                   <SubTopicDetail />
 
