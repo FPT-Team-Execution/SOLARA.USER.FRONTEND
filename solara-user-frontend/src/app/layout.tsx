@@ -33,11 +33,23 @@ const layoutStyle = {
 };
 
 export const metadata: Metadata = {
-  title: "Home - Solara",
-  description: "Learning survival course application",
-  icons: {
-    icon: './',
+  title: 'Solara - Kỹ Năng Sinh Tồn',
+  description: 'Khám phá các kỹ năng sinh tồn cơ bản, từ cách tạo lửa đến tìm kiếm nước sạch.',
+  keywords: 'kỹ năng sinh tồn, năng lượng mặt trời, tạo lửa, tìm nước, sống sót, kỹ năng sống',
+  authors: { name: "Solara" },
+  openGraph: {
+    title: 'Solara - Kỹ Năng Sinh Tồn',
+    description: 'Học các kỹ năng sinh tồn thiết yếu để xử lí khi gặp tình huống khẩn cấp.',
+    images: [
+      {
+        url: 'https://solara.io.vn/_next/image?url=%2Flogo.png&w=256&q=75',
+        width: 256,
+        height: 256,
+      },
+    ],
+    url: 'https://solara.io.vn/',
   },
+  robots: 'index, follow',
 };
 
 export default async function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
