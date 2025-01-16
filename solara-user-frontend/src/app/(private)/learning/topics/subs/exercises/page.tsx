@@ -56,11 +56,11 @@ const Page = () => {
 
                 <div className='hidden md:flex md:flex-col border-dashed border-red-50 w-4/12 rounded-xl gap-4'>
 
-                  <div className="bg-green-100 h-4/6 rounded-xl">
+                  <div className=" h-3/6 rounded-xl">
                     <ExcerciseList />
                   </div>
 
-                  <div className="bg-yellow-100 h-2/6 rounded-xl">
+                  <div className=" h-3/6 rounded-xl">
                     <Advertisement />
                   </div>
 
