@@ -11,7 +11,7 @@ interface IProps {
 const Answer = ({ no, answer, handleAttempt }: IProps) => {
 
     return (
-        <Card onClick={() => handleAttempt(answer)} size='small' className='w-full' title={no + 1} hoverable>
+        <Card onClick={() => handleAttempt(answer)} size='small' className='w-full shadow-lg' title={no + 1} hoverable>
             <p>{answer.optionText}</p>
         </Card>
     )
