@@ -45,22 +45,25 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
   const client = await clerkClient()
   const { userId } = await auth();
 
-  if (userId) {
-    const user = await client.users.getUser(userId);
-    if (user) {
-      if (!user.publicMetadata.role)
-        await client.users.updateUserMetadata(userId!, {
-          publicMetadata: {
-            "role": "User",
-          },
-        })
+  try {
+    if (userId) {
+      const user = await client.users.getUser(userId);
+      if (user) {
+        if (!user.publicMetadata.role)
+          await client.users.updateUserMetadata(userId!, {
+            publicMetadata: {
+              "role": "User",
+            },
+          })
+      }
     }
+  } catch {
   }
 
   return (
     <ClerkProvider dynamic localization={viVN}>
       <head>
-        <link rel="icon" href="sm-logo.png" />
+        <link rel="icon" href="../../public/sm-logo.png" />
       </head>
       <html lang="vn">
         <body

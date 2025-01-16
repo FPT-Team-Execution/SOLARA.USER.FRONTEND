@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import banner from "../../../../public/banner.png"
 import CustomButton from "../Button/CustomButton";
 import styles from "./MainBanner.module.css";
 import { LEARNING_SIMULATIONS_ROUTE, LEARNING_TOPICS_ROUTE } from "@/constants/routes";
@@ -9,7 +10,7 @@ export default function Home() {
         <div className={styles.container}>
             {/* Hình ảnh banner */}
             <Image
-                src="/banner.png"
+                src={banner}
                 alt="banner"
                 layout="responsive"
                 width={1962}

@@ -18,8 +18,11 @@ import CompleteResult from './CompleteResult';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRouter } from 'next/navigation';
+import useUserStore from '@/zustand/useUserStore';
 
 const ExcerciseSpace = () => {
+
+    const { getUserLevel } = useUserStore();
 
     const [isAttemptModalOpen, setIsAttemptModalOpen] = useState(false);
     const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
@@ -154,6 +157,10 @@ const ExcerciseSpace = () => {
 
             const appUserId = getCookie('__appUserId');
             const response = await axiosClient.post<IBaseModel<string>>(POST_COMPLETION_SUBTOPIC_API(excercise!.subTopicId), appUserId)
+
+            if (response.data) {
+                await getUserLevel()
+            }
 
             setCompleteResult(response.data);
             setCompleteLoading(false);
