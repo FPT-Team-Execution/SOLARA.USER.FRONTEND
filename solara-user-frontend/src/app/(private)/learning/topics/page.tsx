@@ -113,7 +113,7 @@ const Page = () => {
           </div>
           <div className='w-1/2 space-y-4'>
             <div>
-              <h1 className='text-sm font-semibold text-left'>Hoàng thành</h1>
+              <h1 className='text-sm font-semibold text-left'>Hoàn thành</h1>
             </div>
             <div>
               {
