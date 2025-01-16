@@ -12,7 +12,7 @@ import { useSearchParams } from 'next/navigation';
 const Page = () => {
   const searchParams = useSearchParams();
   const topicId = searchParams.get('topicId');
-  const { subTopics, getSubTopics } = useSubTopicStore();
+  const { subTopics, getSubTopics, getCompletedSubTopics } = useSubTopicStore();
   const { getTopic } = useTopicStore();
 
   const { loading } = useRequest(async () => {
@@ -24,6 +24,7 @@ const Page = () => {
       orderOn: '',
       isAscending: true,
     }
+    await getCompletedSubTopics();
     await getSubTopics(topicId!, query);
     await getTopic(topicId!);
   }, {

@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const SubTopicRoadMap = () => {
 
-    const { subTopic, subTopics, setSubTopic } = useSubTopicStore();
+    const { subTopic, subTopics, setSubTopic, completedSubTopics } = useSubTopicStore();
     const { topic } = useTopicStore();
     const router = useRouter();
 
@@ -18,6 +18,12 @@ const SubTopicRoadMap = () => {
             setSubTopic(subTopics?.items[0])
         }
     })
+
+    const checkSubTopicCompleted = (subTopicId: string): boolean => {
+        return completedSubTopics?.some(
+            (x) => x.subTopic.topicId === topic?.topicId && x.subTopic.id == subTopicId
+        ) ?? false;
+    };
 
     return (
         <div className="bg-gray-100 w-full gap-8 flex flex-col justify-center items-center py-10">
@@ -41,13 +47,20 @@ const SubTopicRoadMap = () => {
 
                     const even: boolean = index % 2 == 0;
 
+                    const isCompleted = checkSubTopicCompleted(item.id);
+
                     return (
                         <>
-                            <div key={index} className={`flex w-4/6 flex-col   ${even ? "items-start" : "items-end"}`}>
-                                <div onClick={() => setSubTopic(item)} className={`flex rounded-full ${item.id === subTopic?.id ? "bg-green-600" : "bg-slate-200"} ${even ? "pr-2" : "flex-row-reverse pl-2"} gap-2 items-center justify-center cursor-pointer`}>
+                            <div key={index} className={`flex w-4/6 flex-col ${even ? "items-start" : "items-end"}`}>
+                                <div onClick={() => setSubTopic(item)} className={`flex rounded-full ${item.id === subTopic?.id ? "bg-green-600" : "bg-slate-200"} ${even ? "pr-2" : "flex-row-reverse pl-2"} gap-2 items-center justify-center cursor-pointer transition duration-300`}>
                                     <div className="w-20 h-20 bg-green-600 rounded-full border-4 border-green-300 flex items-center justify-center relative">
                                         <span className="text-white text-2xl font-bold">★</span>
-                                        {/* <div className="absolute top-0 right-0 w-3 h-3 bg-green-700 rounded-full animate-ping"></div> */}
+                                        {
+                                            isCompleted ?
+                                                <div className="absolute top-0 right-0 w-3 h-3 bg-green-700 rounded-full animate-ping"></div>
+                                                :
+                                                <div></div>
+                                        }
                                     </div>
                                     <p className={`text-nowrap min-w-16 p-2 ${item.id === subTopic?.id ? "text-white" : "text-black"}`}>{item.name}</p>
                                 </div>

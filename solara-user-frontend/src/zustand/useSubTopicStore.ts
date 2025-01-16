@@ -1,12 +1,16 @@
+import { GET_USER_SUBTOPIC_API } from './../constants/apis';
 import { GET_SUBTOPIC_API, GET_SUBTOPICS_API, POST_SUBTOPIC_API, PUT_SUBTOPIC_API } from '@/constants/apis'
 import { IBaseModel, IPaginate } from '@/interfaces/general'
-import { CreateSubTopicRequest, GetPagedSubTopicRequest, SubTopicDto, UpdateSubTopicRequest } from '@/types/subTopic'
+import { CreateSubTopicRequest, GetPagedSubTopicRequest, SubTopicDto, SubTopicOfUserDto, UpdateSubTopicRequest } from '@/types/subTopic'
 import axiosClient from '@/utils/axios/axiosClient'
+import { getCookie } from 'cookies-next';
 import { create } from 'zustand'
 
 interface SubTopicStore {
     subTopic: SubTopicDto | null
     subTopics: IPaginate<SubTopicDto> | null,
+    completedSubTopics: SubTopicOfUserDto[] | null,
+    getCompletedSubTopics: () => void
     setSubTopic: (subTopic: SubTopicDto) => void,
     getSubTopics: (subTopicId: string, query: GetPagedSubTopicRequest) => Promise<void>
     getSubTopic: (id: string) => Promise<void>
@@ -17,6 +21,21 @@ interface SubTopicStore {
 const useSubTopicStore = create<SubTopicStore>((set) => ({
     subTopic: null,
     subTopics: null,
+    completedSubTopics: null,
+
+    getCompletedSubTopics: async () => {
+        try {
+            const response = await axiosClient.get<IBaseModel<SubTopicOfUserDto[]>>(GET_USER_SUBTOPIC_API(getCookie("__appUserId") as string));
+            if (!response.data.isSuccess) {
+                return
+            }
+            set((state) => ({
+                ...state,
+                completedSubTopics: response.data.responseRequest
+            }))
+        } catch {
+        }
+    },
 
     setSubTopic: (subTopic: SubTopicDto) => {
         set((state) => ({
