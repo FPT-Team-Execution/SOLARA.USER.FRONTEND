@@ -38,7 +38,7 @@ const SubTopicRoadMap = () => {
                     <ArrowLeftIcon className="text-black" />
                 </Button>
                 <div className='flex flex-col items-start'>
-                    <h1 className='text-lg md:text-2xl font-bold'>Chủ đề <span className='text-green-600'>{topic?.topicName}</span></h1>
+                    <h1 className='text-lg text-left md:text-2xl font-bold'>Chủ đề <span className='text-green-600'>{topic?.topicName}</span></h1>
                     <p className='text-gray-600 hidden md:block'>{topic?.description}</p>
                 </div>
             </div>

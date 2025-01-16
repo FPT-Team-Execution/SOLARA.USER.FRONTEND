@@ -20,7 +20,7 @@ const Flashcard = ({ handleFlip, excercise, flip }: IProps) => {
                             <Image src={excercise.imageUrl} alt='' width={500} height={500} className="w-2/6 h-auto object-cover rounded-lg" loading='eager' />
                         } */}
 
-                        <p className="text-lg text-pretty text-center">
+                        <p className="text-sm md:text-lg text-pretty text-center">
                             {excercise?.question}
                         </p>
 
@@ -43,7 +43,7 @@ const Flashcard = ({ handleFlip, excercise, flip }: IProps) => {
                                     <div className='flex flex-col gap-4'>
 
                                         <div>
-                                            <p className="text-lg text-pretty text-center">
+                                            <p className="text-sm md:text-lg text-pretty text-center">
                                                 {excercise?.ans[0].optionText}
                                             </p>
                                         </div>
