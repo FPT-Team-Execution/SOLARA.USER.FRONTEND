@@ -101,7 +101,7 @@ const Page = () => {
                       {
                         completedTopics.map((item, index) => {
                           return (
-                            <TopicCardLite status={TopicOfUserStatusEnum.InProgress} buttonTitle='Học tiếp' key={index} userTopic={item} />
+                            <TopicCardLite status={TopicOfUserStatusEnum.InProgress} key={index} userTopic={item} />
                           )
                         })
                       }
@@ -128,7 +128,7 @@ const Page = () => {
                       {
                         inProgressTopics.map((item, index) => {
                           return (
-                            <TopicCardLite status={TopicOfUserStatusEnum.Completed} buttonTitle='Ôn lại' key={index} userTopic={item} />
+                            <TopicCardLite status={TopicOfUserStatusEnum.Completed} key={index} userTopic={item} />
                           )
                         })
                       }
