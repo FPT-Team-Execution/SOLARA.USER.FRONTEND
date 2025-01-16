@@ -60,7 +60,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
   return (
     <ClerkProvider dynamic localization={viVN}>
       <head>
-        <link rel="icon" href="sm-logo.png" />
+        <link rel="icon" href="../../public/sm-logo.png" />
       </head>
       <html lang="vn">
         <body
