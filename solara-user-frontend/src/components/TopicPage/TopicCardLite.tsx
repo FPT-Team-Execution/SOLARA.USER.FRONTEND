@@ -45,7 +45,7 @@ const TopicCardLite = ({ userTopic, status }: IProps) => {
         <Link
             href={`${LEARNING_TOPICS_SUBS_ROUTE}?topicId=${userTopic.topicId}`}
         >
-            <div className="relative max-w-sm p-2 flex items-center gap-2 bg-white border shadow rounded-xl hover:shadow-lg transition-shadow duration-300">
+            <div className="relative max-w-sm p-2 flex items-center gap-2 bg-white border shadow rounded-lg hover:shadow-lg transition-shadow duration-300">
 
                 <h5 className="text-left pl-2 font-medium tracking-tight text-gray-900">
                     {userTopic.topicName}

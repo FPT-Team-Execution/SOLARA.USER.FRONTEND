@@ -96,7 +96,7 @@ const Page = () => {
                     <LoadingBar />
                   </div>
                   :
-                  completedTopics ?
+                  completedTopics && completedTopics.length > 0 ?
                     <div className='flex items-start flex-wrap gap-4'>
                       {
                         completedTopics.map((item, index) => {
@@ -123,7 +123,7 @@ const Page = () => {
                     <LoadingBar />
                   </div>
                   :
-                  inProgressTopics ?
+                  inProgressTopics && inProgressTopics.length > 0 ?
                     <div className='flex items-start flex-wrap gap-4'>
                       {
                         inProgressTopics.map((item, index) => {
