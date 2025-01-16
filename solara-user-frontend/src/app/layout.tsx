@@ -45,16 +45,19 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
   const client = await clerkClient()
   const { userId } = await auth();
 
-  if (userId) {
-    const user = await client.users.getUser(userId);
-    if (user) {
-      if (!user.publicMetadata.role)
-        await client.users.updateUserMetadata(userId!, {
-          publicMetadata: {
-            "role": "User",
-          },
-        })
+  try {
+    if (userId) {
+      const user = await client.users.getUser(userId);
+      if (user) {
+        if (!user.publicMetadata.role)
+          await client.users.updateUserMetadata(userId!, {
+            publicMetadata: {
+              "role": "User",
+            },
+          })
+      }
     }
+  } catch {
   }
 
   return (

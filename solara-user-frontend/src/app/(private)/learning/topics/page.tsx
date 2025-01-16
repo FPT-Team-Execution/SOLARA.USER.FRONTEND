@@ -90,33 +90,6 @@ const Page = () => {
             </div>
             <div>
               {
-                getCompletedLoading
-                  ?
-                  <div className='flex justify-center items-center'>
-                    <LoadingBar />
-                  </div>
-                  :
-                  completedTopics && completedTopics.length > 0 ?
-                    <div className='flex items-start flex-wrap gap-4'>
-                      {
-                        completedTopics.map((item, index) => {
-                          return (
-                            <TopicCardLite status={TopicOfUserStatusEnum.InProgress} key={index} userTopic={item} />
-                          )
-                        })
-                      }
-                    </div>
-                    :
-                    <span>Bạn vẫn chưa hoàn thành bài học nào!</span>
-              }
-            </div>
-          </div>
-          <div className='w-1/2 space-y-4'>
-            <div>
-              <h1 className='text-sm font-semibold text-left'>Hoàn thành</h1>
-            </div>
-            <div>
-              {
                 getInProgressLoading
                   ?
                   <div className='flex justify-center items-center'>
@@ -128,13 +101,40 @@ const Page = () => {
                       {
                         inProgressTopics.map((item, index) => {
                           return (
-                            <TopicCardLite status={TopicOfUserStatusEnum.Completed} key={index} userTopic={item} />
+                            <TopicCardLite status={TopicOfUserStatusEnum.InProgress} key={index} userTopic={item} />
                           )
                         })
                       }
                     </div>
                     :
                     <span>Bạn vẫn chưa học bài học nào!</span>
+              }
+            </div>
+          </div>
+          <div className='w-1/2 space-y-4'>
+            <div>
+              <h1 className='text-sm font-semibold text-left'>Hoàng thành</h1>
+            </div>
+            <div>
+              {
+                getCompletedLoading
+                  ?
+                  <div className='flex justify-center items-center'>
+                    <LoadingBar />
+                  </div>
+                  :
+                  completedTopics && completedTopics.length > 0 ?
+                    <div className='flex items-start flex-wrap gap-4'>
+                      {
+                        completedTopics.map((item, index) => {
+                          return (
+                            <TopicCardLite status={TopicOfUserStatusEnum.Completed} key={index} userTopic={item} />
+                          )
+                        })
+                      }
+                    </div>
+                    :
+                    <span>Bạn vẫn chưa hoàn thành bài học nào!</span>
               }
             </div>
           </div>

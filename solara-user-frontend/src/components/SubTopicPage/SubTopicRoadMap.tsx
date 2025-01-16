@@ -1,11 +1,13 @@
 import useSubTopicStore from '@/zustand/useSubTopicStore'
 import { useRequest } from 'ahooks';
 // import { FaRegFlag } from 'react-icons/fa';
+import sun from '../../../public/sun.png'
 import RoadMap from './RoadMap';
 import useTopicStore from '@/zustand/useTopicStore';
 import { Button } from 'antd';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const SubTopicRoadMap = () => {
 
@@ -21,7 +23,7 @@ const SubTopicRoadMap = () => {
 
     const checkSubTopicCompleted = (subTopicId: string): boolean => {
         return completedSubTopics?.some(
-            (x) => x.subTopic.topicId === topic?.topicId && x.subTopic.id == subTopicId
+            (x) => x.subTopic.topicId == topic?.topicId && x.subTopic.id == subTopicId
         ) ?? false;
     };
 
@@ -54,12 +56,12 @@ const SubTopicRoadMap = () => {
                             <div key={index} className={`flex w-4/6 flex-col ${even ? "items-start" : "items-end"}`}>
                                 <div onClick={() => setSubTopic(item)} className={` shadow flex rounded-full ${item.id === subTopic?.id ? "bg-green-600 shadow-lg" : "bg-slate-200"} ${even ? "pr-2" : "flex-row-reverse pl-2"} gap-2 items-center justify-center cursor-pointer transition duration-300`}>
                                     <div className="w-20 h-20 bg-green-600 rounded-full border-4 border-green-300 flex items-center justify-center relative">
-                                        <span className="text-white text-2xl font-bold">★</span>
+                                        <span className={`text-2xl font-bold ${item.id === subTopic?.id ? "text-yellow-300" : "text-white"}`}>★</span>
                                         {
-                                            isCompleted ?
-                                                <div className="absolute top-0 right-0 w-3 h-3 bg-green-700 rounded-full animate-ping"></div>
-                                                :
-                                                <div></div>
+                                            isCompleted &&
+                                            <div className={`${item.id === subTopic?.id && "animate-bounce"} absolute ${even ? "top-[-20px] right-[-20px]" : "top-[-20px] left-[-20px]"} `}>
+                                                <Image src={sun} alt='' width={50} />
+                                            </div>
                                         }
                                     </div>
                                     <p className={`text-nowrap min-w-16 p-2 ${item.id === subTopic?.id ? "text-white" : "text-black"}`}>{item.name}</p>
