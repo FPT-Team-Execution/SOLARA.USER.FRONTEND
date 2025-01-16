@@ -9,7 +9,6 @@ import AppHeader from "@/components/layout/AppHeader";
 import AutoAuthen from "@/components/layout/AutoAuthen";
 import { viVN } from '@clerk/localizations'
 import { auth, clerkClient } from "@clerk/nextjs/server";
-import Head from "next/head";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,11 +33,23 @@ const layoutStyle = {
 };
 
 export const metadata: Metadata = {
-  title: "Home - Solara",
-  description: "Learning survival course application",
-  icons: {
-    icon: './',
+  title: 'Solara - Kỹ Năng Sinh Tồn',
+  description: 'Khám phá các kỹ năng sinh tồn cơ bản, từ cách tạo lửa đến tìm kiếm nước sạch.',
+  keywords: 'kỹ năng sinh tồn, năng lượng mặt trời, tạo lửa, tìm nước, sống sót, kỹ năng sống',
+  authors: { name: "Solara" },
+  openGraph: {
+    title: 'Solara - Kỹ Năng Sinh Tồn',
+    description: 'Học các kỹ năng sinh tồn thiết yếu để xử lí khi gặp tình huống khẩn cấp.',
+    images: [
+      {
+        url: 'https://solara.io.vn/_next/image?url=%2Flogo.png&w=256&q=75',
+        width: 256,
+        height: 256,
+      },
+    ],
+    url: 'https://solara.io.vn/',
   },
+  robots: 'index, follow',
 };
 
 export default async function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
@@ -63,17 +74,9 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
 
   return (
     <ClerkProvider dynamic localization={viVN}>
-      <Head>
-        <title>Solara - Kĩ năng sinh tồn</title>
-        <meta name="description" content="Khám phá các kỹ năng sinh tồn cơ bản, từ cách tạo lửa đến tìm kiếm nước sạch." />
-        <meta name="keywords" content="kỹ năng sinh tồn, năng lượng mặt trời, tạo lửa, tìm nước, sống sót, kỹ năng sống" />
-        <meta name="author" content="Solara Team" />
-        <meta property="og:title" content="Solara - Kỹ Năng Sinh Tồn" />
-        <meta property="og:description" content="Học các kỹ năng sinh tồn thiết yếu để xử lí khi gặp tình huống khẩn cấp." />
-        <meta property="og:image" content="https://solara.io.vn/_next/image?url=%2Flogo.png&w=256&q=75" />
-        <meta property="og:url" content="https://solara.io.vn/" />
-        <meta name="robots" content="index, follow" />
-      </Head>
+      <head>
+        <link rel="icon" href="../../public/sm-logo.png" />
+      </head>
       <html lang="vn">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
