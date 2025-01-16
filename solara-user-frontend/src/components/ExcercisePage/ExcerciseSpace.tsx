@@ -216,7 +216,7 @@ const ExcerciseSpace = () => {
                     <ArrowLeftIcon className="text-black" />
                 </Button>
                 <div className='flex flex-col items-start'>
-                    <h1 className='text-2xl font-bold'><span className='text-green-600'>{subTopic?.name}</span></h1>
+                    <h1 className='text-lg md:text-2xl font-bold text-left'><span className='text-green-600'>{subTopic?.name}</span></h1>
                 </div>
             </div>
 
