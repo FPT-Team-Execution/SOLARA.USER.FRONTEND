@@ -52,7 +52,7 @@ const SubTopicRoadMap = () => {
                     return (
                         <>
                             <div key={index} className={`flex w-4/6 flex-col ${even ? "items-start" : "items-end"}`}>
-                                <div onClick={() => setSubTopic(item)} className={`flex rounded-full ${item.id === subTopic?.id ? "bg-green-600" : "bg-slate-200"} ${even ? "pr-2" : "flex-row-reverse pl-2"} gap-2 items-center justify-center cursor-pointer transition duration-300`}>
+                                <div onClick={() => setSubTopic(item)} className={` shadow flex rounded-full ${item.id === subTopic?.id ? "bg-green-600 shadow-lg" : "bg-slate-200"} ${even ? "pr-2" : "flex-row-reverse pl-2"} gap-2 items-center justify-center cursor-pointer transition duration-300`}>
                                     <div className="w-20 h-20 bg-green-600 rounded-full border-4 border-green-300 flex items-center justify-center relative">
                                         <span className="text-white text-2xl font-bold">★</span>
                                         {
