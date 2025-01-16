@@ -38,8 +38,8 @@ const SubTopicRoadMap = () => {
                     <ArrowLeftIcon className="text-black" />
                 </Button>
                 <div className='flex flex-col items-start'>
-                    <h1 className='text-2xl font-bold'>Chủ đề <span className='text-green-600'>{topic?.topicName}</span></h1>
-                    <p className='text-gray-600'>{topic?.description}</p>
+                    <h1 className='text-lg md:text-2xl font-bold'>Chủ đề <span className='text-green-600'>{topic?.topicName}</span></h1>
+                    <p className='text-gray-600 hidden md:block'>{topic?.description}</p>
                 </div>
             </div>
 
@@ -54,8 +54,8 @@ const SubTopicRoadMap = () => {
                     return (
                         <>
                             <div key={index} className={`flex w-4/6 flex-col ${even ? "items-start" : "items-end"}`}>
-                                <div onClick={() => setSubTopic(item)} className={` shadow flex rounded-full ${item.id === subTopic?.id ? "bg-green-600 shadow-lg" : "bg-slate-200"} ${even ? "pr-2" : "flex-row-reverse pl-2"} gap-2 items-center justify-center cursor-pointer transition duration-300`}>
-                                    <div className="w-20 h-20 bg-green-600 rounded-full border-4 border-green-300 flex items-center justify-center relative">
+                                <div onClick={() => setSubTopic(item)} className={` shadow flex rounded-full ${item.id === subTopic?.id ? "bg-green-600 shadow-lg" : "bg-slate-200"} ${even ? "md:pr-2" : "flex-row-reverse md:pl-2"} gap-2 items-center justify-center cursor-pointer transition duration-300`}>
+                                    <div className="min-w-20 min-h-20 bg-green-600 rounded-full border-4 border-green-300 flex items-center justify-center relative">
                                         <span className={`text-2xl font-bold ${item.id === subTopic?.id ? "text-yellow-300" : "text-white"}`}>★</span>
                                         {
                                             isCompleted &&
@@ -64,7 +64,7 @@ const SubTopicRoadMap = () => {
                                             </div>
                                         }
                                     </div>
-                                    <p className={`text-nowrap min-w-16 p-2 ${item.id === subTopic?.id ? "text-white" : "text-black"}`}>{item.name}</p>
+                                    <p className={`min-w-16 hidden md:block p-2 ${item.id === subTopic?.id ? "text-white" : "text-black"}`}>{item.name}</p>
                                 </div>
                             </div>
 

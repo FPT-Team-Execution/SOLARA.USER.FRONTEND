@@ -15,12 +15,10 @@ const Flashcard = ({ handleFlip, excercise, flip }: IProps) => {
                 <div className="absolute inset-0 h-full w-full rounded-xl [backface-visibility:hidden]">
                     <div className="flex min-h-full flex-col items-center justify-center gap-2">
 
-                        <h2 className="text-2xl font-bold">Câu hỏi:</h2>
-
-                        {
+                        {/* {
                             excercise.imageUrl &&
                             <Image src={excercise.imageUrl} alt='' width={500} height={500} className="w-2/6 h-auto object-cover rounded-lg" loading='eager' />
-                        }
+                        } */}
 
                         <p className="text-lg text-pretty text-center">
                             {excercise?.question}
@@ -33,19 +31,23 @@ const Flashcard = ({ handleFlip, excercise, flip }: IProps) => {
                     <div className="flex min-h-full flex-col items-center justify-center">
 
                         {
+                            excercise.imageUrl &&
+                            <Image src={excercise.imageUrl} alt='' width={500} height={500} className="w-2/6 h-auto object-cover rounded-lg" loading='eager' />
+                        }
+                        {
                             excercise?.ans[0] === undefined
                                 ?
                                 'Chưa có câu trả lời'
                                 :
                                 (
                                     <div className='flex flex-col gap-4'>
+
                                         <div>
-                                            <h2 className="text-2xl font-bold mb-2">Trả lời:</h2>
                                             <p className="text-lg text-pretty text-center">
                                                 {excercise?.ans[0].optionText}
                                             </p>
                                         </div>
-                                        {
+                                        {/* {
                                             excercise?.ans[0].explanation === undefined
                                                 ?
                                                 <></>
@@ -57,7 +59,7 @@ const Flashcard = ({ handleFlip, excercise, flip }: IProps) => {
                                                         </p>
                                                     </div>
                                                 )
-                                        }
+                                        } */}
                                     </div>
                                 )
                         }
