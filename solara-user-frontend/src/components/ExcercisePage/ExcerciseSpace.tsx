@@ -85,7 +85,6 @@ const ExcerciseSpace = () => {
         setFlip((prev) => !prev);
 
         if (attempted) {
-            console.log("Attempt already submitted, skipping API call.");
             return;
         }
 
@@ -94,13 +93,11 @@ const ExcerciseSpace = () => {
             const answerId = excercise?.ans?.[0]?.id;
 
             if (!exerciseId || !answerId) {
-                console.error("Exercise ID or Answer ID is missing");
                 return;
             }
 
             const userId = getCookie('__appUserId') as string;
             if (!userId) {
-                console.error("User ID is missing");
                 return;
             }
 
@@ -109,15 +106,13 @@ const ExcerciseSpace = () => {
                 userId,
             };
 
-            const response = await axiosClient.post<IBaseModel<AttemptResponse[]>>(
+            await axiosClient.post<IBaseModel<AttemptResponse[]>>(
                 POST_ATTEMPT_EXCERCISE_API(exerciseId),
                 request
             );
 
-            console.log("Attempt submitted successfully:", response.data);
             setAttempted(true);
-        } catch (error) {
-            console.error("Error submitting attempt:", error);
+        } catch {
         }
     };
 
@@ -164,8 +159,7 @@ const ExcerciseSpace = () => {
 
             setCompleteResult(response.data);
             setCompleteLoading(false);
-        } catch (error) {
-            console.log('Error completing sub topic', error);
+        } catch {
         }
     }
 

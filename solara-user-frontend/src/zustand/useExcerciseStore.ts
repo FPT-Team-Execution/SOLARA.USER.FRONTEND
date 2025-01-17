@@ -37,8 +37,7 @@ const useExcerciseStore = create<ExcerciseStore>((set) => ({
                 excercise: response.data.responseRequest
             }))
 
-        } catch (error) {
-            console.log('Error fetching excercise', error)
+        } catch {
         }
 
     },
@@ -56,8 +55,7 @@ const useExcerciseStore = create<ExcerciseStore>((set) => ({
                 excercises: response.data.responseRequest
             }))
 
-        } catch (error) {
-            console.log('Error fetching excercises', error)
+        } catch {
         }
     },
 

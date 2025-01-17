@@ -58,8 +58,8 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
                 subTopics: response.data.responseRequest
             }))
 
-        } catch (error) {
-            console.log('Error fetching sub topics', error)
+        } catch {
+
         }
     },
 
@@ -76,8 +76,7 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
                 subTopic: response.data.responseRequest
             }))
 
-        } catch (error) {
-            console.log('Error fetching sub topic', error)
+        } catch {
         }
     },
 
@@ -111,8 +110,7 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
                 })
             }
 
-        } catch (error) {
-            console.log('Error creating sub topic', error)
+        } catch {
         }
     },
 
@@ -151,8 +149,7 @@ const useSubTopicStore = create<SubTopicStore>((set) => ({
 
             })
 
-        } catch (error) {
-            console.log('Error updating sub topic', error)
+        } catch {
         }
     },
 
