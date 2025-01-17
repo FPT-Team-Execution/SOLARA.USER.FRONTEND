@@ -17,10 +17,12 @@ import AnswerResult from './AnswerResult';
 import CompleteResult from './CompleteResult';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import useSubTopicStore from '@/zustand/useSubTopicStore';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import useUserStore from '@/zustand/useUserStore';
 
 const ExcerciseSpace = () => {
+
+    const searchParams = useSearchParams();
 
     const { getUserLevel } = useUserStore();
 
@@ -59,13 +61,20 @@ const ExcerciseSpace = () => {
     const [no, setNo] = useState<number>(0);
     const [progress, setProgress] = useState<number>(0);
     const { excercises } = useExcerciseStore();
-    const { subTopic } = useSubTopicStore();
+    const { subTopic, getSubTopic } = useSubTopicStore();
     const router = useRouter();
 
     const { } = useRequest(async () => {
 
         if (!excercises || !excercises.items || !excercises.items[no]) {
             return;
+        }
+
+        if (!subTopic) {
+            const subTopicId = searchParams.get('subTopicId');
+            if (subTopicId) {
+                await getSubTopic(subTopicId)
+            }
         }
 
         setExcercise(excercises.items[no])
