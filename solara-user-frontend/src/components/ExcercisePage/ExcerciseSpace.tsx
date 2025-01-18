@@ -17,10 +17,12 @@ import AnswerResult from './AnswerResult';
 import CompleteResult from './CompleteResult';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import useSubTopicStore from '@/zustand/useSubTopicStore';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import useUserStore from '@/zustand/useUserStore';
 
 const ExcerciseSpace = () => {
+
+    const searchParams = useSearchParams();
 
     const { getUserLevel } = useUserStore();
 
@@ -59,13 +61,20 @@ const ExcerciseSpace = () => {
     const [no, setNo] = useState<number>(0);
     const [progress, setProgress] = useState<number>(0);
     const { excercises } = useExcerciseStore();
-    const { subTopic } = useSubTopicStore();
+    const { subTopic, getSubTopic } = useSubTopicStore();
     const router = useRouter();
 
     const { } = useRequest(async () => {
 
         if (!excercises || !excercises.items || !excercises.items[no]) {
             return;
+        }
+
+        if (!subTopic) {
+            const subTopicId = searchParams.get('subTopicId');
+            if (subTopicId) {
+                await getSubTopic(subTopicId)
+            }
         }
 
         setExcercise(excercises.items[no])
@@ -85,7 +94,6 @@ const ExcerciseSpace = () => {
         setFlip((prev) => !prev);
 
         if (attempted) {
-            console.log("Attempt already submitted, skipping API call.");
             return;
         }
 
@@ -94,13 +102,11 @@ const ExcerciseSpace = () => {
             const answerId = excercise?.ans?.[0]?.id;
 
             if (!exerciseId || !answerId) {
-                console.error("Exercise ID or Answer ID is missing");
                 return;
             }
 
             const userId = getCookie('__appUserId') as string;
             if (!userId) {
-                console.error("User ID is missing");
                 return;
             }
 
@@ -109,15 +115,13 @@ const ExcerciseSpace = () => {
                 userId,
             };
 
-            const response = await axiosClient.post<IBaseModel<AttemptResponse[]>>(
+            await axiosClient.post<IBaseModel<AttemptResponse[]>>(
                 POST_ATTEMPT_EXCERCISE_API(exerciseId),
                 request
             );
 
-            console.log("Attempt submitted successfully:", response.data);
             setAttempted(true);
-        } catch (error) {
-            console.error("Error submitting attempt:", error);
+        } catch {
         }
     };
 
@@ -164,8 +168,7 @@ const ExcerciseSpace = () => {
 
             setCompleteResult(response.data);
             setCompleteLoading(false);
-        } catch (error) {
-            console.log('Error completing sub topic', error);
+        } catch {
         }
     }
 

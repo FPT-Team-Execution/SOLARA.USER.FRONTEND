@@ -57,8 +57,7 @@ const useTopicStore = create<TopicStore>((set) => ({
                 topics: response.data.responseRequest,
             }));
 
-        } catch (error) {
-            console.log('Error fetching topics', error);
+        } catch {
         }
     },
 
@@ -77,8 +76,7 @@ const useTopicStore = create<TopicStore>((set) => ({
                 topic: response.data.responseRequest,
             }));
 
-        } catch (error) {
-            console.log('Error fetching topic', error);
+        } catch {
         }
     },
 
@@ -117,8 +115,7 @@ const useTopicStore = create<TopicStore>((set) => ({
                 });
             }
 
-        } catch (error) {
-            console.log('Error creating topic', error);
+        } catch {
         }
     },
 
@@ -154,8 +151,7 @@ const useTopicStore = create<TopicStore>((set) => ({
                 };
             });
 
-        } catch (error) {
-            console.log('Error updating topic', error);
+        } catch  {
         }
     },
 
@@ -191,8 +187,7 @@ const useTopicStore = create<TopicStore>((set) => ({
                 };
             });
 
-        } catch (error) {
-            console.log('Error deleting topic', error);
+        } catch {
         }
     },
 

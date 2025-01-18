@@ -11,6 +11,10 @@ const SituationChoice = ({ excercise, handleAttempt }: IProps) => {
         <div className='flex w-full h-5/6 flex-col justify-center items-center gap-8'>
             <div>
                 <h2 className="text-2xl font-bold">Câu hỏi:</h2>
+                {
+                    excercise.videoUrl &&
+                    <iframe className="mx-auto" width="560" height="315" src="https://www.youtube.com/embed/21yibkpE0iI?si=Or3_jcuDY1pYsSik" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                }
                 <p className="text-lg text-pretty text-center">
                     {excercise?.question}
                 </p>
