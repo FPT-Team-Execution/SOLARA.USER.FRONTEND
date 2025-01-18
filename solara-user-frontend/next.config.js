@@ -4,7 +4,24 @@ const config = {
   distDir: 'build',
   output: 'standalone',
   images: {
-    domains: ['psszjkdspnyifyjbmyau.supabase.co', 'bcp.cdnchinhphu.vn', 'images2.thanhnien.vn', 'toongadventure.vn'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'psszjkdspnyifyjbmyau.supabase.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'bcp.cdnchinhphu.vn',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images2.thanhnien.vn',
+      },
+      {
+        protocol: 'https',
+        hostname: 'toongadventure.vn',
+      },
+    ],
   },
 };
 
