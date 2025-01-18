@@ -9,6 +9,7 @@ import { CheckOutInfo, CheckOutRequest } from '@/types/payment'
 import axiosClient from '@/utils/axios/axiosClient'
 import { useUser } from '@clerk/nextjs'
 import { useRequest } from 'ahooks'
+import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 // import { Modal } from 'antd'
@@ -62,18 +63,25 @@ const Page = () => {
   const handleGetPaymentLink = async (packageId: string) => {
     try {
       const currentOrigin = window.location.origin;
+
       setIsCreatingLink(true);
+
       // exit();
+
+      const userEmail = user?.emailAddresses?.[0]?.toString() || getCookie('_appUserId');
+      const userFullName = user?.fullName || "";
+      
       const checkOutRequest: CheckOutRequest = {
         canceledReturnUrl: `${currentOrigin}/learning/packages/payment`,
         isCreateInvoice: false,
         packageId: packageId,
         successReturnUrl: `${currentOrigin}/learning/packages/payment`,
         buyerAddress: "Vietnam",
-        buyerEmail: user!.emailAddresses[0].toString()!,
-        buyerName: user!.fullName!,
+        buyerEmail: userEmail,
+        buyerName: userFullName,
         buyerPhone: "",
-      }
+      };
+      
       const response = await axiosClient.post<IBaseModel<CheckOutInfo>>(POST_PAYMENT_CHECKOUT_API, checkOutRequest);
 
       router.push(response.data.responseRequest!.checkOutUrl!);
@@ -87,7 +95,7 @@ const Page = () => {
       // setIsOpen(true);
       // setIsCreatingLink(false);
 
-    } catch {
+    } catch  {
       setIsCreatingLink(false);
     }
   };
