@@ -1,7 +1,7 @@
 import { AnswerDto, AttemptResponse, CreateUserAttemptRequest, ExcerciseDto } from '@/types/excercise';
 import useExcerciseStore from '@/zustand/useExcerciseStore'
 import { useRequest } from 'ahooks';
-import { Button, Modal, Progress } from 'antd';
+import { Button, Modal, notification, Progress } from 'antd';
 import { useState } from 'react'
 import { MdOutlineDone } from 'react-icons/md';
 import Flashcard from './Flashcard';
@@ -19,6 +19,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useUserStore from '@/zustand/useUserStore';
+import { LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE } from '@/constants/routes';
 
 const ExcerciseSpace = () => {
 
@@ -61,7 +62,7 @@ const ExcerciseSpace = () => {
     const [no, setNo] = useState<number>(0);
     const [progress, setProgress] = useState<number>(0);
     const { excercises } = useExcerciseStore();
-    const { subTopic, getSubTopic } = useSubTopicStore();
+    const { subTopic, getSubTopic, subTopics } = useSubTopicStore();
     const router = useRouter();
 
     const { } = useRequest(async () => {
@@ -70,11 +71,9 @@ const ExcerciseSpace = () => {
             return;
         }
 
-        if (!subTopic) {
-            const subTopicId = searchParams.get('subTopicId');
-            if (subTopicId) {
-                await getSubTopic(subTopicId)
-            }
+        const subTopicId = searchParams.get('subTopicId');
+        if (subTopicId) {
+            await getSubTopic(subTopicId)
         }
 
         setExcercise(excercises.items[no])
@@ -86,7 +85,7 @@ const ExcerciseSpace = () => {
             setIsComplete(false);
         }
     }, {
-        refreshDeps: [no]
+        refreshDeps: [no, excercises]
     });
 
     const handleFlip = async () => {
@@ -201,11 +200,35 @@ const ExcerciseSpace = () => {
         }
     };
 
+    const handleRestart = () => {
+        if (completeResult?.isSuccess) {
+            setNo(0);
+        }
+        setAttempted(false);
+        setIsCompleteModalOpen(false);
+    }
+
+    const handleNextLesson = () => {
+        if (subTopics) {
+            const index = subTopics?.items.findIndex(x => x.id == subTopic?.id)
+            if (index === -1 || index === subTopics?.items.length - 1) {
+                notification.info({
+                    message: 'Bài không có'
+                })
+                return null;
+            }
+            const nextSubTopic = subTopics?.items[index + 1];
+            router.replace(`${LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE}?subTopicId=${nextSubTopic?.id}`);
+        } else{
+            router.back();
+        }
+    }
+
     return (
 
         <div className='flex w-full h-full flex-col gap-4'>
-            <Modal closable={false} loading={completeLoading} centered title="Kết quả" okText={completeResult?.isSuccess ? 'Ôn lại' : 'Học tiếp'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isCompleteModalOpen} onOk={handleCompleteModalOk}>
-                <CompleteResult completeResult={completeResult!} />
+            <Modal closable={false} loading={completeLoading} centered okText={completeResult?.isSuccess ? 'Ôn lại' : 'Học tiếp'} okButtonProps={{ style: { backgroundColor: 'green', display: 'none' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isCompleteModalOpen} onOk={handleCompleteModalOk}>
+                <CompleteResult handleNextLesson={handleNextLesson} handleRestart={handleRestart} completeResult={completeResult!} />
             </Modal>
             <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isAttemptModalOpen} onOk={handleAttemptModalOk}>
                 <AnswerResult attemptResult={attemptResult} />
@@ -214,7 +237,7 @@ const ExcerciseSpace = () => {
             <div className="flex w-5/6 gap-4 rounded-lg text-black items-center">
                 <Button
                     onClick={() => router.back()}
-                    className="!w-12 !h-12 flex items-center justify-center !bg-yellow-300 !text-white !rounded-lg"
+                    className="!w-12 hover:!border-green-600 !h-12 flex items-center justify-center !bg-yellow-300 !text-white !rounded-lg"
                 >
                     <ArrowLeftIcon className="text-black" />
                 </Button>
@@ -247,9 +270,9 @@ const ExcerciseSpace = () => {
                     <Progress percent={progress} percentPosition={{ align: 'center', type: 'inner' }} strokeColor="green" showInfo={false} style={{ width: '100%' }} />
                 </div>
                 <div className='flex w-full gap-4'>
-                    <Button className='!w-5/12 !h-14 !rounded-lg' onClick={navigatePrev}>Trở về</Button>
-                    <Button onClick={handleComplete} disabled={!isComplete} className='!w-2/12 !h-14 !rounded-lg' icon={<MdOutlineDone />}></Button>
-                    <Button className='!w-5/12 !h-14 !rounded-lg' onClick={navigateNext}>Kế tiếp</Button>
+                    <Button className='!w-5/12 hover:!border-green-600 hover:!text-green-600 !h-14 !rounded-lg' onClick={navigatePrev}>Trở về</Button>
+                    <Button onClick={handleComplete} disabled={!isComplete} className='!w-2/12 hover:!border-green-600 hover:!text-green-600 !h-14 !rounded-lg' icon={<MdOutlineDone />}></Button>
+                    <Button className='!w-5/12 hover:!border-green-600 hover:!text-green-600 !h-14 !rounded-lg' onClick={navigateNext}>Kế tiếp</Button>
                 </div>
             </div>
         </div>

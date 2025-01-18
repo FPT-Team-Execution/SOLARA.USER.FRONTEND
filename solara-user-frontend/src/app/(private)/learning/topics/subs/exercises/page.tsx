@@ -13,11 +13,11 @@ import { useSearchParams } from "next/navigation";
 const Page = () => {
 
   const searchParams = useSearchParams();
-  const subTopicId = searchParams.get('subTopicId');
 
   const { excercises, getExcercises } = useExcerciseStore();
 
   const { loading } = useRequest(async () => {
+    const subTopicId = searchParams.get('subTopicId');
     const query: GetPagedExcercisesRequest = {
       searchProp: '',
       exerciseTypeId: '',
@@ -28,6 +28,8 @@ const Page = () => {
       isAscending: true,
     }
     await getExcercises(subTopicId!, query);
+  }, {
+    refreshDeps: [searchParams]
   })
 
   return (
@@ -49,7 +51,7 @@ const Page = () => {
             :
             (
               <>
-                
+
                 <div className="md:w-8/12 max-h-full scroll-smooth overflow-hidden">
                   <ExcerciseSpace />
                 </div>
