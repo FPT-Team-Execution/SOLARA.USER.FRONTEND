@@ -10,7 +10,7 @@ interface IProps {
 const UserLevelCard = ({ levelIcon, levelTitle, levelValue }: IProps) => {
     return (
         <div className='flex items-center justify-center px-2 gap-2'>
-            <div className='text-black'>
+            <div className=''>
                 {levelValue}
             </div>
             <div className='w-6'>

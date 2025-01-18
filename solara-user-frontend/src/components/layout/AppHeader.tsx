@@ -12,10 +12,11 @@ import {
 } from '@heroicons/react/24/outline'
 import HeaderButton from '../ui/HeaderButton'
 import Link from 'next/link'
-import { useAuth, UserButton } from '@clerk/nextjs'
+import { useAuth, UserButton, useUser } from '@clerk/nextjs'
 import { HOME_ROUTE, LEARNING_TOPICS_ROUTE, MARKET_ROUTE, SIGNIN_ROUTE } from '@/constants/routes'
 import Image from 'next/image'
 import LearningProgress from './LearningProgress'
+import UserLevelSpace from './UserLevelSpace'
 
 // const learnings = [
 //   { name: 'Flashcard', description: 'Get a better understanding of your traffic', href: '/learning/flashcard', icon: ChartPieIcon },
@@ -30,6 +31,7 @@ const AppHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const { isSignedIn } = useAuth();
+  const { user } = useUser();
 
   return (
     <header className="bg-white">
@@ -221,7 +223,17 @@ const AppHeader = () => {
                 {
                   isSignedIn ?
                     (
-                      <UserButton />
+                      <div className='flex items-center justify-center flex-col gap-8'>
+                        <div className='flex flex-col items-center'>
+                          <UserButton appearance={{
+                            elements: {
+                              userButtonAvatarBox: "w-24 h-24",
+                            },
+                          }} />
+                          <h1 className='text-2xl font-semibold text-black'>{user?.fullName}</h1>
+                        </div>
+                        <UserLevelSpace />
+                      </div>
                     )
                     :
                     (
