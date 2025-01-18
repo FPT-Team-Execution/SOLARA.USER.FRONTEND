@@ -76,7 +76,7 @@ const SubTopicRoadMap = () => {
                                     :
                                     (
                                         <>
-                                            <div className='w-1/2'>
+                                            <div key={index} className='w-1/2'>
                                                 <RoadMap even={even}></RoadMap>
                                             </div>
                                         </>

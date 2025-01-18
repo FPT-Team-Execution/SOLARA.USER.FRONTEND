@@ -1,7 +1,7 @@
 import { AnswerDto, AttemptResponse, CreateUserAttemptRequest, ExcerciseDto } from '@/types/excercise';
 import useExcerciseStore from '@/zustand/useExcerciseStore'
 import { useRequest } from 'ahooks';
-import { Button, Modal, notification, Progress } from 'antd';
+import { Button, Modal, Progress } from 'antd';
 import { useState } from 'react'
 import { MdOutlineDone } from 'react-icons/md';
 import Flashcard from './Flashcard';
@@ -212,10 +212,7 @@ const ExcerciseSpace = () => {
         if (subTopics) {
             const index = subTopics?.items.findIndex(x => x.id == subTopic?.id)
             if (index === -1 || index === subTopics?.items.length - 1) {
-                notification.info({
-                    message: 'Bài không có'
-                })
-                return null;
+                router.back();
             }
             const nextSubTopic = subTopics?.items[index + 1];
             router.replace(`${LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE}?subTopicId=${nextSubTopic?.id}`);
