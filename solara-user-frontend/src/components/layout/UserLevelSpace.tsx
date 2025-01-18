@@ -44,7 +44,7 @@ const UserLevelSpace = () => {
                             <div className="w-full bg-gray-300 rounded-full h-2.5 relative">
                                 <div
                                     className="bg-yellow-400 h-2.5 rounded-full"
-                                    style={{ width: `${userLevel!.currentXp / userLevel!.thresholdXp * 100}` }}
+                                    style={{ width: `${userLevel!.currentXp / userLevel!.thresholdXp * 100}%` }}
                                 ></div>
                             </div>
                             <div className="mt-2 text-xs text-gray-600">
