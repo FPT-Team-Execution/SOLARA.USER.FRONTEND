@@ -221,7 +221,10 @@ const AppHeader = () => {
                 {
                   isSignedIn ?
                     (
-                      <UserButton />
+                      <div className='flex items-center justify-center flex-col gap-4'>
+                        <UserButton />
+                        <LearningProgress />
+                      </div>
                     )
                     :
                     (
