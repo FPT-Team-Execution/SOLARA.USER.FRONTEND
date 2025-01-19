@@ -225,6 +225,8 @@ const ExcerciseSpace = () => {
             setNo(0);
         }
         setAttempted(false);
+        setIsComplete(false);
+        setAttemptedExercises([]);
         setIsCompleteModalOpen(false);
     }
 
