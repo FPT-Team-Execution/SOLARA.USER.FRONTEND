@@ -122,7 +122,7 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
       </div>
 
       <Layout>
-        <Content className="bg-white mb-[68px] ml-2 md:ml-0 my-2 md:my-4 mr-2 md:mr-4 rounded-2xl p-4">
+        <Content className="bg-white mb-[70px] ml-2 md:ml-0 my-2 md:my-4 mr-2 md:mr-4 rounded-2xl p-4">
           {children}
         </Content>
       </Layout>
