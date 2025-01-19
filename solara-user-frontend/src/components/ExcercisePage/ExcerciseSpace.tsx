@@ -54,6 +54,7 @@ const ExcerciseSpace = () => {
     const [completeLoading, setCompleteLoading] = useState<boolean>(false);
     const [attemptLoading, setAttemptLoading] = useState<boolean>(false);
     const [attempted, setAttempted] = useState(false);
+    const [attemptedExercises, setAttemptedExercises] = useState<string[]>([]);
     const [excercise, setExcercise] = useState<ExcerciseDto>();
     const [isComplete, setIsComplete] = useState<boolean>(false);
     const [attemptResult, setAttemptResult] = useState<AttemptResponse>();
@@ -79,11 +80,6 @@ const ExcerciseSpace = () => {
         setExcercise(excercises.items[no])
         calculateProgress();
 
-        if (no === excercises.total - 1) {
-            setIsComplete(true);
-        } else {
-            setIsComplete(false);
-        }
     }, {
         refreshDeps: [no, excercises]
     });
@@ -120,6 +116,18 @@ const ExcerciseSpace = () => {
             );
 
             setAttempted(true);
+
+            if (!attemptedExercises.includes(excercise!.id)) {
+                setAttemptedExercises((prev) => [...prev, excercise!.id]);
+            }
+
+            if (
+                excercises?.items &&
+                excercises.items.every((item) => attemptedExercises.includes(item.id) || item.id === excercise!.id)
+            ) {
+                setIsComplete(true);
+            }
+
         } catch {
         }
     };
@@ -186,9 +194,21 @@ const ExcerciseSpace = () => {
             );
 
             if (response.data?.responseRequest && response.data.responseRequest.length > 0) {
+
                 const result = response.data.responseRequest[0];
 
                 setAttemptResult(result);
+
+                if (!attemptedExercises.includes(excercise!.id)) {
+                    setAttemptedExercises((prev) => [...prev, excercise!.id]);
+                }
+
+                if (
+                    excercises?.items &&
+                    excercises.items.every((item) => attemptedExercises.includes(item.id) || item.id === excercise!.id)
+                ) {
+                    setIsComplete(true);
+                }
 
             } else {
                 console.warn('responseRequest is empty or undefined');
@@ -216,7 +236,7 @@ const ExcerciseSpace = () => {
             }
             const nextSubTopic = subTopics?.items[index + 1];
             router.replace(`${LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE}?subTopicId=${nextSubTopic?.id}`);
-        } else{
+        } else {
             router.back();
         }
     }
@@ -268,8 +288,8 @@ const ExcerciseSpace = () => {
                 </div>
                 <div className='flex w-full gap-4'>
                     <Button className='!w-5/12 hover:!border-green-600 hover:!text-green-600 !h-14 !rounded-lg' onClick={navigatePrev}>Trở về</Button>
-                    <Button onClick={handleComplete} disabled={!isComplete} className='!w-2/12 hover:!border-green-600 hover:!text-green-600 !h-14 !rounded-lg' icon={<MdOutlineDone />}></Button>
-                    <Button className='!w-5/12 hover:!border-green-600 hover:!text-green-600 !h-14 !rounded-lg' onClick={navigateNext}>Kế tiếp</Button>
+                    <Button onClick={handleComplete} disabled={!isComplete} className={`!w-2/12 hover:!border-green-600 hover:!text-green-600 !h-14 !rounded-lg ${isComplete && 'hover:!text-white animate-bounce !bg-green-600 !text-white'}`} icon={<MdOutlineDone />}></Button>
+                    <Button disabled={!attempted} className='!w-5/12 hover:!border-green-600 hover:!text-green-600 !h-14 !rounded-lg' onClick={navigateNext}>Kế tiếp</Button>
                 </div>
             </div>
         </div>
