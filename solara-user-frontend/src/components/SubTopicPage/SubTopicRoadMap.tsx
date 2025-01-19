@@ -4,10 +4,11 @@ import { useRequest } from 'ahooks';
 import sun from '../../../public/sun.png'
 import RoadMap from './RoadMap';
 import useTopicStore from '@/zustand/useTopicStore';
-import { Button } from 'antd';
+import { Button, Popover } from 'antd';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import SubTopicDetail from './SubTopicDetail';
 
 const SubTopicRoadMap = () => {
 
@@ -33,7 +34,7 @@ const SubTopicRoadMap = () => {
             <div className="flex w-5/6 gap-4 rounded-lg text-black items-center">
                 <Button
                     onClick={() => router.back()}
-                    className="!w-12 !h-12 flex items-center justify-center !bg-yellow-300 !text-white !rounded-lg"
+                    className="!w-12 hover:!border-green-600 !h-12 flex items-center justify-center !bg-yellow-300 !text-white !rounded-lg"
                 >
                     <ArrowLeftIcon className="text-black" />
                 </Button>
@@ -53,21 +54,22 @@ const SubTopicRoadMap = () => {
 
                     return (
                         <>
-                            <div key={index} className={`flex w-4/6 flex-col ${even ? "items-start" : "items-end"}`}>
-                                <div onClick={() => setSubTopic(item)} className={` shadow flex rounded-full ${item.id === subTopic?.id ? "bg-green-600 shadow-lg" : "bg-slate-200"} ${even ? "md:pr-2" : "flex-row-reverse md:pl-2"} gap-2 items-center justify-center cursor-pointer transition duration-300`}>
-                                    <div className="min-w-20 min-h-20 bg-green-600 rounded-full border-4 border-green-300 flex items-center justify-center relative">
-                                        <span className={`text-2xl font-bold ${item.id === subTopic?.id ? "text-yellow-300" : "text-white"}`}>★</span>
-                                        {
-                                            isCompleted &&
-                                            <div className={`${item.id === subTopic?.id && "animate-bounce"} absolute ${even ? "top-[-20px] right-[-20px]" : "top-[-20px] left-[-20px]"} `}>
-                                                <Image src={sun} alt='' width={50} />
-                                            </div>
-                                        }
+                            <Popover key={index} content={(<SubTopicDetail></SubTopicDetail>)} trigger="click">
+                                <div className={`flex w-4/6 flex-col ${even ? "items-start" : "items-end"}`}>
+                                    <div onClick={() => setSubTopic(item)} className={` shadow flex rounded-full ${item.id === subTopic?.id ? "bg-green-600 shadow-lg" : "bg-slate-200"} ${even ? "md:pr-2" : "flex-row-reverse md:pl-2"} gap-2 items-center justify-center cursor-pointer transition duration-300`}>
+                                        <div className="min-w-20 min-h-20 bg-green-600 rounded-full border-4 border-green-300 flex items-center justify-center relative">
+                                            <span className={`text-2xl font-bold ${item.id === subTopic?.id ? "text-yellow-300" : "text-white"}`}>★</span>
+                                            {
+                                                isCompleted &&
+                                                <div className={`${item.id === subTopic?.id && "animate-bounce"} absolute ${even ? "top-[-20px] right-[-20px]" : "top-[-20px] left-[-20px]"} `}>
+                                                    <Image src={sun} alt='' width={50} />
+                                                </div>
+                                            }
+                                        </div>
+                                        <p className={`min-w-16 hidden md:block p-2 ${item.id === subTopic?.id ? "text-white" : "text-black"}`}>{item.name}</p>
                                     </div>
-                                    <p className={`min-w-16 hidden md:block p-2 ${item.id === subTopic?.id ? "text-white" : "text-black"}`}>{item.name}</p>
                                 </div>
-                            </div>
-
+                            </Popover>
                             {
                                 index === subTopics.items.length - 1 ?
                                     (
@@ -76,7 +78,7 @@ const SubTopicRoadMap = () => {
                                     :
                                     (
                                         <>
-                                            <div className='w-1/2'>
+                                            <div key={index} className='w-1/2'>
                                                 <RoadMap even={even}></RoadMap>
                                             </div>
                                         </>

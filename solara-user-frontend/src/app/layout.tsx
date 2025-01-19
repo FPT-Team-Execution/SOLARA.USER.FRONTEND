@@ -34,6 +34,9 @@ const layoutStyle = {
 
 export const metadata: Metadata = {
   title: 'Solara - Kỹ Năng Sinh Tồn',
+  icons: {
+    icon: './',
+  },
   description: 'Khám phá các kỹ năng sinh tồn cơ bản, từ cách tạo lửa đến tìm kiếm nước sạch.',
   keywords: 'kỹ năng sinh tồn, năng lượng mặt trời, tạo lửa, tìm nước, sống sót, kỹ năng sống',
   authors: { name: "Solara" },
@@ -74,9 +77,6 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
 
   return (
     <ClerkProvider dynamic localization={viVN}>
-      <head>
-        <link rel="icon" href="../../public/sm-logo.png" />
-      </head>
       <html lang="vn">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}

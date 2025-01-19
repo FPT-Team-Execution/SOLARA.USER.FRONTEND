@@ -15,7 +15,7 @@ const SubTopicDetail = () => {
     }
 
     return (
-        <div>
+        <>
             <div className="bg-gray-100 p-4 rounded-lg shadow">
                 <h2 className="text-2xl font-bold mb-2">{subTopic?.name}</h2>
                 <p className="text-gray-700 text-sm">{subTopic?.description}</p>
@@ -37,7 +37,7 @@ const SubTopicDetail = () => {
                 </div>
 
             </div>
-        </div>
+        </>
     )
 }
 
