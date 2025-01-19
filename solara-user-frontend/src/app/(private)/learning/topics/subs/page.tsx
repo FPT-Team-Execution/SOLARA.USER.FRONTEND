@@ -1,5 +1,6 @@
 "use client";
 
+import UserLevelSpace from '@/components/layout/UserLevelSpace';
 import SubTopicDetail from '@/components/SubTopicPage/SubTopicDetail';
 import SubTopicRoadMap from '@/components/SubTopicPage/SubTopicRoadMap';
 import Spinner from '@/components/ui/Spinner';
@@ -56,9 +57,10 @@ const Page = () => {
 
                 </div>
 
-                <div className='w-full md:w-4/12 flex flex-col border-dashed border-red-50 rounded-xl mt-4 md:mt-0'>
+                <div className='hidden gap-4 md:flex w-full md:w-4/12 flex-col border-dashed border-red-50 rounded-xl mt-4 md:mt-0'>
 
                   <SubTopicDetail />
+                  <UserLevelSpace />
 
                 </div>
               </>
