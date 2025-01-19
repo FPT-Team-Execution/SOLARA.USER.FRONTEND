@@ -172,6 +172,7 @@ const AppHeader = () => {
                 <HeaderButton
                   pathIndex={1}
                   href={HOME_ROUTE}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
                 >
                   Trang Chủ
@@ -201,6 +202,7 @@ const AppHeader = () => {
                 </Disclosure> */}
 
                 <HeaderButton
+                  onClick={() => setMobileMenuOpen(false)}
                   pathIndex={1}
                   isMultiPath
                   href={LEARNING_TOPICS_ROUTE}
@@ -210,6 +212,7 @@ const AppHeader = () => {
                 </HeaderButton>
 
                 <HeaderButton
+                  onClick={() => setMobileMenuOpen(false)}
                   pathIndex={1}
                   href={MARKET_ROUTE}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/6 font-semibold text-gray-900"
@@ -239,6 +242,7 @@ const AppHeader = () => {
                     (
 
                       <HeaderButton
+                        onClick={() => setMobileMenuOpen(false)}
                         pathIndex={1}
                         href={SIGNIN_ROUTE}
                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
