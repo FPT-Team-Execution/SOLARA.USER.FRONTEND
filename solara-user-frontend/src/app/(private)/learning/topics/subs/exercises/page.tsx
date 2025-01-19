@@ -52,7 +52,7 @@ const Page = () => {
             (
               <>
 
-                <div className="md:w-8/12 max-h-full scroll-smooth overflow-hidden">
+                <div className="w-full md:w-8/12 max-h-full scroll-smooth overflow-hidden">
                   <ExcerciseSpace />
                 </div>
 
