@@ -16,7 +16,7 @@ export interface DisasterRisk {
 const EventPredictionDisplay = ({ data }: { data: DisasterRisk[] }) => {
 
     return (
-        <div className="p-6 bg-gray-100">
+        <div className="p-6 border rounded-lg shadow">
             <List
                 itemLayout="vertical"
                 size="large"

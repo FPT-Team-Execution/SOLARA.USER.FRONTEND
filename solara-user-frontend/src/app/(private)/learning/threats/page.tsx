@@ -10,11 +10,11 @@ const Page = () => {
   const [data, setData] = useState<DisasterRisk[]>([]);
 
   return (
-    <div className="flex w-full h-full">
+    <div className="flex flex-col md:flex-row w-full h-full">
       <div className="w-full md:w-2/6">
         <InputEventForm setData={setData} />
       </div>
-      <div className="md:w-4/6 h-full">
+      <div className="w-full md:w-4/6 h-full">
         <EventPredictionDisplay data={data} />
       </div>
     </div>
