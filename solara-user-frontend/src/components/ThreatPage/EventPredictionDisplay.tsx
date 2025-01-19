@@ -16,14 +16,14 @@ export interface DisasterRisk {
 const EventPredictionDisplay = ({ data }: { data: DisasterRisk[] }) => {
 
     return (
-        <div className="p-6 border rounded-lg shadow">
+        <div className="p-6">
             <List
                 itemLayout="vertical"
                 size="large"
                 dataSource={data}
                 renderItem={(item) => (
                     <List.Item key={item.location}>
-                        <Card title={item.location} bordered={false}>
+                        <Card title={item.location} hoverable className="shadow-lg" bordered={true}>
                             <div>
                                 <p>
                                     <strong>Nhiệt độ:</strong> {item.weather.temperature}

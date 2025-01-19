@@ -6,6 +6,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { LuDelete } from "react-icons/lu";
 import { DisasterRisk } from "./EventPredictionDisplay";
 import { IBaseModel } from "@/interfaces/general";
+import { MdAddCircleOutline, MdBatchPrediction } from "react-icons/md";
 
 interface Event {
     time: string;
@@ -24,8 +25,13 @@ const InputEventForm = ({ setData }: IProps) => {
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
     const [editingEvent, setEditingEvent] = useState<Event>({ time: "", location: "" });
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+    const [predictionLoading, setPredictionLoading] = useState<boolean>(false);
 
     const handleAddEvent = () => {
+        if (inputEvents.length >= 10){
+            message.error("Bạn chỉ được phép nhập tối đa 10 sự kiện!");
+            return
+        }
         if (time && location) {
             setInputEvents([...inputEvents, { time, location }]);
             setTime("");
@@ -57,11 +63,18 @@ const InputEventForm = ({ setData }: IProps) => {
 
     const handleSubmit = async () => {
         try {
+            
+            if (inputEvents.length <= 0) {
+                message.error("Chưa có sự kiện nào được lên lịch!");
+                return
+            }
+            setPredictionLoading(true);
             const payload = { inputEvents, minPrediction };
             const response = await axiosClient.post<IBaseModel<DisasterRisk[]>>("/issue-prediction", payload);
             console.log("Response:", response.data);
             message.success("Gửi thành công!");
             setData(response.data.responseRequest!)
+            setPredictionLoading(false);
         } catch (error) {
             console.error("Lỗi khi gửi dữ liệu:", error);
             message.error("Đã xảy ra lỗi khi gửi dữ liệu!");
@@ -91,7 +104,7 @@ const InputEventForm = ({ setData }: IProps) => {
                 </Form.Item>
 
 
-                <Button type="primary" onClick={handleAddEvent} className="mb-4">
+                <Button icon={<MdAddCircleOutline />} type="default" onClick={handleAddEvent} className="mb-4 hover:!text-green-600 hover:!border-green-600">
                     Thêm sự kiện
                 </Button>
             </div>
@@ -162,11 +175,14 @@ const InputEventForm = ({ setData }: IProps) => {
             </Form.Item>
 
             <Button
+                loading={predictionLoading}
+                icon={<MdBatchPrediction />}
+                className="!bg-green-600"
                 type="primary"
                 onClick={handleSubmit}
                 style={{ marginTop: "20px" }}
             >
-                Gửi API
+                Dự đoán
             </Button>
         </div>
     );
