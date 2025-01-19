@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ComponentProps } from 'react';
 
 interface SidebarButtonProps extends ComponentProps<typeof Link> {
-    children: React.ReactNode; // Văn bản hoặc phần tử con
+    children?: React.ReactNode; // Văn bản hoặc phần tử con
     icon?: React.ReactNode; // Icon tùy chọn
     isMultiPath?: boolean; // Kiểm tra nhiều đường dẫn
     pathIndex: number;
