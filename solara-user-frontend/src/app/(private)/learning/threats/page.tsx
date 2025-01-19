@@ -2,7 +2,6 @@
 
 import EventPredictionDisplay, { DisasterRisk } from "@/components/ThreatPage/EventPredictionDisplay"
 import InputEventForm from "@/components/ThreatPage/InputEventForm"
-import CommingSoon from "@/components/ui/CommingSoon"
 import { useState } from "react"
 
 const Page = () => {

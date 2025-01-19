@@ -1,5 +1,4 @@
-import React from "react";
-import { Card, List, Collapse, Tag, message } from "antd";
+import { Card, List, Collapse, Tag } from "antd";
 
 export interface Weather {
     temperature: string;
@@ -21,8 +20,8 @@ const EventPredictionDisplay = ({ data }: { data: DisasterRisk[] }) => {
                 itemLayout="vertical"
                 size="large"
                 dataSource={data}
-                renderItem={(item) => (
-                    <List.Item key={item.location}>
+                renderItem={(item, index) => (
+                    <List.Item key={index}>
                         <Card title={item.location} hoverable className="shadow-lg" bordered={true}>
                             <div>
                                 <p>

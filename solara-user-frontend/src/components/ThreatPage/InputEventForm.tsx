@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Input, Button, List, Form, message, Modal } from "antd";
 import axiosClient from "@/utils/axios/axiosClient";
-import { CiEdit } from "react-icons/ci";
 import { AiOutlineEdit } from "react-icons/ai";
 import { LuDelete } from "react-icons/lu";
 import { DisasterRisk } from "./EventPredictionDisplay";
@@ -28,7 +27,7 @@ const InputEventForm = ({ setData }: IProps) => {
     const [predictionLoading, setPredictionLoading] = useState<boolean>(false);
 
     const handleAddEvent = () => {
-        if (inputEvents.length >= 10){
+        if (inputEvents.length >= 10) {
             message.error("Bạn chỉ được phép nhập tối đa 10 sự kiện!");
             return
         }
@@ -63,7 +62,7 @@ const InputEventForm = ({ setData }: IProps) => {
 
     const handleSubmit = async () => {
         try {
-            
+
             if (inputEvents.length <= 0) {
                 message.error("Chưa có sự kiện nào được lên lịch!");
                 return
@@ -116,14 +115,17 @@ const InputEventForm = ({ setData }: IProps) => {
                     dataSource={inputEvents}
                     renderItem={(event, index) => (
                         <List.Item
+                            key={index}
                             actions={[
                                 <Button
+                                    key={index}
                                     type="link"
                                     onClick={() => handleEditEvent(index)}
                                     icon={<AiOutlineEdit />}
                                 >
                                 </Button>,
                                 <Button
+                                    key={index}
                                     icon={<LuDelete />}
                                     type="link"
                                     onClick={() => handleDeleteEvent(index)}
@@ -131,7 +133,7 @@ const InputEventForm = ({ setData }: IProps) => {
                                 </Button>,
                             ]}
                         >
-                            <div className="md:w-full">
+                            <div key={index} className="md:w-full">
                                 {event.time} - {event.location}
                             </div>
                         </List.Item>
