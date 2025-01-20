@@ -71,7 +71,7 @@ const InputEventForm = ({ setData }: IProps) => {
             const payload = { inputEvents, minPrediction };
             const response = await axiosClient.post<IBaseModel<DisasterRisk[]>>("/issue-prediction", payload);
             console.log("Response:", response.data);
-            message.success("Gửi thành công!");
+            message.success("Dự đoán thành công!");
             setData(response.data.responseRequest!)
             setPredictionLoading(false);
         } catch (error) {
