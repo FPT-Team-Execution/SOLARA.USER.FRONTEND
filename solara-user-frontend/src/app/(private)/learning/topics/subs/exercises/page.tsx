@@ -62,7 +62,7 @@ const Page = () => {
                     <ExcerciseList />
                   </div>
 
-                  <div className=" h-3/6 rounded-xl">
+                  <div className="hidden h-3/6 rounded-xl">
                     <Advertisement />
                   </div>
 

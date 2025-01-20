@@ -1,16 +1,28 @@
 import { LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE } from '@/constants/routes';
 import useSubTopicStore from '@/zustand/useSubTopicStore'
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import { useRouter } from 'next/navigation'
 import { AiTwotoneExperiment } from 'react-icons/ai';
+import { IoLockClosed } from 'react-icons/io5';
 import { TbCards } from 'react-icons/tb';
 import { VscDebugStart } from 'react-icons/vsc';
 
-const SubTopicDetail = () => {
+interface IProps {
+    isLocked?: boolean;
+}
+
+const SubTopicDetail = ({ isLocked }: IProps) => {
     const { subTopic } = useSubTopicStore();
     const router = useRouter();
 
     const handleNavigate = (): void => {
+        if (isLocked) {
+            notification.warning({
+                message: 'Bài học bị khóa',
+                description: 'Vui lòng hoàn thành bài học trước để tiếp tục.',
+            });
+            return;
+        }
         router.push(`${LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE}?subTopicId=${subTopic?.id}`)
     }
 
@@ -31,8 +43,8 @@ const SubTopicDetail = () => {
                         </div>
                     </div>
 
-                    <div>
-                        <Button icon={<VscDebugStart />} onClick={handleNavigate} className='w-full !py-6 !font-bold !text-lg !bg-green-600 !text-white'>Học Ngay</Button>
+                    <div >
+                        <Button icon={!isLocked ? <VscDebugStart /> : <IoLockClosed />} onClick={() => handleNavigate()} className={`w-full !text-lg !font-bold !py-6 ${!isLocked ? '!bg-green-600 !text-white' : 'hover:!border-gray-300 !bg-gray-200 !text-gray-400 !cursor-not-allowed'}`}>{!isLocked ? 'Học Ngay' : 'Khóa'}</Button>
                     </div>
                 </div>
 
