@@ -9,8 +9,8 @@ import { Button, Popover } from 'antd';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import SubTopicDetail from './SubTopicDetail';
 import { SubTopicDto } from '@/types/subTopic';
+import PopoverSubTopic from './PopoverSubTopic';
 
 const SubTopicRoadMap = () => {
 
@@ -113,7 +113,7 @@ const SubTopicRoadMap = () => {
 
                     return (
                         <>
-                            <Popover key={index} content={(<SubTopicDetail isLocked={isLocked}></SubTopicDetail>)} trigger="click">
+                            <Popover key={index} content={(<PopoverSubTopic subTopic={item} isLocked={isLocked}></PopoverSubTopic>)} trigger="click">
                                 <div className={`flex w-4/6 flex-col ${even ? "items-start" : "items-end"}`}>
                                     <div
                                         onClick={() => handleSubTopicClick(item, index)}
