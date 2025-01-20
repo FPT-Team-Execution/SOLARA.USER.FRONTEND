@@ -27,7 +27,7 @@ const PartnerSection = () => {
         </div>
         <div className="flex flex-col items-center">
           <p className="text-partner text-sm md:text-base lg:text-lg leading-relaxed italic text-[#1C3A1F]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Solara kết nối bạn với những thương hiệu uy tín trong lĩnh vực dụng cụ sinh tồn. Từ trang thiết bị dã ngoại đến công cụ đa năng, chúng tôi cùng đối tác mang đến sản phẩm chất lượng, sẵn sàng đồng hành cùng bạn chinh phục thiên nhiên.
           </p>
           <Link href={MARKET_ROUTE} legacyBehavior>
             <a>
@@ -59,8 +59,8 @@ const PartnerSection = () => {
         ))}
         {/* <VectorSpecialFeaturesBg className="fixed custom-vector-bg"></VectorSpecialFeaturesBg> */}
       </div>
-      
-      
+
+
 
 
     </div>
