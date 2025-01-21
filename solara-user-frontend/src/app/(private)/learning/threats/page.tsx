@@ -1,12 +1,13 @@
 "use client"
 
-import EventPredictionDisplay, { DisasterRisk } from "@/components/ThreatPage/EventPredictionDisplay"
+import EventPredictionDisplay from "@/components/ThreatPage/EventPredictionDisplay"
 import InputEventForm from "@/components/ThreatPage/InputEventForm"
+import { LocationPrediction } from "@/types/prediction"
 import { useState } from "react"
 
 const Page = () => {
 
-  const [data, setData] = useState<DisasterRisk[]>([]);
+  const [data, setData] = useState<LocationPrediction[]>([]);
 
   return (
     <div className="flex flex-col md:flex-row w-full h-full">
