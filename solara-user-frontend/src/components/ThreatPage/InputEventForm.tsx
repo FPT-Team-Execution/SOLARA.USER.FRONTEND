@@ -1,39 +1,40 @@
 import { useState } from "react";
-import { Input, Button, List, Form, message, Modal } from "antd";
+import { Input, Button, List, Form, message, Modal, DatePicker, Select } from "antd";
 import axiosClient from "@/utils/axios/axiosClient";
 import { AiOutlineEdit } from "react-icons/ai";
 import { LuDelete } from "react-icons/lu";
-import { DisasterRisk } from "./EventPredictionDisplay";
 import { IBaseModel } from "@/interfaces/general";
 import { MdAddCircleOutline, MdBatchPrediction } from "react-icons/md";
+import { LocationPrediction } from "@/types/prediction";
+import dayjs from "dayjs";
 
 interface Event {
-    time: string;
+    time: Date;
     location: string;
 }
 
 interface IProps {
-    setData: (data: DisasterRisk[]) => void
+    setData: (data: LocationPrediction[]) => void;
 }
 
 const InputEventForm = ({ setData }: IProps) => {
     const [inputEvents, setInputEvents] = useState<Event[]>([]);
-    const [time, setTime] = useState<string>("");
+    const [time, setTime] = useState<Date | null>(null);
     const [location, setLocation] = useState<string>("");
     const [minPrediction, setMinPrediction] = useState<number>(1);
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
-    const [editingEvent, setEditingEvent] = useState<Event>({ time: "", location: "" });
+    const [editingEvent, setEditingEvent] = useState<Event>({ time: new Date(), location: "" });
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
     const [predictionLoading, setPredictionLoading] = useState<boolean>(false);
 
     const handleAddEvent = () => {
         if (inputEvents.length >= 10) {
             message.error("Bạn chỉ được phép nhập tối đa 10 sự kiện!");
-            return
+            return;
         }
         if (time && location) {
             setInputEvents([...inputEvents, { time, location }]);
-            setTime("");
+            setTime(null);
             setLocation("");
         } else {
             message.error("Vui lòng nhập đầy đủ thời gian và địa điểm!");
@@ -52,7 +53,7 @@ const InputEventForm = ({ setData }: IProps) => {
         setInputEvents(updatedEvents);
         setIsModalVisible(false);
         setEditingIndex(null);
-        setEditingEvent({ time: "", location: "" });
+        setEditingEvent({ time: new Date(), location: "" });
     };
 
     const handleDeleteEvent = (index: number) => {
@@ -62,19 +63,19 @@ const InputEventForm = ({ setData }: IProps) => {
 
     const handleSubmit = async () => {
         try {
-
             if (inputEvents.length <= 0) {
                 message.error("Chưa có sự kiện nào được lên lịch!");
-                return
+                return;
             }
             setPredictionLoading(true);
             const payload = { inputEvents, minPrediction };
-            const response = await axiosClient.post<IBaseModel<DisasterRisk[]>>("/issue-prediction", payload);
+            const response = await axiosClient.post<IBaseModel<LocationPrediction[]>>("/issue-prediction", payload);
             console.log("Response:", response.data);
             message.success("Dự đoán thành công!");
-            setData(response.data.responseRequest!)
+            setData(response.data.responseRequest!);
             setPredictionLoading(false);
         } catch (error) {
+            setPredictionLoading(false);
             console.error("Lỗi khi gửi dữ liệu:", error);
             message.error("Đã xảy ra lỗi khi gửi dữ liệu!");
         }
@@ -85,7 +86,6 @@ const InputEventForm = ({ setData }: IProps) => {
             <h1 className="text-2xl font-bold mb-4">Nhập Sự Kiện</h1>
 
             <div className="mb-4">
-
                 <Form.Item>
                     <Input
                         value={location}
@@ -95,15 +95,20 @@ const InputEventForm = ({ setData }: IProps) => {
                 </Form.Item>
 
                 <Form.Item>
-                    <Input
-                        value={time}
-                        onChange={(e) => setTime(e.target.value)}
-                        placeholder="Thời gian"
+                    <DatePicker
+                        value={time ? dayjs(time) : null}
+                        onChange={(date) => setTime(date?.toDate() || null)}
+                        placeholder="Chọn thời gian"
+                        style={{ width: "100%" }}
                     />
                 </Form.Item>
 
-
-                <Button icon={<MdAddCircleOutline />} type="default" onClick={handleAddEvent} className="mb-4 hover:!text-green-600 hover:!border-green-600">
+                <Button
+                    icon={<MdAddCircleOutline />}
+                    type="default"
+                    onClick={handleAddEvent}
+                    className="mb-4 hover:!text-green-600 hover:!border-green-600"
+                >
                     Thêm sự kiện
                 </Button>
             </div>
@@ -118,23 +123,23 @@ const InputEventForm = ({ setData }: IProps) => {
                             key={index}
                             actions={[
                                 <Button
+                                    className="!text-green-600"
                                     key={index}
                                     type="link"
                                     onClick={() => handleEditEvent(index)}
                                     icon={<AiOutlineEdit />}
-                                >
-                                </Button>,
+                                ></Button>,
                                 <Button
+                                    className="!text-green-600"
                                     key={index}
                                     icon={<LuDelete />}
                                     type="link"
                                     onClick={() => handleDeleteEvent(index)}
-                                >
-                                </Button>,
+                                ></Button>,
                             ]}
                         >
                             <div key={index} className="md:w-full">
-                                {event.time} - {event.location}
+                                {event.location} - {dayjs(event.time).format("YYYY-MM-DD")}
                             </div>
                         </List.Item>
                     )}
@@ -148,18 +153,25 @@ const InputEventForm = ({ setData }: IProps) => {
                     open={isModalVisible}
                     onCancel={() => setIsModalVisible(false)}
                     onOk={handleSaveEdit}
+                    okButtonProps={{ style: { backgroundColor: 'green' } }}
+                    cancelButtonProps={{ style: { display: 'none' } }}
+                    okText='Xác nhận'
                 >
                     <Form>
-                        <Form.Item label="Thời gian">
-                            <Input
-                                value={editingEvent.time}
-                                onChange={(e) => setEditingEvent({ ...editingEvent, time: e.target.value })}
-                            />
-                        </Form.Item>
                         <Form.Item label="Địa điểm">
                             <Input
                                 value={editingEvent.location}
                                 onChange={(e) => setEditingEvent({ ...editingEvent, location: e.target.value })}
+                            />
+                        </Form.Item>
+                        <Form.Item label="Thời gian">
+                            <DatePicker
+
+                                value={dayjs(editingEvent.time)}
+                                onChange={(date) =>
+                                    setEditingEvent({ ...editingEvent, time: date?.toDate() || new Date() })
+                                }
+                                style={{ width: "100%" }}
                             />
                         </Form.Item>
                     </Form>
@@ -167,13 +179,17 @@ const InputEventForm = ({ setData }: IProps) => {
             )}
 
             <Form.Item label="Số lượng dự đoán tối thiểu">
-                <Input
-                    type="number"
+                <Select
                     value={minPrediction}
-                    onChange={(e) => setMinPrediction(Number(e.target.value))}
-                    min="1"
+                    onChange={(value) => setMinPrediction(value)}
                     style={{ width: 100 }}
-                />
+                >
+                    {[1, 2, 3, 4, 5].map((num) => (
+                        <Select.Option key={num} value={num}>
+                            {num}
+                        </Select.Option>
+                    ))}
+                </Select>
             </Form.Item>
 
             <Button
