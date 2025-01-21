@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Input, Button, List, Form, message, Modal, DatePicker } from "antd";
+import { Input, Button, List, Form, message, Modal, DatePicker, Select } from "antd";
 import axiosClient from "@/utils/axios/axiosClient";
 import { AiOutlineEdit } from "react-icons/ai";
 import { LuDelete } from "react-icons/lu";
@@ -98,7 +98,6 @@ const InputEventForm = ({ setData }: IProps) => {
                     <DatePicker
                         value={time ? dayjs(time) : null}
                         onChange={(date) => setTime(date?.toDate() || null)}
-                        showTime
                         placeholder="Chọn thời gian"
                         style={{ width: "100%" }}
                     />
@@ -124,12 +123,14 @@ const InputEventForm = ({ setData }: IProps) => {
                             key={index}
                             actions={[
                                 <Button
+                                    className="!text-green-600"
                                     key={index}
                                     type="link"
                                     onClick={() => handleEditEvent(index)}
                                     icon={<AiOutlineEdit />}
                                 ></Button>,
                                 <Button
+                                    className="!text-green-600"
                                     key={index}
                                     icon={<LuDelete />}
                                     type="link"
@@ -138,7 +139,7 @@ const InputEventForm = ({ setData }: IProps) => {
                             ]}
                         >
                             <div key={index} className="md:w-full">
-                                {dayjs(event.time).format("YYYY-MM-DD HH:mm")} - {event.location}
+                                {event.location} - {dayjs(event.time).format("YYYY-MM-DD")}
                             </div>
                         </List.Item>
                     )}
@@ -152,22 +153,25 @@ const InputEventForm = ({ setData }: IProps) => {
                     open={isModalVisible}
                     onCancel={() => setIsModalVisible(false)}
                     onOk={handleSaveEdit}
+                    okButtonProps={{ style: { backgroundColor: 'green' } }}
+                    cancelButtonProps={{ style: { display: 'none' } }}
+                    okText='Xác nhận'
                 >
                     <Form>
-                        <Form.Item label="Thời gian">
-                            <DatePicker
-                                value={dayjs(editingEvent.time)}
-                                onChange={(date) =>
-                                    setEditingEvent({ ...editingEvent, time: date?.toDate() || new Date() })
-                                }
-                                showTime
-                                style={{ width: "100%" }}
-                            />
-                        </Form.Item>
                         <Form.Item label="Địa điểm">
                             <Input
                                 value={editingEvent.location}
                                 onChange={(e) => setEditingEvent({ ...editingEvent, location: e.target.value })}
+                            />
+                        </Form.Item>
+                        <Form.Item label="Thời gian">
+                            <DatePicker
+
+                                value={dayjs(editingEvent.time)}
+                                onChange={(date) =>
+                                    setEditingEvent({ ...editingEvent, time: date?.toDate() || new Date() })
+                                }
+                                style={{ width: "100%" }}
                             />
                         </Form.Item>
                     </Form>
@@ -175,13 +179,17 @@ const InputEventForm = ({ setData }: IProps) => {
             )}
 
             <Form.Item label="Số lượng dự đoán tối thiểu">
-                <Input
-                    type="number"
+                <Select
                     value={minPrediction}
-                    onChange={(e) => setMinPrediction(Number(e.target.value))}
-                    min="1"
+                    onChange={(value) => setMinPrediction(value)}
                     style={{ width: 100 }}
-                />
+                >
+                    {[1, 2, 3, 4, 5].map((num) => (
+                        <Select.Option key={num} value={num}>
+                            {num}
+                        </Select.Option>
+                    ))}
+                </Select>
             </Form.Item>
 
             <Button
