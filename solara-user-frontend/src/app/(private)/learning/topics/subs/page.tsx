@@ -57,7 +57,7 @@ const Page = () => {
 
                 </div>
 
-                <div className='hidden gap-4 md:flex w-full md:w-4/12 flex-col border-dashed border-red-50 rounded-xl mt-4 md:mt-0'>
+                <div className='text-left hidden gap-4 md:flex w-full md:w-4/12 flex-col border-dashed border-red-50 rounded-xl mt-4 md:mt-0'>
 
                   <SubTopicDetail />
                   <UserLevelSpace />
