@@ -36,5 +36,5 @@
 }
 
 .responsiveTitle {
-    @apply text-xl md:text-3xl lg:text-5xl;
+    @apply text-sm md:text-3xl lg:text-5xl;
 }
