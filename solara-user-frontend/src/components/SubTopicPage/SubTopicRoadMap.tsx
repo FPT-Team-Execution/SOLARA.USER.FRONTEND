@@ -113,7 +113,7 @@ const SubTopicRoadMap = () => {
 
                     return (
                         <>
-                            <Popover key={index} content={(<PopoverSubTopic subTopic={item} isLocked={isLocked}></PopoverSubTopic>)} trigger="click">
+                            <Popover overlayClassName='md:hidden' key={index} content={(<PopoverSubTopic subTopic={item} isLocked={isLocked}></PopoverSubTopic>)} trigger="click">
                                 <div className={`flex w-4/6 flex-col ${even ? "items-start" : "items-end"}`}>
                                     <div
                                         onClick={() => handleSubTopicClick(item, index)}
