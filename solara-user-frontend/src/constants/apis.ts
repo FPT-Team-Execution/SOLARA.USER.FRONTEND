@@ -15,6 +15,10 @@ export const GET_USER_LEVEL_API = (appUserId: string) => `/users/${appUserId}/le
 export const GET_USER_TOPIC_API = (appUserId: string) => `/users/${appUserId}/topics`;
 export const GET_USER_SUBTOPIC_API = (appUserId: string) => `/users/${appUserId}/sub-topics`;
 
+// UserSubcription
+export const GET_USERS_SUBSCRIPTIONS = `user-subscriptions`;
+export const GET_USER_SUBSCRIPTIONS = (appUserId: string) => `user-subscriptions/${appUserId}`;
+
 // Topic
 export const GET_TOPICS_API = "/topics";
 export const GET_TOPIC_API = (topicId: string) => `/topics/${topicId}`;
