@@ -227,7 +227,7 @@ const AppHeader = () => {
                   isSignedIn ?
                     (
                       <div className='flex items-center justify-center flex-col gap-8'>
-                        <div className='flex flex-col items-center'>
+                        <div className='flex gap-2 flex-col items-center'>
                           <UserButton appearance={{
                             elements: {
                               userButtonAvatarBox: "w-24 h-24",
