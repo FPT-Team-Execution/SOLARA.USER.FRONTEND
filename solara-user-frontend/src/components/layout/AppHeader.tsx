@@ -17,6 +17,7 @@ import { HOME_ROUTE, LEARNING_TOPICS_ROUTE, MARKET_ROUTE, SIGNIN_ROUTE } from '@
 import Image from 'next/image'
 import LearningProgress from './LearningProgress'
 import UserLevelSpace from './UserLevelSpace'
+import UserSubcription from '../ui/UserSubcription'
 
 // const learnings = [
 //   { name: 'Flashcard', description: 'Get a better understanding of your traffic', href: '/learning/flashcard', icon: ChartPieIcon },
@@ -227,7 +228,7 @@ const AppHeader = () => {
                   isSignedIn ?
                     (
                       <div className='flex items-center justify-center flex-col gap-8'>
-                        <div className='flex flex-col items-center'>
+                        <div className='flex gap-2 flex-col items-center'>
                           <UserButton appearance={{
                             elements: {
                               userButtonAvatarBox: "w-24 h-24",
@@ -235,6 +236,7 @@ const AppHeader = () => {
                           }} />
                           <h1 className='text-2xl font-semibold text-black'>{user?.fullName}</h1>
                         </div>
+                        <UserSubcription />
                         <UserLevelSpace />
                       </div>
                     )

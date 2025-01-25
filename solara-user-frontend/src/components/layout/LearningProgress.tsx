@@ -13,12 +13,15 @@ import { UserLevel } from "@/enums/userLevel";
 import { useState } from "react";
 import { Drawer } from "antd";
 import UserLevelSpace from "./UserLevelSpace";
+import { UserButton, useUser } from "@clerk/nextjs";
+import UserSubcription from "../ui/UserSubcription";
 
 const LearningProgress = () => {
 
     const { userLevel, getUserLevel } = useUserStore();
 
     const [open, setOpen] = useState<boolean>(false);
+    const { user } = useUser();
 
     const showDrawer = () => {
         if (!userLevel) {
@@ -50,7 +53,20 @@ const LearningProgress = () => {
             }
             <>
                 <Drawer title="Tiến trình học tập" onClose={onClose} open={open}>
-                    <UserLevelSpace/>
+                    <div className="space-y-4">
+                        <div className="flex gap-2 flex-col items-center justify-center">
+                            <UserButton appearance={{
+                                elements: {
+                                    userButtonAvatarBox: "w-24 h-24",
+                                },
+                            }} />
+                            <h1 className='text-2xl font-semibold text-black'>{user?.fullName}</h1>
+                        </div>
+                        <div>
+                            <UserSubcription />
+                        </div>
+                        <UserLevelSpace />
+                    </div>
                 </Drawer>
             </>
         </>
