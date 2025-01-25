@@ -1,15 +1,18 @@
-import { AUTH_CLERK_API, GET_USER_LEVEL_API } from '@/constants/apis';
-import { IBaseModel } from '@/interfaces/general';
+import { AUTH_CLERK_API, GET_USER_LEVEL_API, GET_USER_SUBSCRIPTIONS } from '@/constants/apis';
+import { IBaseModel, IPaginate } from '@/interfaces/general';
 import axiosClient from '@/utils/axios/axiosClient';
 import { create } from 'zustand';
 import { getCookie, setCookie } from 'cookies-next';
 import { UserLevelDto } from '@/types/userLevel';
+import { GetUserSubscriptionsRequest, UserSubscription } from '@/types/userSubscription';
 
 interface UserStore {
     loading: boolean,
     authenticated: boolean,
     appUserId: string | null,
     userLevel: UserLevelDto | null,
+    userSubcriptions: UserSubscription[] | null,
+    getUserSubsctiptions: () => Promise<void>,
     setAuthenticated: () => Promise<void>,
     getUserLevel: () => Promise<void>,
 }
@@ -19,6 +22,31 @@ const useUserStore = create<UserStore>((set) => ({
     authenticated: false,
     userLevel: null,
     appUserId: null,
+    userSubcriptions: null,
+
+
+    getUserSubsctiptions: async () => {
+        try {
+            const request: GetUserSubscriptionsRequest = {
+                userId: getCookie('__appUserId') as string,
+                searchProp: '',
+                isAscending: true,
+                page: 1,
+                size: 100,
+                orderOn: '',
+                searchKey: ''
+            }
+            const response = await axiosClient.get<IBaseModel<IPaginate<UserSubscription>>>(GET_USER_SUBSCRIPTIONS, { params: request })
+
+            set((state) => ({
+                ...state,
+                userSubcriptions: response.data.responseRequest?.items
+            }));
+
+        } catch {
+
+        }
+    },
 
     setAuthenticated: async () => {
         set((state) => ({

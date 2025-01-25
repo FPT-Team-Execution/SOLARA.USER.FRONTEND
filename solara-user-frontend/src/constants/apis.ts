@@ -16,8 +16,8 @@ export const GET_USER_TOPIC_API = (appUserId: string) => `/users/${appUserId}/to
 export const GET_USER_SUBTOPIC_API = (appUserId: string) => `/users/${appUserId}/sub-topics`;
 
 // UserSubcription
-export const GET_USERS_SUBSCRIPTIONS = `user-subscriptions`;
-export const GET_USER_SUBSCRIPTIONS = (appUserId: string) => `user-subscriptions/${appUserId}`;
+export const GET_USER_SUBSCRIPTIONS = `user-subscriptions`;
+export const GET_USER_SUBSCRIPTION = (id: string) => `user-subscriptions/${id}`;
 
 // Topic
 export const GET_TOPICS_API = "/topics";

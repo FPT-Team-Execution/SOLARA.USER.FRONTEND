@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Drawer } from "antd";
 import UserLevelSpace from "./UserLevelSpace";
 import { UserButton, useUser } from "@clerk/nextjs";
+import UserSubcription from "../ui/UserSubcription";
 
 const LearningProgress = () => {
 
@@ -60,6 +61,9 @@ const LearningProgress = () => {
                                 },
                             }} />
                             <h1 className='text-2xl font-semibold text-black'>{user?.fullName}</h1>
+                        </div>
+                        <div>
+                            <UserSubcription />
                         </div>
                         <UserLevelSpace />
                     </div>
