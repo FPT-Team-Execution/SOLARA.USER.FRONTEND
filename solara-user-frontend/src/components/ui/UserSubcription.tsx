@@ -6,6 +6,7 @@ import clock from '../../../public/clock.png';
 import hourGlass from '../../../public/hourglass.png';
 import { useState } from "react";
 import Image from "next/image";
+import { formatPrice } from "@/utils/price/formatPrice";
 
 const UserSubcription = () => {
     const { userSubcriptions, getUserSubsctiptions } = useUserStore();
@@ -102,15 +103,15 @@ const UserSubcription = () => {
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="font-semibold text-gray-600">Giá:</span>
-                                <span className="text-green-600 font-bold">${userSubcriptions![0].package.price}</span>
+                                <span className="text-green-600 font-bold">{formatPrice(userSubcriptions![0].package.price)}</span>
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="font-semibold text-gray-600">Giá giảm:</span>
-                                <span className="text-red-500 font-bold">${userSubcriptions![0].package.discountPrice}</span>
+                                <span className="text-red-500 font-bold">{formatPrice(userSubcriptions![0].package.discountPrice)}</span>
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="font-semibold text-gray-600">Giá cuối:</span>
-                                <span className="text-blue-600 font-bold">${userSubcriptions![0].package.finalPrice}</span>
+                                <span className="text-blue-600 font-bold">{formatPrice(userSubcriptions![0].package.finalPrice)}</span>
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="font-semibold text-gray-600">Thời gian:</span>
