@@ -49,9 +49,9 @@ const UserSubcription = () => {
                                     <Image src={clock} alt="" width={32} />
                                 </div>
                                 <div>
-                                    <p className="text-gray-500 text-sm">Duration</p>
+                                    <p className="text-gray-500 text-sm">Thời gian</p>
                                     <p className="text-lg font-bold text-gray-800">
-                                        {userSubcriptions![0].package.durationDay} days
+                                        {userSubcriptions![0].package.durationDay} ngày
                                     </p>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@ const UserSubcription = () => {
                                     <Image src={hourGlass} alt="" width={28} />
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-500">Days Left</p>
+                                    <p className="text-sm text-gray-500">Còn lại</p>
                                     <p className="text-gray-800">
                                         {Math.max(
                                             0,
@@ -70,7 +70,7 @@ const UserSubcription = () => {
                                                 (1000 * 60 * 60 * 24)
                                             )
                                         )}{" "}
-                                        days
+                                        ngày
                                     </p>
                                 </div>
                             </div>
@@ -89,41 +89,41 @@ const UserSubcription = () => {
                     >
                         <div className="space-y-4">
                             <div className="flex justify-between items-center">
-                                <span className="font-semibold text-gray-600">Name:</span>
+                                <span className="font-semibold text-gray-600">Tên:</span>
                                 <span className="text-gray-800">{userSubcriptions![0].package.name}</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="font-semibold text-gray-600">Description:</span>
+                                <span className="font-semibold text-gray-600">Mô tả:</span>
                                 <span className="text-gray-800">{userSubcriptions![0].package.description}</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="font-semibold text-gray-600">Features:</span>
+                                <span className="font-semibold text-gray-600">Tính năng:</span>
                                 <span className="text-gray-800">{userSubcriptions![0].package.features}</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="font-semibold text-gray-600">Price:</span>
+                                <span className="font-semibold text-gray-600">Giá:</span>
                                 <span className="text-green-600 font-bold">${userSubcriptions![0].package.price}</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="font-semibold text-gray-600">Discount Price:</span>
+                                <span className="font-semibold text-gray-600">Giá giảm:</span>
                                 <span className="text-red-500 font-bold">${userSubcriptions![0].package.discountPrice}</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="font-semibold text-gray-600">Final Price:</span>
+                                <span className="font-semibold text-gray-600">Giá cuối:</span>
                                 <span className="text-blue-600 font-bold">${userSubcriptions![0].package.finalPrice}</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="font-semibold text-gray-600">Duration:</span>
+                                <span className="font-semibold text-gray-600">Thời gian:</span>
                                 <span className="text-gray-800">{userSubcriptions![0].package.durationDay} days</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="font-semibold text-gray-600">Start Date:</span>
+                                <span className="font-semibold text-gray-600">Bắt đầu:</span>
                                 <span className="text-gray-800">
                                     {new Date(userSubcriptions![0].startDate).toLocaleDateString('vi-VM')}
                                 </span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="font-semibold text-gray-600">End Date:</span>
+                                <span className="font-semibold text-gray-600">Kết thúc:</span>
                                 <span className="text-gray-800">
                                     {new Date(userSubcriptions![0].endDate).toLocaleDateString('vi-VM')}
                                 </span>
