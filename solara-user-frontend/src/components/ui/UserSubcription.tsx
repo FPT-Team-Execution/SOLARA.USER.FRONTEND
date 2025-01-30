@@ -33,7 +33,7 @@ const UserSubcription = () => {
                     <LoadingBar />
                 )
                     :
-                    (userSubcriptions === null || userSubcriptions.length > 0)
+                    (userSubcriptions !== null && userSubcriptions.length > 0)
                     &&
                     (<div className="w-full">
                         <div
