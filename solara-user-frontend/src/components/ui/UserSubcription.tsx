@@ -28,7 +28,7 @@ const UserSubcription = () => {
 
     return (
         <>
-            {loading ? (
+            {loading && userSubcriptions ? (
                 <LoadingBar />
             ) : (
                 <div className="w-full">
