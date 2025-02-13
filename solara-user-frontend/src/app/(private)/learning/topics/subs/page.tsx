@@ -22,7 +22,7 @@ const Page = () => {
       searchKey: '',
       page: 1,
       size: 100,
-      orderOn: '',
+      orderOn: 'createdOn',
       isAscending: true,
     }
     await getCompletedSubTopics();
