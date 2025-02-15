@@ -32,7 +32,7 @@ const Flashcard = ({ handleFlip, excercise, flip }: IProps) => {
 
                         {
                             excercise.imageUrl &&
-                            <Image src={excercise.imageUrl} alt='' width={500} height={500} className="w-full md:w-2/6 h-auto object-cover rounded-lg" loading='eager' />
+                            <Image src={excercise.imageUrl} alt='' width={500} height={500} className="w-full md:w-3/6 h-auto object-cover rounded-lg" loading='eager' />
                         }
                         {
                             excercise?.ans[0] === undefined
