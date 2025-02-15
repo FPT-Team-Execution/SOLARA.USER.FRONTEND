@@ -2,14 +2,14 @@ import { AnswerDto, AttemptResponse, CreateUserAttemptRequest, ExcerciseDto } fr
 import useExcerciseStore from '@/zustand/useExcerciseStore'
 import { useRequest } from 'ahooks';
 import { Button, Modal, Progress } from 'antd';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdOutlineDone } from 'react-icons/md';
 import Flashcard from './Flashcard';
 import { ExcerciseType } from '@/enums/excerciseType';
 import BestChoice from './BestChoice';
 import SituationChoice from './SituationChoice';
 import TrueFalse from './TrueFalse';
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import axiosClient from '@/utils/axios/axiosClient';
 import { IBaseModel } from '@/interfaces/general';
 import { POST_ATTEMPT_EXCERCISE_API, POST_COMPLETION_SUBTOPIC_API } from '@/constants/apis';
@@ -20,6 +20,7 @@ import useSubTopicStore from '@/zustand/useSubTopicStore';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useUserStore from '@/zustand/useUserStore';
 import { LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE } from '@/constants/routes';
+
 
 const ExcerciseSpace = () => {
 
@@ -35,7 +36,7 @@ const ExcerciseSpace = () => {
     };
 
     const handleAttemptModalOk = () => {
-        if(attemptResult?.isCorrect) {
+        if (attemptResult?.isCorrect) {
             navigateNext()
         }
         setIsAttemptModalOpen(false);
@@ -68,6 +69,20 @@ const ExcerciseSpace = () => {
     const { subTopic, getSubTopic, subTopics } = useSubTopicStore();
     const router = useRouter();
 
+    useEffect(() => {
+        const subTopicId = searchParams.get('subTopicId');
+        if (subTopicId) {
+            const remSubNo = getCookie(`rem_sub_${subTopicId}`)?.toString();
+            if (remSubNo) {
+                setNo(Number(remSubNo));
+                for (let index = 0; index <= Number(remSubNo); index++) {
+                    setAttemptedExercises((prev) => [...prev, excercises?.items[index].id ?? ""]);
+                }
+            }
+            getSubTopic(subTopicId);
+        }
+    },[excercises?.items, getSubTopic, searchParams])
+
     const { } = useRequest(async () => {
 
         if (!excercises || !excercises.items || !excercises.items[no]) {
@@ -75,8 +90,9 @@ const ExcerciseSpace = () => {
         }
 
         const subTopicId = searchParams.get('subTopicId');
+
         if (subTopicId) {
-            await getSubTopic(subTopicId)
+            setCookie(`rem_sub_${subTopicId}`, no);
         }
 
         setExcercise(excercises.items[no])
@@ -177,6 +193,7 @@ const ExcerciseSpace = () => {
 
             setCompleteResult(response.data);
             setCompleteLoading(false);
+            setNo(0)
         } catch {
         }
     }
@@ -251,7 +268,7 @@ const ExcerciseSpace = () => {
             <Modal closable={false} loading={completeLoading} centered okText={completeResult?.isSuccess ? 'Ôn lại' : 'Học tiếp'} okButtonProps={{ style: { backgroundColor: 'green', display: 'none' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isCompleteModalOpen} onOk={handleCompleteModalOk}>
                 <CompleteResult handleNextLesson={handleNextLesson} handleRestart={handleRestart} completeResult={completeResult!} />
             </Modal>
-            <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={attemptResult?.isCorrect ? "Tiếp tục" : "Thử lại" } okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isAttemptModalOpen} onOk={handleAttemptModalOk}>
+            <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={attemptResult?.isCorrect ? "Tiếp tục" : "Thử lại"} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isAttemptModalOpen} onOk={handleAttemptModalOk}>
                 <AnswerResult imgUrl={excercise?.imageUrl} attemptResult={attemptResult} />
             </Modal>
 
