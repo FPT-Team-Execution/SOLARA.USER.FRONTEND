@@ -35,7 +35,9 @@ const ExcerciseSpace = () => {
     };
 
     const handleAttemptModalOk = () => {
-        navigateNext()
+        if(attemptResult?.isCorrect) {
+            navigateNext()
+        }
         setIsAttemptModalOpen(false);
     };
 
@@ -249,8 +251,8 @@ const ExcerciseSpace = () => {
             <Modal closable={false} loading={completeLoading} centered okText={completeResult?.isSuccess ? 'Ôn lại' : 'Học tiếp'} okButtonProps={{ style: { backgroundColor: 'green', display: 'none' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isCompleteModalOpen} onOk={handleCompleteModalOk}>
                 <CompleteResult handleNextLesson={handleNextLesson} handleRestart={handleRestart} completeResult={completeResult!} />
             </Modal>
-            <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={'Tiếp tục'} okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isAttemptModalOpen} onOk={handleAttemptModalOk}>
-                <AnswerResult attemptResult={attemptResult} />
+            <Modal closable={false} loading={attemptLoading} centered title="Kết quả" okText={attemptResult?.isCorrect ? "Tiếp tục" : "Thử lại" } okButtonProps={{ style: { backgroundColor: 'green' } }} cancelButtonProps={{ style: { display: 'none' } }} open={isAttemptModalOpen} onOk={handleAttemptModalOk}>
+                <AnswerResult imgUrl={excercise?.imageUrl} attemptResult={attemptResult} />
             </Modal>
 
             <div className="flex w-5/6 gap-4 rounded-lg text-black items-center">
