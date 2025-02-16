@@ -73,7 +73,7 @@ const FeatureGrid = () => {
   ];
 
   return (
-    <div className="bg-[#F7F8F7] py-12 sm:py-16 md:py-20 px-4 relative overflow-hidden">
+    <div id='SpecialFeatures' className="bg-[#F7F8F7] py-12 sm:py-16 md:py-20 px-4 relative overflow-hidden">
       <div className="relative z-10">
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-8 sm:mb-12">

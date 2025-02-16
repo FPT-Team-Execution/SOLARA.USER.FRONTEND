@@ -16,7 +16,7 @@ const PartnerSection = () => {
   ];
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between px-6 py-12 bg-[#F7F8F7] min-h-[500px]">
+    <div id="PartnerSection" className="flex flex-col md:flex-row items-center justify-between px-6 py-12 bg-[#F7F8F7] min-h-[500px]">
       {/* Left Section: Information */}
       <div className="md:w-1/2 mb-8 md:mb-0 flex flex-col justify-center">
         <div className="flex items-center justify-center mb-4 relative">
