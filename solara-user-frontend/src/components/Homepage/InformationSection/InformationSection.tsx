@@ -21,7 +21,7 @@ const InformationSection = () => {
                     <p className="mt-4">Địa chỉ</p>
                     <p className="mt-2 text-sm">Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Hồ Chí Minh, Vietnam</p>
                     <p className="mt-4">Liên lạc</p>
-                    <p className="mt-2 text-sm">012 345 6788</p>
+                    <p className="mt-2 text-sm">085 956 9959</p>
                 </div>
 
                 {/* Tính năng */}
