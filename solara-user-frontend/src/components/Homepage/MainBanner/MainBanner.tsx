@@ -7,7 +7,7 @@ import { LEARNING_SIMULATIONS_ROUTE, LEARNING_TOPICS_ROUTE } from "@/constants/r
 
 export default function Home() {
     return (
-        <div className={styles.container}>
+        <div id="MainBanner" className={styles.container}>
             {/* Hình ảnh banner */}
             <Image
                 src={banner}

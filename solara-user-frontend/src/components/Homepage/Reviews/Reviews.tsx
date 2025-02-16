@@ -33,7 +33,7 @@ const TestimonialSlider = () => {
     setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <div className="bg-white w-full px-4 py-8 sm:py-12 md:py-16 lg:max-w-7xl lg:mx-auto"> {/* Increased max-width for better layout */}
+    <div id="Reviews" className="bg-white w-full px-4 py-8 sm:py-12 md:py-16 lg:max-w-7xl lg:mx-auto"> {/* Increased max-width for better layout */}
       <div className="bg-white relative"> {/* Container for testimonial and navigation */}
         {/* Navigation Buttons */}
         <div className="flex z-10 justify-between absolute top-1/2 -translate-y-1/2 w-full px-4 md:px-8 lg:px-12"> {/* Improved button container */}
