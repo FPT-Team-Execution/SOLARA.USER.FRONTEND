@@ -68,7 +68,14 @@ const InputEventForm = ({ setData }: IProps) => {
                 return;
             }
             setPredictionLoading(true);
-            const payload = { inputEvents, minPrediction };
+
+            // Chuyển đổi time về dạng YYYY-MM-DD
+            const formattedEvents = inputEvents.map(event => ({
+                time: dayjs(event.time).format("YYYY-MM-DD"),
+                location: event.location
+            }));
+
+            const payload = { inputEvents: formattedEvents, minPrediction };
             const response = await axiosClient.post<IBaseModel<LocationPrediction[]>>("/issue-prediction", payload);
             console.log("Response:", response.data);
             message.success("Dự đoán thành công!");
