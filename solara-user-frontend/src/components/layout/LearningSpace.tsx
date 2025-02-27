@@ -51,7 +51,8 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
             {collapsed ? "" : "Chủ Đề"}
           </SidebarButton>
           <SidebarButton
-            pathIndex={1}
+            isMultiPath
+            pathIndex={2}
             className={`h-12 flex ${collapsed == true ? "items-center justify-center" : ""
               } m-2 p-4`}
             icon={<IoExtensionPuzzleOutline />}
@@ -91,7 +92,7 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
             icon={<FiLayers />}
             href={LEARNING_TOPICS_ROUTE}
           >
-            
+
           </SidebarButton>
           <SidebarButton
             pathIndex={1}
@@ -99,7 +100,7 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
             icon={<IoExtensionPuzzleOutline />}
             href={LEARNING_SIMULATIONS_ROUTE}
           >
-          
+
           </SidebarButton>
           <SidebarButton
             pathIndex={1}
@@ -107,7 +108,7 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
             icon={<LuBadgeInfo />}
             href={LEARNING_THREATS_ROUTE}
           >
-            
+
           </SidebarButton>
           <SidebarButton
             isMultiPath
@@ -116,7 +117,7 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
             icon={<GoPackage />}
             href={LEARNING_PACKAGES_ROUTE}
           >
-            
+
           </SidebarButton>
         </div>
       </div>
