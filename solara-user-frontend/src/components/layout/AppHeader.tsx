@@ -18,6 +18,7 @@ import Image from 'next/image'
 import LearningProgress from './LearningProgress'
 import UserLevelSpace from './UserLevelSpace'
 import UserSubcription from '../ui/UserSubcription'
+import UserReferral from '../ui/UserReferral'
 
 // const learnings = [
 //   { name: 'Flashcard', description: 'Get a better understanding of your traffic', href: '/learning/flashcard', icon: ChartPieIcon },
@@ -236,6 +237,7 @@ const AppHeader = () => {
                           }} />
                           <h1 className='text-2xl font-semibold text-black'>{user?.fullName}</h1>
                         </div>
+                        <UserReferral/>
                         <UserSubcription />
                         <UserLevelSpace />
                       </div>
