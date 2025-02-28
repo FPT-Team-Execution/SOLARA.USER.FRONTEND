@@ -6,13 +6,14 @@ import { useRequest } from 'ahooks';
 
 const AutoAuthen = () => {
     const { isSignedIn } = useAuth();
-    const { setAuthenticated, getUserLevel } = useUserStore();
+    const { setAuthenticated, getUserLevel, getUser } = useUserStore();
     const { session } = useSession();
     const { } = useRequest(async () => {
         if (isSignedIn) {
             await session?.touch();
             await setAuthenticated();
             await getUserLevel();
+            await getUser();
         }
     }, {
         refreshDeps: [isSignedIn]

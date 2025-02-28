@@ -12,5 +12,6 @@ export type User = {
     createdOn: string;
     updatedBy: string | null;
     updatedOn: string | null;
+    referralCode: string,
     roleName: string | null;
 }
