@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Tabs, Button, Input, Collapse } from "antd";
 import useUserStore from "@/zustand/useUserStore";
+import axiosClient from "@/utils/axios/axiosClient";
+import { ReferralReferRequest } from "@/types/referral";
+import { getCookie } from "cookies-next";
+import { POST_REFERRAL_REFER_API } from "@/constants/apis";
 
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -16,15 +20,19 @@ const UserReferral = () => {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    const handleSubmit = () => {
-        alert(`Mã giới thiệu của bạn: ${inputCode}`);
+    const handleSubmit = async () => {
+        const request: ReferralReferRequest = {
+            referredUserId: getCookie("__appUserId") as string,
+            referrerCode: inputCode
+        }
+        await axiosClient.post(POST_REFERRAL_REFER_API, request);
     };
 
     return (
         <div className="w-full">
             <Collapse>
                 <Panel header="Mã giới thiệu" key="1">
-                    <Tabs defaultActiveKey="1">
+                    <Tabs className="flex items-center justify-center flex-col" defaultActiveKey="1">
                         <TabPane tab="Mã của bạn" key="1">
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#f3f3f3", padding: "10px", borderRadius: "8px", marginBottom: "16px" }}>
                                 <span style={{ fontSize: "18px", fontFamily: "monospace" }}>{user?.referralCode}</span>
@@ -41,7 +49,7 @@ const UserReferral = () => {
                                 onChange={(e) => setInputCode(e.target.value)}
                                 style={{ marginBottom: "16px" }}
                             />
-                            <Button type="primary" onClick={handleSubmit} block>
+                            <Button className="!bg-green-600" type="primary" onClick={handleSubmit} block>
                                 Gửi
                             </Button>
                         </TabPane>
