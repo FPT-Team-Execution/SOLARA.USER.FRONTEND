@@ -15,6 +15,7 @@ import { Drawer } from "antd";
 import UserLevelSpace from "./UserLevelSpace";
 import { UserButton, useUser } from "@clerk/nextjs";
 import UserSubcription from "../ui/UserSubcription";
+import UserReferral from "../ui/UserReferral";
 
 const LearningProgress = () => {
 
@@ -54,6 +55,7 @@ const LearningProgress = () => {
             <>
                 <Drawer title="Tiến trình học tập" onClose={onClose} open={open}>
                     <div className="space-y-4">
+                        
                         <div className="flex gap-2 flex-col items-center justify-center">
                             <UserButton appearance={{
                                 elements: {
@@ -62,10 +64,18 @@ const LearningProgress = () => {
                             }} />
                             <h1 className='text-2xl font-semibold text-black'>{user?.fullName}</h1>
                         </div>
+
+                        <div>
+                            <UserReferral />
+                        </div>
+
                         <div>
                             <UserSubcription />
                         </div>
-                        <UserLevelSpace />
+
+                        <div>
+                            <UserLevelSpace />
+                        </div>
                     </div>
                 </Drawer>
             </>

@@ -1,10 +1,11 @@
-import { AUTH_CLERK_API, GET_USER_LEVEL_API, GET_USER_SUBSCRIPTIONS } from '@/constants/apis';
+import { AUTH_CLERK_API, GET_USER_API, GET_USER_LEVEL_API, GET_USER_SUBSCRIPTIONS } from '@/constants/apis';
 import { IBaseModel, IPaginate } from '@/interfaces/general';
 import axiosClient from '@/utils/axios/axiosClient';
 import { create } from 'zustand';
 import { getCookie, setCookie } from 'cookies-next';
 import { UserLevelDto } from '@/types/userLevel';
 import { GetUserSubscriptionsRequest, UserSubscription } from '@/types/userSubscription';
+import { User } from '@/types/user';
 
 interface UserStore {
     loading: boolean,
@@ -12,9 +13,12 @@ interface UserStore {
     appUserId: string | null,
     userLevel: UserLevelDto | null,
     userSubcriptions: UserSubscription[] | null,
+    user: User | null,
+
     getUserSubsctiptions: () => Promise<void>,
     setAuthenticated: () => Promise<void>,
     getUserLevel: () => Promise<void>,
+    getUser: () => Promise<void>
 }
 
 const useUserStore = create<UserStore>((set) => ({
@@ -23,7 +27,21 @@ const useUserStore = create<UserStore>((set) => ({
     userLevel: null,
     appUserId: null,
     userSubcriptions: null,
+    user: null,
 
+    getUser: async () => {
+        try {
+            const response = await axiosClient.get<IBaseModel<User>>(GET_USER_API(getCookie('__appUserId') as string));
+
+            set((state) => ({
+                ...state,
+                user: response.data.responseRequest
+            }))
+            
+        } catch {
+
+        }
+    },
 
     getUserSubsctiptions: async () => {
         try {
