@@ -34,6 +34,11 @@ const UserReferral = () => {
                 description: "Đã nhận mã giới thiệu!"
             })
             setInputCode("");
+        } else {
+            notification.warning({
+                message: 'Thất bại!',
+                description: "Mã đã được sử dụng!"
+            })
         }
     };
 
