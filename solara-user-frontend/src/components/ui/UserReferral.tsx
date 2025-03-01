@@ -22,6 +22,15 @@ const UserReferral = () => {
     };
 
     const handleSubmit = async () => {
+
+        if (inputCode.trim() == "") {
+            notification.warning({
+                message: 'Thất bại!',
+                description: "Bạn chưa nhập mã!"
+            })
+            return
+        }
+
         const request: ReferralReferRequest = {
             referredUserId: getCookie("__appUserId") as string,
             referrerCode: inputCode
@@ -63,7 +72,7 @@ const UserReferral = () => {
                                 onChange={(e) => setInputCode(e.target.value)}
                                 style={{ marginBottom: "16px" }}
                             />
-                            <Button className="!bg-green-600" type="primary" onClick={handleSubmit} block>
+                            <Button disabled={inputCode.trim() == ""} className="!bg-green-600" type="primary" onClick={handleSubmit} block>
                                 Gửi
                             </Button>
                         </TabPane>
