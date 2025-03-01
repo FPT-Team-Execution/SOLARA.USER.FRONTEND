@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Tabs, Button, Input, Collapse } from "antd";
+import { Tabs, Button, Input, Collapse, notification } from "antd";
 import useUserStore from "@/zustand/useUserStore";
 import axiosClient from "@/utils/axios/axiosClient";
 import { ReferralReferRequest } from "@/types/referral";
 import { getCookie } from "cookies-next";
 import { POST_REFERRAL_REFER_API } from "@/constants/apis";
+import { IBaseModel } from "@/interfaces/general";
 
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -25,7 +26,15 @@ const UserReferral = () => {
             referredUserId: getCookie("__appUserId") as string,
             referrerCode: inputCode
         }
-        await axiosClient.post(POST_REFERRAL_REFER_API, request);
+        const response = await axiosClient.post<IBaseModel<null>>(POST_REFERRAL_REFER_API, request);
+
+        if (response.data.isSuccess) {
+            notification.success({
+                message: 'Thành công!',
+                description: "Đã nhận mã giới thiệu!"
+            })
+            setInputCode("");
+        }
     };
 
     return (
