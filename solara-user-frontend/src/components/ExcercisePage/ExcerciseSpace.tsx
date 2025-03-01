@@ -2,7 +2,7 @@ import { AnswerDto, AttemptResponse, CreateUserAttemptRequest, ExcerciseDto } fr
 import useExcerciseStore from '@/zustand/useExcerciseStore'
 import { useRequest } from 'ahooks';
 import { Button, Modal, Progress } from 'antd';
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { MdOutlineDone } from 'react-icons/md';
 import Flashcard from './Flashcard';
 import { ExcerciseType } from '@/enums/excerciseType';
@@ -81,7 +81,7 @@ const ExcerciseSpace = () => {
             }
             getSubTopic(subTopicId);
         }
-    },[excercises?.items, getSubTopic, searchParams])
+    }, [excercises?.items, getSubTopic, searchParams])
 
     const { } = useRequest(async () => {
 
@@ -102,7 +102,7 @@ const ExcerciseSpace = () => {
         refreshDeps: [no, excercises]
     });
 
-    const handleFlip = async () => {
+    const handleFlip = useCallback(async () => {
 
         setFlip((prev) => !prev);
 
@@ -148,7 +148,7 @@ const ExcerciseSpace = () => {
 
         } catch {
         }
-    };
+    }, [attempted, attemptedExercises, excercise, excercises?.items]);
 
     const calculateProgress = () => {
         if (excercises?.total === undefined) {
@@ -158,7 +158,7 @@ const ExcerciseSpace = () => {
         setProgress(progress);
     }
 
-    const navigateNext = () => {
+    const navigateNext = useCallback(() => {
 
         if (!excercises || no >= (excercises.total || 0) - 1) {
             return;
@@ -168,16 +168,16 @@ const ExcerciseSpace = () => {
         setAttempted(false);
         setNo((prev) => prev + 1);
 
-    };
+    }, [excercises, no]);
 
-    const navigatePrev = () => {
+    const navigatePrev = useCallback(() => {
 
         if (no <= 0) {
             return
         }
         setFlip(false)
         setNo((prev) => prev - 1)
-    }
+    }, [no])
 
     const handleComplete = async () => {
         try {
@@ -261,6 +261,41 @@ const ExcerciseSpace = () => {
             router.back();
         }
     }
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            switch (event.code) {
+
+                case "Space":
+                    event.preventDefault();
+                    if (excercise?.exerciseTypeId == ExcerciseType.flashcard) {
+                        handleFlip();
+                    }
+                    break;
+
+                case "ArrowLeft":
+                    navigatePrev();
+                    break;
+
+                case "ArrowRight":
+                    if (attempted) {
+
+                        navigateNext();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [handleFlip, navigatePrev, navigateNext, excercise?.exerciseTypeId, attempted]);
+
 
     return (
 
