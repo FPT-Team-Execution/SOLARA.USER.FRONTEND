@@ -63,3 +63,6 @@ export const PUT_PAYMENT_UPDATE_API = "/payments/complete"
 
 // Referral
 export const POST_REFERRAL_REFER_API = "/referrals/refer"
+
+//Virtual
+export const POST_SIMULATION_VIRTUAL_API = "/virtual"

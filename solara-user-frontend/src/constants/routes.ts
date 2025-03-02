@@ -14,6 +14,7 @@ export const LEARNING_TOPICS_ROUTE = "/learning/topics";
 export const LEARNING_TOPICS_SUBS_ROUTE = "/learning/topics/subs";
 export const LEARNING_TOPICS_SUBS_EXCERCISES_ROUTE = "/learning/topics/subs/exercises";
 export const LEARNING_SIMULATIONS_ROUTE = "/learning/simulations";
+export const LEARNING_SIMULATIONS_PLAY_ROUTE = "/learning/simulations/play";
 export const LEARNING_THREATS_ROUTE = "/learning/threats";
 export const LEARNING_PACKAGES_ROUTE = "/learning/packages";
 
