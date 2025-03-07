@@ -4,8 +4,10 @@ import useUserStore from "@/zustand/useUserStore";
 import axiosClient from "@/utils/axios/axiosClient";
 import { ReferralReferRequest } from "@/types/referral";
 import { getCookie } from "cookies-next";
-import { POST_REFERRAL_REFER_API } from "@/constants/apis";
+import { GET_BY_REFERRER_REFER_API, POST_REFERRAL_REFER_API } from "@/constants/apis";
 import { IBaseModel } from "@/interfaces/general";
+import { User } from "@/types/user";
+import { useRequest } from "ahooks";
 
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -14,12 +16,18 @@ const UserReferral = () => {
     const { user } = useUserStore();
     const [inputCode, setInputCode] = useState("");
     const [copied, setCopied] = useState(false);
+    const [usersReferred, setUsersReferred] = useState<User[]>();
 
     const handleCopy = () => {
         navigator.clipboard.writeText(user!.referralCode!);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
+
+    const { } = useRequest(async () => {
+        const response = await axiosClient.get<IBaseModel<User[]>>(GET_BY_REFERRER_REFER_API);
+        setUsersReferred(response.data.responseRequest)
+    })
 
     const handleSubmit = async () => {
 
@@ -64,7 +72,7 @@ const UserReferral = () => {
                                 </Button>
                             </div>
                         </TabPane>
-                        <TabPane tab="Nhập mã giới thiệu" key="2">
+                        <TabPane tab="Nhập mã" key="2">
                             <Input
                                 type="text"
                                 placeholder="Nhập mã giới thiệu"
@@ -75,6 +83,20 @@ const UserReferral = () => {
                             <Button disabled={inputCode.trim() == ""} className="!bg-green-600" type="primary" onClick={handleSubmit} block>
                                 Gửi
                             </Button>
+                        </TabPane>
+                        <TabPane tab="Đã giới thiệu">
+                            {
+                                usersReferred?.map((user, index) => {
+                                    return (
+                                        <p key={index} className="bg-slate-50 text-sm font-semibold text-gray-700 p-2 rounded-lg shadow-md">
+                                            <span>{index + 1}. </span>{user.fullName}
+                                        </p>
+                                    )
+                                })
+                            }
+
+
+
                         </TabPane>
                     </Tabs>
                 </Panel>
