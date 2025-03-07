@@ -5,6 +5,14 @@ export interface IBaseModel<T> {
     responseRequest?: T;
 };
 
+export interface IBaseModelLite<T, E> {
+    isSuccess: boolean;
+    message: string;
+    statusCode: number;
+    response?: T,
+    request?: E
+} 
+
 export interface IPaginate<T> {
     size: number,
     page: number,
