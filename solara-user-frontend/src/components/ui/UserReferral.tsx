@@ -2,11 +2,10 @@ import { useState } from "react";
 import { Tabs, Button, Input, Collapse, notification } from "antd";
 import useUserStore from "@/zustand/useUserStore";
 import axiosClient from "@/utils/axios/axiosClient";
-import { ReferralReferRequest } from "@/types/referral";
+import { ByReferred, ReferralReferRequest } from "@/types/referral";
 import { getCookie } from "cookies-next";
 import { GET_BY_REFERRER_REFER_API, POST_REFERRAL_REFER_API } from "@/constants/apis";
-import { IBaseModel } from "@/interfaces/general";
-import { User } from "@/types/user";
+import { IBaseModel, IBaseModelLite } from "@/interfaces/general";
 import { useRequest } from "ahooks";
 
 const { TabPane } = Tabs;
@@ -16,7 +15,7 @@ const UserReferral = () => {
     const { user } = useUserStore();
     const [inputCode, setInputCode] = useState("");
     const [copied, setCopied] = useState(false);
-    const [usersReferred, setUsersReferred] = useState<User[]>();
+    const [byReferreds, setByReferreds] = useState<ByReferred[]>();
 
     const handleCopy = () => {
         navigator.clipboard.writeText(user!.referralCode!);
@@ -25,8 +24,8 @@ const UserReferral = () => {
     };
 
     const { } = useRequest(async () => {
-        const response = await axiosClient.get<IBaseModel<User[]>>(GET_BY_REFERRER_REFER_API);
-        setUsersReferred(response.data.responseRequest)
+        const response = await axiosClient.get<IBaseModelLite<ByReferred[], string>>(GET_BY_REFERRER_REFER_API);
+        setByReferreds(response.data.response)
     })
 
     const handleSubmit = async () => {
@@ -86,17 +85,14 @@ const UserReferral = () => {
                         </TabPane>
                         <TabPane tab="Đã giới thiệu">
                             {
-                                usersReferred?.map((user, index) => {
+                                byReferreds?.map((item, index) => {
                                     return (
                                         <p key={index} className="bg-slate-50 text-sm font-semibold text-gray-700 p-2 rounded-lg shadow-md">
-                                            <span>{index + 1}. </span>{user.fullName}
+                                            <span>{index + 1}. </span>{item.referredUser.fullName}
                                         </p>
                                     )
                                 })
                             }
-
-
-
                         </TabPane>
                     </Tabs>
                 </Panel>
