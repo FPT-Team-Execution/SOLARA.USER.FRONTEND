@@ -118,9 +118,9 @@ const StreamingServiceWithPopup = () => {
   );
 
   return (
-    <div className="flex flex-col min-h-screen text-start bg-gray-50 text-gray-800">
+    <div className="flex flex-col min-h-screen text-start text-gray-800">
       {/* Hero section with enhanced design */}
-      <div className="relative w-full bg-gradient-to-r from-green-50 to-blue-50 py-16 px-4">
+      <div className="relative w-full py-16 px-4">
         <div className="max-w-4xl mx-auto text-center z-20 space-y-6">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Giả lập sinh tồn</h1>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto">Bạn đã sẵn sàng đối mặt với những thử thách sinh tồn chưa? Tìm kiếm trình giả lập ngay.</p>
