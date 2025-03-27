@@ -51,6 +51,15 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
             {collapsed ? "" : "Chủ Đề"}
           </SidebarButton>
           <SidebarButton
+            pathIndex={1}
+            className={`h-12 flex ${collapsed == true ? "items-center justify-center" : ""
+              } m-2 p-4`}
+            icon={<LuBadgeInfo />}
+            href={LEARNING_THREATS_ROUTE}
+          >
+            {collapsed ? "" : "Rủi Ro"}
+          </SidebarButton>
+          <SidebarButton
             isMultiPath
             pathIndex={2}
             className={`h-12 flex ${collapsed == true ? "items-center justify-center" : ""
@@ -59,15 +68,6 @@ const LearningSpace = ({ children }: { children: React.ReactNode }) => {
             href={LEARNING_SIMULATIONS_ROUTE}
           >
             {collapsed ? "" : "Giả Lập"}
-          </SidebarButton>
-          <SidebarButton
-            pathIndex={1}
-            className={`h-12 flex ${collapsed == true ? "items-center justify-center" : ""
-              } m-2 p-4`}
-            icon={<LuBadgeInfo />}
-            href={LEARNING_THREATS_ROUTE}
-          >
-            {collapsed ? "" : "Rủi Ro"}
           </SidebarButton>
           <SidebarButton
             isMultiPath

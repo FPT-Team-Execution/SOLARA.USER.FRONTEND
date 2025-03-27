@@ -58,7 +58,7 @@ const useUserStore = create<UserStore>((set) => ({
 
             set((state) => ({
                 ...state,
-                userSubcriptions: response.data.responseRequest?.items
+                userSubcriptions: response.data.responseRequest?.items.reverse()
             }));
 
         } catch {
