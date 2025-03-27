@@ -1,7 +1,9 @@
 "use client"
 
-import { LEARNING_SIMULATIONS_PLAY_ROUTE } from '@/constants/routes';
+import { LEARNING_PACKAGES_ROUTE, LEARNING_SIMULATIONS_PLAY_ROUTE } from '@/constants/routes';
 import { SimulationShow } from '@/types/simulation';
+import useUserStore from '@/zustand/useUserStore';
+import { useRequest } from 'ahooks';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -15,6 +17,24 @@ const StreamingServiceWithPopup = () => {
   const navigatePlay = (title: string) => {
     router.push(`${LEARNING_SIMULATIONS_PLAY_ROUTE}?init=${encodeURIComponent(title)}`);
   }
+
+  const { userSubcriptions, getUserSubsctiptions } = useUserStore();
+  const { } = useRequest(async () => {
+    if (userSubcriptions == null || userSubcriptions.length == 0) {
+      await getUserSubsctiptions();
+    }
+    const duration = Math.max(
+      0,
+      Math.ceil(
+          (new Date(userSubcriptions![0].endDate).getTime() -
+              new Date().getTime()) /
+          (1000 * 60 * 60 * 24)
+      )
+  )
+    if (duration <= 0) {
+      router.push(LEARNING_PACKAGES_ROUTE)
+    }
+  });
 
   const trending: SimulationShow[] = [
     {
